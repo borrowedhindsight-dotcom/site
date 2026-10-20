@@ -1,10 +1,10 @@
-"""Build borrowedhindsight.com into _site/ from stories.json (stories dated in the future stay hidden)."""
+"""Build borrowedhindsight.org into _site/ from stories.json (stories dated in the future stay hidden)."""
 import json, html, shutil, pathlib, datetime as dt
 
 ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / '_site'
 TODAY = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).date().isoformat()
-SITE = 'https://borrowedhindsight.com'
+SITE = 'https://borrowedhindsight.org'
 E = html.escape
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -57,7 +57,7 @@ def main():
     for name in ('privacy', 'terms'):
         body = (ROOT / f'{name}.html').read_text()
         title = 'Privacy policy' if name == 'privacy' else 'Terms of use'
-        write(f'{name}/index.html', page(f'{title} | Borrowed Hindsight', f'{title} for borrowedhindsight.com and the Borrowed Hindsight channels.', f'<main class="wrap legal">{body}</main>', f'/{name}/'))
+        write(f'{name}/index.html', page(f'{title} | Borrowed Hindsight', f'{title} for borrowedhindsight.org and the Borrowed Hindsight channels.', f'<main class="wrap legal">{body}</main>', f'/{name}/'))
     write('404.html', page('Not found | Borrowed Hindsight', 'Page not found', '<main class="wrap legal"><h1>Not found</h1><p><a href="/">Back to the stories</a></p></main>'))
     urls = ['/', '/privacy/', '/terms/'] + [f'/stories/{s["slug"]}/' for s in stories]
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{SITE}{u}</loc></url>' for u in urls) + '</urlset>')
