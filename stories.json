@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "ronald-wayne-apple-800",
+    "date": "2026-10-20",
+    "tag": "Business partnerships",
+    "title": "He sold 10% of Apple for $800. Was it a mistake?",
+    "summary": "Ronald Wayne walked away from Apple after 12 days. Hindsight says disaster. What he knew at the time says something else.",
+    "body": [
+      "In April 1976, Ronald Wayne co-founded Apple with Steve Jobs and Steve Wozniak. He held 10% of the new partnership, wrote its partnership agreement and drew the company's first logo.",
+      "Twelve days later, he gave up his stake for $800.",
+      "The internet calls it the worst decision in history. But look at what he knew at the time. Jobs had borrowed money to fill Apple's first big order, about $15,000. In a general partnership, each partner can be personally liable for the business's debts. Wayne was older than his partners and owned a house and a car. They had far less to lose. If Apple failed, creditors could come after what he owned.",
+      "Asked about it again in 2026, Wayne said he has no regrets."
+    ],
+    "lesson": "A decision can be sensible and still turn out badly. Judge it by what was known at the time, not by how it ended.",
+    "check_title": "Before any partnership, loan or guarantee, ask:",
+    "check": [
+      "If this goes wrong, what can they take from me personally?"
+    ],
+    "sources": [
+      [
+        "Fortune (27 Apr 2026): Apple co-founder Ronald Wayne on missing out and having no regrets",
+        "https://fortune.com/2026/04/27/apple-cofounder-ronald-wayne-missed-billionaire-opportunity-no-regrets-gen-z-advice-steve-jobs-steve-wozniak/"
+      ],
+      [
+        "Outlook Business: Why Apple co-founder Ronald Wayne has no regrets",
+        "https://www.outlookbusiness.com/corporate/ronald-wayne-apple-stake-sale-800-missed-400bn-no-regrets"
+      ],
+      [
+        "Apple Computer Company partnership agreement, 1 April 1976 (as reported in the sources above)",
+        ""
+      ]
+    ],
+    "reel": "https://www.instagram.com/reel/Des5AIoixAc/"
+  },
+  {
+    "slug": "lottery-winners-go-broke-myth",
+    "date": "2026-10-22",
+    "tag": "Viral money myths",
+    "title": "Do 70% of lottery winners really go broke?",
+    "summary": "It's one of the most-shared money stats online. We looked for the study behind it and couldn't find one.",
+    "body": [
+      "\"Seventy percent of lottery winners go broke.\" You've probably heard it. We went looking for the study behind it, and couldn't find one.",
+      "The figure is usually credited to the US National Endowment for Financial Education (NEFE). In 2018, NEFE said the statistic is not backed by its research.",
+      "So what does research actually show? A study of almost 35,000 Florida lottery winners compared people who won $50,000 to $150,000 with people who won under $10,000. The bigger winners were less likely to file for bankruptcy right after winning, but about 50 percent more likely to file three to five years later. The money delayed bankruptcy. It didn't prevent it.",
+      "In Sweden, researchers following large lottery winners found they reported higher life satisfaction for more than a decade after winning."
+    ],
+    "lesson": "Sudden money doesn't fix money habits. If a windfall lands on you, slow down before any big decision.",
+    "check_title": "Before you share a viral statistic, ask:",
+    "check": [
+      "Who measured it?",
+      "Where's the original?"
+    ],
+    "sources": [
+      [
+        "Hankins, Hoekstra & Skiba (2011). The Ticket to Easy Street? The Financial Consequences of Winning the Lottery. Review of Economics and Statistics 93(3)",
+        "https://doi.org/10.1162/REST_a_00114"
+      ],
+      [
+        "Vanderbilt University (2009): Lotteries, from big bucks to bankruptcy",
+        "https://news.vanderbilt.edu/2009/07/07/lotteries-from-big-bucks-to-bankruptcy-83864/"
+      ],
+      [
+        "Lindqvist, Östling & Cesarini (2020). Long-Run Effects of Lottery Wealth on Psychological Well-Being. Review of Economic Studies 87(6)",
+        "https://doi.org/10.1093/restud/rdaa006"
+      ],
+      [
+        "NEFE (Jan 2018): Research statistic on financial windfalls and bankruptcy",
+        "https://www.nefe.org/news/the-latest/2018/research-statistic-on-financial-windfalls-and-bankruptcy.aspx"
+      ]
+    ],
+    "reel": "https://www.instagram.com/borrowed.hindsight/"
+  }
+]
