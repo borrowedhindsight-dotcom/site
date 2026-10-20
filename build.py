@@ -22,7 +22,7 @@ def page(title, desc, body, path='/'):
 <nav><a href="/#stories">Stories</a><a href="https://www.instagram.com/borrowed.hindsight/">Instagram</a><a href="https://www.youtube.com/@borrowedhindsight">YouTube</a></nav></div></header>
 {body}
 <footer><div class="wrap"><span>© {dt.date.today().year} Borrowed Hindsight</span><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:borrowedhindsight@gmail.com">Contact</a>
-<span>General education, not personal or financial advice.</span></div></footer></body></html>'''
+<span>General education, not personal or financial advice. Our publishing tool uses YouTube API Services: see our <a href="/privacy/">Privacy policy</a> and the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.</span></div></footer></body></html>'''
 
 
 def write(rel, content):
