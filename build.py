@@ -4,7 +4,7 @@ import json, html, shutil, pathlib, datetime as dt
 ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / '_site'
 TODAY = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).date().isoformat()
-SITE = 'https://borrowedhindsight.org'
+SITE = 'https://www.borrowedhindsight.org'
 E = html.escape
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
