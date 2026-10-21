@@ -5,6 +5,7 @@ ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / '_site'
 TODAY = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).date().isoformat()
 SITE = 'https://www.borrowedhindsight.org'
+FACEBOOK = 'https://www.facebook.com/profile.php?id=61595827433117'   # switch to facebook.com/borrowedhindsight once the username is set
 NEWSLETTER = 'https://borrowedhindsight.substack.com'   # Substack address, e.g. 'https://borrowedhindsight.substack.com'. Empty = sign-up hidden.
 E = html.escape
 
@@ -28,7 +29,7 @@ def page(title, desc, body, path='/', ld=None, og_type='website', extra=''):
 <header class="top"><div class="wrap"><img src="/assets/logo.svg" alt=""><a class="brand" href="/">Borrowed Hindsight</a>
 <nav><a href="/#stories">Stories</a>{nl_nav}<a href="/about/">About</a><a class="ext" href="https://www.instagram.com/borrowed.hindsight/">Instagram</a><a class="ext" href="https://www.youtube.com/@borrowedhindsight">YouTube</a></nav></div></header>
 {body}
-<footer><div class="wrap"><span>© {dt.date.today().year} Borrowed Hindsight</span><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:borrowedhindsight@gmail.com">Contact</a>
+<footer><div class="wrap"><span>© {dt.date.today().year} Borrowed Hindsight</span><a href="/about/">About</a><a href="{FACEBOOK}">Facebook</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:borrowedhindsight@gmail.com">Contact</a>
 <span>General education, not personal or financial advice. Our publishing tool uses YouTube API Services: see our <a href="/privacy/">Privacy policy</a> and the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.</span></div></footer></body></html>'''
 
 
@@ -48,7 +49,7 @@ def write(rel, content):
 
 ORG = {'@type': 'Organization', '@id': f'{SITE}/#org', 'name': 'Borrowed Hindsight', 'url': SITE + '/',
        'logo': {'@type': 'ImageObject', 'url': f'{SITE}/assets/apple-touch-icon.png'},
-       'sameAs': ['https://www.instagram.com/borrowed.hindsight/', 'https://www.youtube.com/@borrowedhindsight'],
+       'sameAs': ['https://www.instagram.com/borrowed.hindsight/', 'https://www.youtube.com/@borrowedhindsight', FACEBOOK],
        'email': 'borrowedhindsight@gmail.com'}
 
 
