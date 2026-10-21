@@ -50,7 +50,7 @@ def main():
         body = f'''<main class="wrap"><article><span class="meta">{E(s["tag"])} · {d}</span><h1>{E(s["title"])}</h1>{paras}
 <div class="lesson"><b>The borrowed hindsight</b>{E(s["lesson"])}</div>
 <div class="check"><h3>{E(s["check_title"])}</h3><ul>{checks}</ul></div>
-<p><a class="btn" href="{E(s["reel"])}">Watch the 60-second version</a></p>
+<p><a class="btn" href="{E(s["reel"])}">Watch the video</a></p>
 <div class="sources"><b>Sources</b><ol>{srcs}</ol><p class="note">General education, not personal or financial advice. Spotted an error? Email borrowedhindsight@gmail.com and we'll correct it.</p></div></article></main>'''
         write(f'stories/{s["slug"]}/index.html', page(f'{s["title"]} | Borrowed Hindsight', s['summary'], body, f'/stories/{s["slug"]}/'))
 
