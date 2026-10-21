@@ -5,7 +5,7 @@ ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / '_site'
 TODAY = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).date().isoformat()
 SITE = 'https://www.borrowedhindsight.org'
-FACEBOOK = 'https://www.facebook.com/profile.php?id=61595827433117'   # switch to facebook.com/borrowedhindsight once the username is set
+FACEBOOK = 'https://www.facebook.com/borrowedhindsight'
 NEWSLETTER = 'https://borrowedhindsight.substack.com'   # Substack address, e.g. 'https://borrowedhindsight.substack.com'. Empty = sign-up hidden.
 E = html.escape
 
