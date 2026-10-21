@@ -30,7 +30,33 @@
         ""
       ]
     ],
-    "reel": "https://www.instagram.com/reel/Des5AIoixAc/"
+    "reel": "https://www.instagram.com/reel/Des5AIoixAc/",
+    "seo_title": "Ronald Wayne sold 10% of Apple for $800: was it a mistake?",
+    "keywords": [
+      "Ronald Wayne",
+      "Apple co-founder",
+      "Apple 10% stake",
+      "partnership liability",
+      "business partnership decision"
+    ],
+    "faq": [
+      [
+        "Who is Ronald Wayne?",
+        "Ronald Wayne co-founded Apple with Steve Jobs and Steve Wozniak in April 1976. He held 10% of the partnership, wrote the partnership agreement and drew Apple's first logo."
+      ],
+      [
+        "How much did Ronald Wayne sell his Apple stake for?",
+        "He gave up his 10% stake for $800, twelve days after Apple was founded."
+      ],
+      [
+        "Why did Ronald Wayne leave Apple?",
+        "Apple was a general partnership, so each partner could be personally liable for its debts. Wayne owned a house and a car, his partners had far less to lose, and Jobs had borrowed money to fill Apple's first big order."
+      ],
+      [
+        "Does Ronald Wayne regret selling?",
+        "Asked again in 2026, he said he has no regrets (Fortune, April 2026)."
+      ]
+    ]
   },
   {
     "slug": "lottery-winners-go-broke-myth",
@@ -68,7 +94,29 @@
         "https://www.nefe.org/news/the-latest/2018/research-statistic-on-financial-windfalls-and-bankruptcy.aspx"
       ]
     ],
-    "reel": "https://www.instagram.com/borrowed.hindsight/"
+    "reel": "https://www.instagram.com/borrowed.hindsight/",
+    "seo_title": "Do 70% of lottery winners go broke? The statistic checked",
+    "keywords": [
+      "lottery winners go broke",
+      "70 percent lottery winners",
+      "NEFE statistic",
+      "lottery winners bankruptcy study",
+      "windfall money"
+    ],
+    "faq": [
+      [
+        "Is it true that 70% of lottery winners go broke?",
+        "We found no study behind the figure. It's usually credited to the US National Endowment for Financial Education (NEFE), which said in 2018 that the statistic isn't backed by its research."
+      ],
+      [
+        "What does research say about lottery winners and bankruptcy?",
+        "A study of about 35,000 Florida lottery winners found that people who won $50,000 to $150,000 were less likely to file for bankruptcy right away, but about 50% more likely to file three to five years later than people who won under $10,000."
+      ],
+      [
+        "Are lottery winners happier?",
+        "A Swedish study of large lottery winners found they reported higher life satisfaction for more than a decade after winning."
+      ]
+    ]
   },
   {
     "slug": "10000-hour-rule",
@@ -101,7 +149,29 @@
         ""
       ]
     ],
-    "reel": "https://www.instagram.com/borrowed.hindsight/"
+    "reel": "https://www.instagram.com/borrowed.hindsight/",
+    "seo_title": "Is the 10,000-hour rule true? What the research found",
+    "keywords": [
+      "10,000 hour rule",
+      "deliberate practice",
+      "Anders Ericsson",
+      "practice and performance",
+      "how to get better at work"
+    ],
+    "faq": [
+      [
+        "Where does the 10,000-hour rule come from?",
+        "It was popularised by a 2008 bestselling book, based on a 1993 study by Anders Ericsson and colleagues of violinists."
+      ],
+      [
+        "Is the 10,000-hour rule true?",
+        "Not as a rule. In the original study, 10,000 hours was an average for the best violinists by age 20, not a threshold. A 2014 review of 88 studies found practice explained about 12% of differences in performance overall, and under 1% in professions."
+      ],
+      [
+        "What kind of practice works best?",
+        "Researchers point to deliberate practice: focused effort on specific weaknesses, with feedback, rather than simply repeating what you already do."
+      ]
+    ]
   },
   {
     "slug": "james-dyson-5127-prototypes",
@@ -130,6 +200,28 @@
         "https://en.wikipedia.org/wiki/Dyson_(company)"
       ]
     ],
-    "reel": "https://www.instagram.com/borrowed.hindsight/"
+    "reel": "https://www.instagram.com/borrowed.hindsight/",
+    "seo_title": "James Dyson's 5,127 prototypes: why vacuum makers said no",
+    "keywords": [
+      "James Dyson",
+      "5127 prototypes",
+      "Dyson bagless vacuum",
+      "Dyson rejection",
+      "persistence in business"
+    ],
+    "faq": [
+      [
+        "How many prototypes did James Dyson make?",
+        "5,127 prototypes, built over about five years, before his bagless vacuum design worked."
+      ],
+      [
+        "Why did vacuum companies reject Dyson's invention?",
+        "They earned a lot of money selling replacement bags, and a bagless vacuum would have cut into that business."
+      ],
+      [
+        "How did Dyson succeed after being rejected?",
+        "He licensed his design to a company in Japan, and the royalties funded him until he launched his own vacuum in the UK in 1993. Within about 18 months it was the UK's best-selling vacuum cleaner."
+      ]
+    ]
   }
 ]

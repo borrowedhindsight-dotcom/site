@@ -40,3 +40,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px}
 .legal h1{font:800 40px/1.1 "Bricolage Grotesque",sans-serif;margin:40px 0 8px}
 .legal h2{font-size:24px;margin:32px 0 8px}
 @media (max-width:560px){header.top nav{gap:10px;font-size:14px}header.top nav a:first-child{display:none}header.top a.brand{font-size:19px}.hero{padding:40px 0 44px}}
+.crumbs{font-size:14px;color:var(--grey);padding-top:24px}.crumbs a{color:inherit}
+article .lead{font-size:20px;font-weight:600}
+article h2{font-size:26px;margin:32px 0 10px}
+.faq details{border-top:1px solid #0001;padding:14px 0}.faq summary{font-weight:700;cursor:pointer;font-size:18px}.faq details p{margin:10px 0 0}
+.sources h2{font-size:20px;margin:0 0 8px}
+.related{padding-bottom:56px}.related h2{margin-top:0}
