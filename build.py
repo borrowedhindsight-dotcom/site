@@ -5,7 +5,7 @@ ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / '_site'
 TODAY = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).date().isoformat()
 SITE = 'https://www.borrowedhindsight.org'
-NEWSLETTER = ''   # Substack address, e.g. 'https://borrowedhindsight.substack.com'. Empty = sign-up hidden.
+NEWSLETTER = 'https://borrowedhindsight.substack.com'   # Substack address, e.g. 'https://borrowedhindsight.substack.com'. Empty = sign-up hidden.
 E = html.escape
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
