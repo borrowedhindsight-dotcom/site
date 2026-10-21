@@ -5,6 +5,7 @@ ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / '_site'
 TODAY = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=5, minutes=30)).date().isoformat()
 SITE = 'https://www.borrowedhindsight.org'
+NEWSLETTER = ''   # Substack address, e.g. 'https://borrowedhindsight.substack.com'. Empty = sign-up hidden.
 E = html.escape
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -12,6 +13,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="
 
 
 def page(title, desc, body, path='/', ld=None, og_type='website', extra=''):
+    nl_nav = '<a href="/#newsletter">Newsletter</a>' if NEWSLETTER else ''
     ld_html = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in (ld or []))
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,10 +26,19 @@ def page(title, desc, body, path='/', ld=None, og_type='website', extra=''):
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:image" content="{SITE}/assets/og.png"><meta property="og:url" content="{SITE}{path}">
 {FONTS}<link rel="stylesheet" href="/assets/style.css"></head><body>
 <header class="top"><div class="wrap"><img src="/assets/logo.svg" alt=""><a class="brand" href="/">Borrowed Hindsight</a>
-<nav><a href="/#stories">Stories</a><a href="/about/">About</a><a href="https://www.instagram.com/borrowed.hindsight/">Instagram</a><a href="https://www.youtube.com/@borrowedhindsight">YouTube</a></nav></div></header>
+<nav><a href="/#stories">Stories</a>{nl_nav}<a href="/about/">About</a><a class="ext" href="https://www.instagram.com/borrowed.hindsight/">Instagram</a><a class="ext" href="https://www.youtube.com/@borrowedhindsight">YouTube</a></nav></div></header>
 {body}
 <footer><div class="wrap"><span>© {dt.date.today().year} Borrowed Hindsight</span><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:borrowedhindsight@gmail.com">Contact</a>
 <span>General education, not personal or financial advice. Our publishing tool uses YouTube API Services: see our <a href="/privacy/">Privacy policy</a> and the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.</span></div></footer></body></html>'''
+
+
+def signup(where='home'):
+    if not NEWSLETTER:
+        return ''
+    head = 'Get one borrowed lesson a week' if where == 'home' else 'Liked this? Get one like it every week'
+    return f'''<section class="signup" id="newsletter"><div><h2>{head}</h2>
+<p>A true money or career decision story, what happened, and the one question to ask yourself. Free, in your inbox every week. Unsubscribe anytime.</p></div>
+<iframe src="{NEWSLETTER}/embed" title="Subscribe to the Borrowed Hindsight newsletter" loading="lazy" scrolling="no"></iframe></section>'''
 
 
 def write(rel, content):
@@ -55,7 +66,7 @@ def main():
 <p class="lead">True stories of money and career decisions: what people chose, what happened, and the one question worth asking before you decide.</p>
 <div class="btns"><a class="btn" href="https://www.instagram.com/borrowed.hindsight/">Follow on Instagram</a><a class="btn alt" href="https://www.youtube.com/@borrowedhindsight">Watch on YouTube</a></div></div></section>
 <main class="wrap"><h2 id="stories">Latest stories</h2><div class="cards">{cards or "<p>First stories coming soon.</p>"}</div>
-<p class="note">Every story is researched and sourced. Videos are animated and AI-narrated. Nothing here is personal or financial advice. <a href="/about/">How we research our stories</a>.</p></main>'''
+{signup('home')}<p class="note">Every story is researched and sourced. Videos are animated and AI-narrated. Nothing here is personal or financial advice. <a href="/about/">How we research our stories</a>.</p></main>'''
     home_ld = [{'@context': 'https://schema.org', '@graph': [ORG, {'@type': 'WebSite', '@id': f'{SITE}/#site', 'url': SITE + '/', 'name': 'Borrowed Hindsight',
                'description': 'True stories of money and career decisions, with sources.', 'publisher': {'@id': f'{SITE}/#org'}, 'inLanguage': 'en'},
                {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE}/stories/{s["slug"]}/'} for i, s in enumerate(stories)]}]}]
@@ -78,7 +89,7 @@ def main():
 <p class="lead">{E(s["summary"])}</p><h2>The story</h2>{paras}
 <div class="lesson"><b>The borrowed hindsight</b>{E(s["lesson"])}</div>
 <div class="check"><h3>{E(s["check_title"])}</h3><ul>{checks}</ul></div>
-<p><a class="btn" href="{E(s["reel"])}">Watch the video</a></p>{faq_html}
+<p><a class="btn" href="{E(s["reel"])}">Watch the video</a></p>{signup('story')}{faq_html}
 <div class="sources"><h2>Sources</h2><ol>{srcs}</ol><p class="note">General education, not personal or financial advice. Spotted an error? Email borrowedhindsight@gmail.com and we'll correct it. <a href="/about/">How we research</a>.</p></div></article>{rel_html}</main>'''
         art = {'@context': 'https://schema.org', '@type': 'Article', 'headline': s['title'][:110], 'description': s['summary'],
                'datePublished': f'{s["date"]}T19:30:00+05:30', 'dateModified': f'{mod}T19:30:00+05:30',
