@@ -38,7 +38,8 @@ def signup(where='home'):
     head = 'Get one borrowed lesson a week' if where == 'home' else 'Liked this? Get one like it every week'
     return f'''<section class="signup" id="newsletter"><div><h2>{head}</h2>
 <p>A true money or career decision story, what happened, and the one question to ask yourself. Free, in your inbox every week. Unsubscribe anytime.</p></div>
-<iframe src="{NEWSLETTER}/embed" title="Subscribe to the Borrowed Hindsight newsletter" loading="lazy" scrolling="no"></iframe></section>'''
+<div><iframe src="{NEWSLETTER}/embed" title="Subscribe to the Borrowed Hindsight newsletter" scrolling="no"></iframe>
+<p class="note"><a href="{NEWSLETTER}/subscribe" rel="noopener">Or subscribe on Substack →</a></p></div></section>'''
 
 
 def write(rel, content):
