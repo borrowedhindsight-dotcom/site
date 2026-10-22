@@ -390,5 +390,62 @@
       ]
     ],
     "reel": "https://www.instagram.com/borrowed.hindsight/"
+  },
+  {
+    "slug": "steve-sasson-kodak-first-digital-camera-1975",
+    "date": "2026-10-27",
+    "tag": "Business decisions",
+    "title": "He invented the digital camera. His company shelved it.",
+    "seo_title": "Steve Sasson's 1975 digital camera: why Kodak held back",
+    "summary": "In 1975 Kodak engineer Steve Sasson built the first digital camera. Kodak saw no market and kept it quiet. Here is what they knew at the time.",
+    "body": [
+      "Steve Sasson joined Eastman Kodak in June 1973, fresh from a master's degree in electrical engineering at Rensselaer Polytechnic Institute. Working in Kodak's applied research laboratory, he built a camera around a new electronic image sensor, a CCD. By December 1975, at 24, he had a working camera that needed no film.",
+      "It was not pretty. The prototype was about the size of a toaster and weighed roughly 3.6 kilograms (about 8 pounds). Its Fairchild sensor captured a black-and-white image of just 100 by 100 pixels, or 0.01 megapixels. Taking the picture took 50 milliseconds, but recording it to a cassette tape took 23 seconds. To see the photo, you played the tape back on a television set.",
+      "Sasson demonstrated it to Kodak managers. He later described their reaction as \"curiosity and skepticism\", and said \"they did not like the word 'digital'.\" He told the New York Times they were convinced that no one would ever want to look at their pictures on a television. Prints were cheap and familiar, and Kodak dominated the photo market through film. Sasson was not allowed to discuss the camera publicly or show it outside the company, though Kodak was granted a US patent for it in 1978.",
+      "Judged by what was known in 1975, the caution made sense: the camera was slow, heavy and needed a TV. But the technology kept improving. Kodak launched its own digital camera about 18 years later, by which time the shift was well under way. In 2012 Eastman Kodak filed for bankruptcy, and it emerged in 2013.",
+      "Sasson's work was eventually celebrated. He received the US National Medal of Technology and Innovation in 2009, and the IEEE commemorated his camera as a Milestone."
+    ],
+    "lesson": "If a new idea threatens your best seller, someone else will build it. Better to learn from it early than to be surprised by it later.",
+    "check_title": "Before you dismiss a clumsy new idea, ask:",
+    "check": [
+      "Am I judging it by how good it is today, or by how fast it is improving?",
+      "Am I saying no because it is weak, or because it threatens something I already earn from?"
+    ],
+    "keywords": [
+      "first digital camera Kodak 1975",
+      "Steve Sasson digital camera",
+      "why Kodak shelved the digital camera",
+      "Kodak digital camera history",
+      "Kodak bankruptcy 2012 digital"
+    ],
+    "faq": [
+      [
+        "Who invented the first digital camera?",
+        "Kodak engineer Steve Sasson built the first self-contained portable digital camera in 1975, working in Kodak's applied research laboratory."
+      ],
+      [
+        "Why didn't Kodak sell the digital camera in 1975?",
+        "Executives didn't see a market: the prototype weighed about 8 pounds, took 23 seconds to save each photo and needed a TV to view it, and Kodak's business was built on film."
+      ],
+      [
+        "How many pixels did the first digital camera have?",
+        "It captured black-and-white images of 100 by 100 pixels, or 10,000 pixels (0.01 megapixels), recorded onto cassette tape."
+      ]
+    ],
+    "sources": [
+      [
+        "PetaPixel: How Steve Sasson invented the digital camera",
+        "https://petapixel.com/how-steve-sasson-invented-the-digital-camera/"
+      ],
+      [
+        "PetaPixel: In 1975, Kodak said digital photography would never catch on",
+        "https://petapixel.com/2017/09/21/kodak-said-digital-photography-1975/"
+      ],
+      [
+        "IEEE Spectrum: The first digital camera",
+        "https://spectrum.ieee.org/first-digital-camera-history"
+      ]
+    ],
+    "reel": "https://www.instagram.com/borrowed.hindsight/"
   }
 ]
