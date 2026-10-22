@@ -447,5 +447,66 @@
       ]
     ],
     "reel": "https://www.instagram.com/borrowed.hindsight/"
+  },
+  {
+    "slug": "stewart-butterfield-glitch-game-slack-origin-story",
+    "date": "2026-10-28",
+    "tag": "Business decisions",
+    "title": "His game flopped. Its chat tool sold for $27.7 billion.",
+    "seo_title": "Slack's origin story: how a failed game became $27.7B",
+    "summary": "Stewart Butterfield's online game Glitch shut down in 2012. The chat tool his team built to make it became Slack, sold to Salesforce for $27.7 billion.",
+    "body": [
+      "In 2009 Stewart Butterfield, already known as a co-founder of Flickr, co-founded a company called Tiny Speck. Its first product was Glitch, a quirky online game with hand-drawn 2D worlds. Glitch launched on 27 September 2011.",
+      "The game struggled from the start. Within two months the team pulled it back to improve the gameplay, and in November 2012 Tiny Speck announced that Glitch would close. The game world shut down on 9 December 2012.",
+      "But while building Glitch, the team had made something for themselves: an internal chat tool to talk to each other. After the game closed, Butterfield turned that tool into the company's product. He announced Slack in August 2013 and it became publicly available in February 2014. The name stood for \"Searchable Log of All Conversation and Knowledge\". The company raised $17 million from investors including Andreessen Horowitz and Accel, and in August 2014 renamed itself Slack Technologies.",
+      "Slack grew quickly: its revenue rose from $105.2 million in 2017 to $400.6 million in the fiscal year ending January 2019. It listed on the stock market in June 2019, and on 1 December 2020 Salesforce announced it would buy Slack for $27.7 billion. The deal closed on 21 July 2021.",
+      "It was not the first time this happened to Butterfield. In 2002 he co-founded Ludicorp to build an online game called Game Neverending. The game never launched, but tools built for it grew into Flickr, which went live in February 2004 and was bought by Yahoo in March 2005. Twice, the side tool turned out to be the real business."
+    ],
+    "lesson": "The tool you built to solve your own problem might be worth more than the project it was built for. When a plan fails, look at what you made along the way.",
+    "check_title": "Before you write off a project that didn't work, ask:",
+    "check": [
+      "What did we build for ourselves that others might need too?",
+      "Am I attached to the original plan, or to solving a real problem?"
+    ],
+    "keywords": [
+      "Slack origin story",
+      "Stewart Butterfield Glitch game",
+      "how Slack started from a failed game",
+      "Salesforce Slack acquisition 27.7 billion",
+      "Flickr Game Neverending origin"
+    ],
+    "faq": [
+      [
+        "How did Slack start?",
+        "Slack began as an internal chat tool that Stewart Butterfield's team at Tiny Speck built while making the online game Glitch. After Glitch closed in December 2012, they turned the tool into a product, released publicly in February 2014."
+      ],
+      [
+        "How much did Salesforce pay for Slack?",
+        "Salesforce announced on 1 December 2020 that it would buy Slack for $27.7 billion. The acquisition was completed on 21 July 2021."
+      ],
+      [
+        "Did Flickr also come from a game?",
+        "Yes. Flickr grew out of tools built for Game Neverending, an online game from Butterfield's company Ludicorp that never launched. Flickr went live in February 2004 and Yahoo bought it in March 2005."
+      ]
+    ],
+    "sources": [
+      [
+        "Wikipedia: Stewart Butterfield",
+        "https://en.wikipedia.org/wiki/Stewart_Butterfield"
+      ],
+      [
+        "Wikipedia: Slack Technologies",
+        "https://en.wikipedia.org/wiki/Slack_Technologies"
+      ],
+      [
+        "Salesforce: Salesforce completes acquisition of Slack (21 July 2021)",
+        "https://www.salesforce.com/au/news/press-releases/2021/07/21/salesforce-slack-deal-close/"
+      ],
+      [
+        "Wikipedia: Flickr",
+        "https://en.wikipedia.org/wiki/Flickr"
+      ]
+    ],
+    "reel": "https://www.instagram.com/borrowed.hindsight/"
   }
 ]
