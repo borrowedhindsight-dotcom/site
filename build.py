@@ -38,7 +38,7 @@ def signup(where='home'):
         return ''
     head = 'Get one borrowed lesson a week' if where == 'home' else 'Liked this? Get one like it every week'
     return f'''<section class="signup" id="newsletter"><div><h2>{head}</h2>
-<p>A true money or career decision story, what happened, and the one question to ask yourself. Free, in your inbox every week. Unsubscribe anytime.</p></div>
+<p>One true story a week of someone who started small and built something big, and the one lesson you can borrow from it. Free. Unsubscribe anytime.</p></div>
 <div><iframe src="{NEWSLETTER}/embed" title="Subscribe to the Borrowed Hindsight newsletter" scrolling="no"></iframe>
 <p class="note"><a href="{NEWSLETTER}/subscribe" rel="noopener">Or subscribe on Substack →</a></p></div></section>'''
 
@@ -64,15 +64,15 @@ def main():
     stories = sorted([s for s in json.load(open(ROOT / 'stories.json')) if s['date'] <= TODAY], key=lambda s: s['date'], reverse=True)
 
     cards = ''.join(f'<a class="card" href="/stories/{s["slug"]}/"><span class="tag">{E(s["tag"])}</span><h3>{E(s["title"])}</h3><p>{E(s["summary"])}</p></a>' for s in stories)
-    home = f'''<section class="hero"><div class="wrap"><h1>Other people's hindsight, <span class="script">borrowed</span> for your next big decision.</h1>
-<p class="lead">True stories of money and career decisions: what people chose, what happened, and the one question worth asking before you decide.</p>
+    home = f'''<section class="hero"><div class="wrap"><h1>They started with almost nothing. Their hindsight is yours to <span class="script">borrow</span>.</h1>
+<p class="lead">True, sourced stories of founders, late starters, comebacks and record-breakers: the low point, the climb, and one lesson you can use in your own life.</p>
 <div class="btns"><a class="btn" href="https://www.instagram.com/borrowed.hindsight/">Follow on Instagram</a><a class="btn alt" href="https://www.youtube.com/@borrowedhindsight">Watch on YouTube</a></div></div></section>
 <main class="wrap"><h2 id="stories">Latest stories</h2><div class="cards">{cards or "<p>First stories coming soon.</p>"}</div>
 {signup('home')}<p class="note">Every story is researched and sourced. Videos are animated and AI-narrated. Nothing here is personal or financial advice. <a href="/about/">How we research our stories</a>.</p></main>'''
     home_ld = [{'@context': 'https://schema.org', '@graph': [ORG, {'@type': 'WebSite', '@id': f'{SITE}/#site', 'url': SITE + '/', 'name': 'Borrowed Hindsight',
-               'description': 'True stories of money and career decisions, with sources.', 'publisher': {'@id': f'{SITE}/#org'}, 'inLanguage': 'en'},
+               'description': 'True, sourced stories of people who started small and built something big, with one lesson to borrow.', 'publisher': {'@id': f'{SITE}/#org'}, 'inLanguage': 'en'},
                {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE}/stories/{s["slug"]}/'} for i, s in enumerate(stories)]}]}]
-    write('index.html', page('Borrowed Hindsight: true money and career decision stories', 'True stories of money and career decisions, with sources, and one question worth asking before you decide.', home, ld=home_ld))
+    write('index.html', page('Borrowed Hindsight: true stories of people who started from nothing', 'True, sourced stories of founders, late starters, comebacks and record-breakers, and one lesson you can borrow from each.', home, ld=home_ld))
 
     for s in stories:
         url = f'/stories/{s["slug"]}/'
@@ -109,7 +109,7 @@ def main():
         write(f'stories/{s["slug"]}/index.html', page(f'{title} | Borrowed Hindsight', s['summary'], body, url, ld=ld, og_type='article', extra=extra))
 
     about = '''<h1>About Borrowed Hindsight</h1>
-<p>Borrowed Hindsight tells true stories of money and career decisions: what someone chose, what they knew at the time, what happened next, and one question you can ask before making a similar decision yourself.</p>
+<p>Borrowed Hindsight tells true stories of people who started with very little, or were told no, or started late, and built something remarkable anyway: the low point, the choice, the climb, and one line of hindsight you can borrow for your own life.</p>
 <h2>How we research</h2><p>Every story is built from primary or reputable sources: court and company records, peer-reviewed studies, official statistics, and major publications quoting primary sources. Each story page lists its sources. If a popular statistic or story can't be traced to a real source, we say so instead of repeating it.</p>
 <h2>How the videos are made</h2><p>Our short videos are animated and narrated with an AI voice. Scripts are researched and checked before publishing.</p>
 <h2>What we don't do</h2><p>We don't give personal financial, investment, legal or career advice, and we don't recommend products, stocks or apps. We judge decisions by what was known at the time, not by how they turned out.</p>
@@ -132,7 +132,7 @@ def main():
     items = ''.join(f'<item><title>{E(s["title"])}</title><link>{SITE}/stories/{s["slug"]}/</link><guid>{SITE}/stories/{s["slug"]}/</guid>'
                     f'<pubDate>{dt.datetime.fromisoformat(s["date"] + "T14:00:00+00:00").strftime("%a, %d %b %Y %H:%M:%S +0000")}</pubDate><description>{E(s["summary"])}</description></item>' for s in stories)
     write('feed.xml', f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Borrowed Hindsight</title><link>{SITE}/</link>'
-          f'<description>True stories of money and career decisions.</description><language>en</language>{items}</channel></rss>')
+          f'<description>True stories of people who started from nothing, and the lesson to borrow.</description><language>en</language>{items}</channel></rss>')
     print('built', len(stories), 'stories')
 
 if __name__ == '__main__':
