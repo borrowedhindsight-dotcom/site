@@ -9,6 +9,23 @@ FACEBOOK = 'https://www.facebook.com/borrowedhindsight'
 NEWSLETTER = 'https://borrowedhindsight.substack.com'   # Substack address, e.g. 'https://borrowedhindsight.substack.com'. Empty = sign-up hidden.
 E = html.escape
 
+# Google Analytics 4 measurement ID (e.g. 'G-ABC123XYZ9') and AdSense publisher ID (e.g. 'ca-pub-1234567890123456').
+# Empty = that tag is left out entirely. AdSense uses Auto ads: Google chooses ad placement (turn it on in AdSense > Ads > By site).
+GA_ID = ''
+ADSENSE_CLIENT = ''
+PROFILE = 'https://www.instagram.com/borrowed.hindsight/'
+
+
+def tracking():
+    t = ''
+    if GA_ID:
+        t += (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'
+              f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>")
+    if ADSENSE_CLIENT:
+        t += (f'<meta name="google-adsense-account" content="{ADSENSE_CLIENT}">'
+              f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>')
+    return t
+
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
          '<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Caveat+Brush&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">')
 
@@ -25,7 +42,7 @@ def page(title, desc, body, path='/', ld=None, og_type='website', extra=''):
 <meta property="og:type" content="{og_type}"><meta property="og:site_name" content="Borrowed Hindsight"><meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{E(title)}"><meta name="twitter:description" content="{E(desc)}"><meta name="twitter:image" content="{SITE}/assets/og.png">{extra}{ld_html}
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:image" content="{SITE}/assets/og.png"><meta property="og:url" content="{SITE}{path}">
-{FONTS}<link rel="stylesheet" href="/assets/style.css"></head><body>
+{FONTS}<link rel="stylesheet" href="/assets/style.css">{tracking()}</head><body>
 <header class="top"><div class="wrap"><img src="/assets/logo.svg" alt=""><a class="brand" href="/">Borrowed Hindsight</a>
 <nav><a href="/#stories">Stories</a>{nl_nav}<a href="/about/">About</a><a class="ext" href="https://www.instagram.com/borrowed.hindsight/">Instagram</a><a class="ext" href="https://www.youtube.com/@borrowedhindsight">YouTube</a></nav></div></header>
 {body}
@@ -41,6 +58,24 @@ def signup(where='home'):
 <p>One true story a week of someone who started small and built something big, and the one lesson you can borrow from it. Free. Unsubscribe anytime.</p></div>
 <div><iframe src="{NEWSLETTER}/embed" title="Subscribe to the Borrowed Hindsight newsletter" scrolling="no"></iframe>
 <p class="note"><a href="{NEWSLETTER}/subscribe" rel="noopener">Or subscribe on Substack →</a></p></div></section>'''
+
+
+def site_data():
+    if not (GA_ID or ADSENSE_CLIENT):
+        return ('<p>borrowedhindsight.org does not use cookies, analytics, advertising trackers or sign-up forms. We do not collect personal information from visitors.</p>')
+    t = '<p>We do not ask visitors for personal information.</p>'
+    if GA_ID:
+        t += ('<p><b>Analytics.</b> We use Google Analytics to understand how many people visit, which stories they read and where they came from '
+              '(for example Instagram, YouTube or a search engine). Google Analytics uses cookies and collects data such as pages viewed, approximate location, '
+              'device and browser. We see only aggregate reports and never use it to identify you. See '
+              '<a href="https://policies.google.com/technologies/partner-sites">how Google uses data from sites that use its services</a>. '
+              'You can opt out with the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics opt-out add-on</a>.</p>')
+    if ADSENSE_CLIENT:
+        t += ('<p><b>Advertising.</b> This site shows ads served by Google AdSense. Google and its partners use cookies to show ads based on your visits '
+              'to this and other websites. You can turn off personalised ads in <a href="https://adssettings.google.com">Google Ads Settings</a>, or opt out of '
+              "third-party vendors' cookies at <a href=\"https://www.aboutads.info/choices/\">aboutads.info</a>. We do not choose or endorse the products in these ads, "
+              'and nothing in them is advice from us.</p>')
+    return t
 
 
 def write(rel, content):
@@ -86,12 +121,14 @@ def main():
         related = [r for r in stories if r is not s][:3]
         rel_html = ('<section class="related"><h2>More borrowed hindsight</h2><div class="cards">' + ''.join(
             f'<a class="card" href="/stories/{r["slug"]}/"><span class="tag">{E(r["tag"])}</span><h3>{E(r["title"])}</h3></a>' for r in related) + '</div></section>') if related else ''
+        watch = (f'<a class="btn" href="{E(s["reel"])}">Watch the video</a>' if s.get('reel') and s['reel'] != PROFILE
+                 else f'<a class="btn" href="{PROFILE}">Follow on Instagram for more stories</a>')
         body = f'''<main class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <a href="/#stories">Stories</a> › <span>{E(s["title"])}</span></nav>
 <article><span class="meta">{E(s["tag"])} · <time datetime="{s["date"]}">{dtxt}</time> · By Borrowed Hindsight</span><h1>{E(s["title"])}</h1>
 <p class="lead">{E(s["summary"])}</p><h2>The story</h2>{paras}
 <div class="lesson"><b>The borrowed hindsight</b>{E(s["lesson"])}</div>
 <div class="check"><h3>{E(s["check_title"])}</h3><ul>{checks}</ul></div>
-<p><a class="btn" href="{E(s["reel"])}">Watch the video</a></p>{signup('story')}{faq_html}
+<p>{watch}</p>{signup('story')}{faq_html}
 <div class="sources"><h2>Sources</h2><ol>{srcs}</ol><p class="note">General education, not personal or financial advice. Spotted an error? Email borrowedhindsight@gmail.com and we'll correct it. <a href="/about/">How we research</a>.</p></div></article>{rel_html}</main>'''
         art = {'@context': 'https://schema.org', '@type': 'Article', 'headline': s['title'][:110], 'description': s['summary'],
                'datePublished': f'{s["date"]}T19:30:00+05:30', 'dateModified': f'{mod}T19:30:00+05:30',
@@ -119,6 +156,7 @@ def main():
 
     for name in ('privacy', 'terms'):
         body = (ROOT / f'{name}.html').read_text()
+        body = body.replace('<!--SITE-DATA-->', site_data())
         title = 'Privacy policy' if name == 'privacy' else 'Terms of use'
         write(f'{name}/index.html', page(f'{title} | Borrowed Hindsight', f'{title} for borrowedhindsight.org and the Borrowed Hindsight channels.', f'<main class="wrap legal">{body}</main>', f'/{name}/'))
     write('404.html', page('Not found | Borrowed Hindsight', 'Page not found', '<main class="wrap legal"><h1>Not found</h1><p><a href="/">Back to the stories</a></p></main>').replace('index,follow', 'noindex'))
@@ -128,6 +166,8 @@ def main():
            [(f'/stories/{s["slug"]}/', s.get('updated', s['date']), '0.8') for s in stories]
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(
         f'<url><loc>{SITE}{u}</loc>{f"<lastmod>{m}</lastmod>" if m else ""}<priority>{pr}</priority></url>' for u, m, pr in urls) + '</urlset>')
+    if ADSENSE_CLIENT:
+        write('ads.txt', f'google.com, {ADSENSE_CLIENT.replace("ca-", "")}, DIRECT, f08c47fec0942fa0\n')
     write('robots.txt', f'User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n')
     items = ''.join(f'<item><title>{E(s["title"])}</title><link>{SITE}/stories/{s["slug"]}/</link><guid>{SITE}/stories/{s["slug"]}/</guid>'
                     f'<pubDate>{dt.datetime.fromisoformat(s["date"] + "T14:00:00+00:00").strftime("%a, %d %b %Y %H:%M:%S +0000")}</pubDate><description>{E(s["summary"])}</description></item>' for s in stories)
