@@ -86,7 +86,7 @@ def page(title, desc, body, path='/', ld=None, og_type='website', extra='', imag
 <footer><div class="wrap wide"><div class="fcols">
 <div><b>Borrowed Hindsight</b><p>True, sourced stories of people who started with almost nothing, and one lesson to borrow from each.</p>
 <p><a href="{INSTAGRAM}">Instagram</a> · <a href="{YOUTUBE}">YouTube</a> · <a href="{FACEBOOK}">Facebook</a> · <a href="{NEWSLETTER}">Newsletter</a></p></div>
-<div><b>Stories</b><p>{" · ".join(f'<a href="/category/{c}/">{E(n)}</a>' for c, (n, _) in CATS.items())}</p></div>
+<div><b>Stories</b><p>{" · ".join(f'<a href="/category/{c}/">{E(n)}</a>' for c, (n, _) in CATS.items() if c in LIVE_CATS)}</p></div>
 <div><b>About</b><p><a href="/about/">About us</a> · <a href="/editorial-standards/">Editorial standards</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></div></div>
 <p class="fine">© {dt.date.today().year} Borrowed Hindsight. General education, not personal or financial advice. Videos are animated and AI-narrated. Our publishing tool uses YouTube API Services: see our <a href="/privacy/">Privacy policy</a> and the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.</p></div></footer>
 <script>document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{{navigator.clipboard&&navigator.clipboard.writeText(b.dataset.copy);b.textContent='Link copied';}}));</script>
@@ -208,6 +208,7 @@ def slugify(t):
 
 THUMBS = set()
 TITLES = {}
+LIVE_CATS = set()   # categories that have at least one published story
 LINK_RE = re.compile(r'https?://(?:www\.)?borrowedhindsight\.org/stories/([a-z0-9-]+)/?')
 
 
@@ -340,6 +341,7 @@ def main():
     THUMBS = make_thumbs(stories)
     TITLES.update({s['slug']: s['title'] for s in stories})
     by_cat = {c: [s for s in stories if cat_of(s) == c] for c in CATS}
+    LIVE_CATS.update(c for c in CATS if by_cat[c])
 
     # home
     cat_blocks = ''.join(
