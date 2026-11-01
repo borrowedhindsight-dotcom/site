@@ -207,6 +207,17 @@ def slugify(t):
 
 
 THUMBS = set()
+TITLES = {}
+LINK_RE = re.compile(r'https?://(?:www\.)?borrowedhindsight\.org/stories/([a-z0-9-]+)/?')
+
+
+def para(text):
+    """Escape a paragraph and turn links to our own stories into titled internal links."""
+    out = E(text)
+    def repl(m):
+        slug = m.group(1)
+        return f'<a href="/stories/{slug}/">{E(TITLES.get(slug, slug.replace("-", " ")))}</a>'
+    return LINK_RE.sub(repl, out)
 
 
 def thumb(s):
@@ -253,10 +264,10 @@ def story_page(s, prev_s, next_s, related):
     mod = s.get('updated', s['date']); rt = max(1, round(words_of(s) / 220))
     is_article = s.get('kind') == 'article'
     if s.get('sections'):
-        intro = ''.join(f'<p>{E(p)}</p>' for p in s.get('intro', []))
+        intro = ''.join(f'<p>{para(p)}</p>' for p in s.get('intro', []))
         ids = [slugify(sec['h']) for sec in s['sections']]
         toc = '<nav class="toc"><b>In this story</b><ol>' + ''.join(f'<li><a href="#{i}">{E(sec["h"])}</a></li>' for i, sec in zip(ids, s['sections'])) + '</ol></nav>'
-        secs = ''.join(f'<h2 id="{i}">{E(sec["h"])}</h2>' + ''.join(f'<p>{E(p)}</p>' for p in sec['paras']) for i, sec in zip(ids, s['sections']))
+        secs = ''.join(f'<h2 id="{i}">{E(sec["h"])}</h2>' + ''.join(f'<p>{para(p)}</p>' for p in sec['paras']) for i, sec in zip(ids, s['sections']))
         main_html = intro + toc + secs
     else:
         main_html = '<h2>The story</h2>' + ''.join(f'<p>{E(p)}</p>' for p in s.get('body', []))
@@ -327,6 +338,7 @@ def main():
     shutil.copytree(ROOT / 'assets', OUT / 'assets', ignore=shutil.ignore_patterns('fonts')); shutil.copy(ROOT / 'CNAME', OUT / 'CNAME')
     stories = sorted([s for s in json.load(open(ROOT / 'stories.json')) if s['date'] <= TODAY], key=lambda s: (s['date'], s['slug']), reverse=True)
     THUMBS = make_thumbs(stories)
+    TITLES.update({s['slug']: s['title'] for s in stories})
     by_cat = {c: [s for s in stories if cat_of(s) == c] for c in CATS}
 
     # home
