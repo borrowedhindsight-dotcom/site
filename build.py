@@ -232,6 +232,13 @@ def make_images(stories):
     for s in stories:
         frame_p = ROOT / 'assets' / 'reels' / f'{s["slug"]}.jpg'
         col = hex_rgb(CATS[cat_of(s)][2])
+        ill_p = ROOT / 'assets' / 'covers' / f'{s["slug"]}.png'
+        if ill_p.exists():   # illustrated cover drawn with the animation kit (bh-publisher scripts/covers.py)
+            cover = Image.open(ill_p).convert('RGBA').resize((W, H), Image.LANCZOS)
+            save(cover, f'assets/thumbs/{s["slug"]}.jpg', 86)
+            save(cover.resize((640, 360), Image.LANCZOS), f'assets/thumbs/{s["slug"]}-640.jpg', 82)
+            save(cover, f'assets/og/{s["slug"]}.jpg', 86)
+            made.add(s['slug']); continue
         if frame_p.exists():
             f = Image.open(frame_p).convert('RGB')
             bg = f.resize((W, int(f.height * W / f.width))); top = (bg.height - H) // 2
@@ -298,6 +305,8 @@ THUMBS = set()
 TITLES = {}
 LIVE_CATS = set()   # categories that have at least one published story
 COUNTS = {}
+COVER_META = json.load(open(ROOT / 'covers.json')) if (ROOT / 'covers.json').exists() else {}
+POP = json.load(open(ROOT / 'popularity.json')) if (ROOT / 'popularity.json').exists() else {}   # Instagram views per story, from bh-publisher
 LINK_RE = re.compile(r'https?://(?:www\.)?borrowedhindsight\.org/stories/([a-z0-9-]+)/?')
 
 
@@ -320,7 +329,22 @@ def og_img(s):
     return f'/assets/og/{s["slug"]}.jpg' if s['slug'] in THUMBS else '/assets/og.png'
 
 
-def img_tag(s, sizes, eager=False, alt=''):
+def alt_of(s):
+    if s['slug'] in COVER_META:
+        return COVER_META[s['slug']]['alt']
+    if (ROOT / 'assets' / 'reels' / f'{s["slug"]}.jpg').exists():
+        return f'Illustration from our animated video: {s["title"]}'
+    return f'Borrowed Hindsight illustration: {s["title"]}'
+
+
+def caption_of(s):
+    if s['slug'] in COVER_META:
+        return COVER_META[s['slug']]['caption']
+    return f'Illustration from the Borrowed Hindsight video about this story.' if (ROOT / 'assets' / 'reels' / f'{s["slug"]}.jpg').exists() else ''
+
+
+def img_tag(s, sizes, eager=False, alt=None):
+    alt = alt_of(s) if alt is None else alt
     src = thumb(s)
     srcset = f' srcset="{thumb(s, True)} 640w, {src} 1200w" sizes="{sizes}"' if s['slug'] in THUMBS else ''
     load = ' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"'
@@ -420,7 +444,7 @@ def story_page(s, prev_s, next_s, related):
 <article>
 <header class="story-head">{kicker(c, True)}<h1>{E(s["title"])}</h1><p class="lead">{E(s["summary"])}</p>
 <div class="byline"><img src="/assets/logo.svg" alt="" width="42" height="42"><div><b>{E(BYLINE)}</b><div class="facts"><time datetime="{s["date"]}">{fmt_date(s["date"])}</time>{upd}<span>{rt} min read</span><span>Checked against {nsrc} sources</span></div></div></div></header>
-<figure class="cover">{img_tag(s, "(max-width:1240px) 100vw, 1200px", eager=True, alt=s["title"])}</figure>
+<figure class="cover">{img_tag(s, "(max-width:1240px) 100vw, 1200px", eager=True)}</figure>{f'<p class="figcap">{E(caption_of(s))}</p>' if caption_of(s) else ''}
 <div class="layout"><div class="prose">
 {toc_m}{intro}{secs}{photo_html}{tl_html}
 <section class="lesson" id="lesson"><small>The borrowed hindsight</small><p><span class="hl">{E(s["lesson"])}</span></p></section>
@@ -435,7 +459,7 @@ def story_page(s, prev_s, next_s, related):
     art = {'@context': 'https://schema.org', '@type': 'Article', '@id': SITE + url + '#article', 'headline': s['title'][:110], 'description': s['summary'],
            'datePublished': f'{s["date"]}T19:30:00+05:30', 'dateModified': f'{mod}T19:30:00+05:30',
            'author': {'@type': 'Organization', 'name': BYLINE, 'url': SITE + '/about/'}, 'publisher': ORG,
-           'image': [img, SITE + og_img(s)], 'mainEntityOfPage': SITE + url, 'articleSection': cname, 'inLanguage': 'en', 'wordCount': words_of(s),
+           'image': [{'@type': 'ImageObject', 'url': img, 'width': 1200, 'height': 675, 'caption': alt_of(s), 'contentUrl': img}], 'mainEntityOfPage': SITE + url, 'articleSection': cname, 'inLanguage': 'en', 'wordCount': words_of(s),
            'keywords': ', '.join(s.get('keywords', [])) or None, 'citation': [u for _, u in s['sources'] if u] or None,
            'abstract': s['lesson'], 'isAccessibleForFree': True,
            'speakable': {'@type': 'SpeakableSpecification', 'cssSelector': ['.story-head .lead', '.lesson p']}}
@@ -484,7 +508,8 @@ def main():
     stories = sorted([s for s in json.load(open(ROOT / 'stories.json')) if s['date'] <= TODAY], key=lambda s: (s['date'], s['slug']), reverse=True)
     THUMBS = make_images(stories)
     TITLES.update({s['slug']: s['title'] for s in stories})
-    by_cat = {c: [s for s in stories if cat_of(s) == c] for c in CATS}
+    popular = sorted(stories, key=lambda s: (POP.get(s['slug'], 0), s['date']), reverse=True)   # most-watched first, then newest
+    by_cat = {c: [s for s in popular if cat_of(s) == c] for c in CATS}
     LIVE_CATS.update(c for c in CATS if by_cat[c])
     COUNTS.update({c: len(v) for c, v in by_cat.items()})
 
@@ -492,6 +517,10 @@ def main():
     feat = stories[0]; fc = cat_of(feat)
     latest = stories[1:7]
     shown = stories[:7]
+    watched = [s for s in popular if POP.get(s['slug'], 0) > 0 and s is not feat][:4]
+    most_html = (f'<section class="block"><div class="shead"><h2>Most watched</h2><a class="all" href="{INSTAGRAM}" rel="noopener">Watch on Instagram</a></div>'
+                 f'<p class="sdesc">The stories people watched most on Instagram. Read the full, sourced version here.</p>'
+                 f'<div class="row">{"".join(card(s, summary=False) for s in watched)}</div></section>') if len(watched) >= 3 else ''
     wall = [s for s in stories if s.get('lesson')][:9]
     wall_html = ''.join(f'<a class="quote" href="/stories/{s["slug"]}/"><q>{E(s["lesson"])}</q><span>{E(s["title"])}</span></a>' for s in wall)
     rows = ''.join(
@@ -503,7 +532,7 @@ def main():
 <p class="lead">Founders, late starters, comebacks and record-breakers: the low point, the climb, and one line of hindsight you can borrow. Every story is researched, sourced and checked twice.</p></div></section>
 <a class="feature" href="/stories/{feat["slug"]}/"><div class="pic">{img_tag(feat, "(max-width:900px) 100vw, 690px", eager=True)}</div>
 <div>{kicker(fc)}<h2>{E(feat["title"])}</h2><p>{E(feat["summary"])}</p><blockquote><span class="hl">{E(feat["lesson"])}</span></blockquote><span class="more">Read the story ({mins(feat)} min)</span></div></a>
-<section class="block"><div class="shead"><h2>Latest stories</h2><a class="all" href="/stories/">All {len(stories)} stories</a></div>{grid(latest)}</section></div>
+{most_html}<section class="block"><div class="shead"><h2>Latest stories</h2><a class="all" href="/stories/">All {len(stories)} stories</a></div>{grid(latest)}</section></div>
 <section class="wall"><div class="wrap"><h2>Lines worth borrowing</h2><p class="sub">Every story ends with one line of hindsight. Here are the latest. Tap one to read the story behind it.</p><div class="quotes">{wall_html}</div></div></section>
 <div class="wrap"><section class="block"><div class="shead"><h2>Browse by category</h2></div>{chips_html(by_cat)}</section>
 {rows}{signup('home')}</div></main>'''
@@ -547,8 +576,8 @@ q.addEventListener('input',run);q.focus();}})();
     for i, s in enumerate(chrono):
         prev_s = chrono[i - 1] if i > 0 else None
         next_s = chrono[i + 1] if i + 1 < len(chrono) else None
-        same = [r for r in stories if r is not s and cat_of(r) == cat_of(s)]
-        other = [r for r in stories if r is not s and cat_of(r) != cat_of(s)]
+        same = [r for r in popular if r is not s and cat_of(r) == cat_of(s)]
+        other = [r for r in popular if r is not s and cat_of(r) != cat_of(s)]
         story_page(s, prev_s, next_s, (same[:2] + other[:1] + same[2:])[:3])
 
     # ---------- static pages ----------
