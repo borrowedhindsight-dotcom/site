@@ -12,7 +12,7 @@ E = html.escape
 # Google Analytics 4 measurement ID (e.g. 'G-ABC123XYZ9') and AdSense publisher ID (e.g. 'ca-pub-1234567890123456').
 # Empty = that tag is left out entirely. AdSense uses Auto ads: Google chooses ad placement (turn it on in AdSense > Ads > By site).
 GA_ID = 'G-V6QHHCTWJT'
-ADSENSE_CLIENT = ''
+ADSENSE_CLIENT = 'ca-pub-8424876803254841'
 PROFILE = 'https://www.instagram.com/borrowed.hindsight/'
 
 
