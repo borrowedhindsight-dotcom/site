@@ -517,7 +517,7 @@ def main():
     feat = stories[0]; fc = cat_of(feat)
     latest = stories[1:7]
     shown = stories[:7]
-    watched = [s for s in popular if POP.get(s['slug'], 0) > 0 and s is not feat][:4]
+    watched = [s for s in popular if POP.get(s['slug'], 0) > 0][:4]   # the top story stays in Most watched even when it is also featured (Deepak, 6 Nov)
     most_html = (f'<section class="block"><div class="shead"><h2>Most watched</h2><a class="all" href="{INSTAGRAM}" rel="noopener">Watch on Instagram</a></div>'
                  f'<p class="sdesc">The stories people watched most on Instagram. Read the full, sourced version here.</p>'
                  f'<div class="row">{"".join(card(s, summary=False) for s in watched)}</div></section>') if len(watched) >= 3 else ''
