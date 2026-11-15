@@ -9208,5 +9208,238 @@
       ]
     ],
     "photo": null
+  },
+  {
+    "slug": "inventions-people-said-would-never-work-famous-quotes-fake",
+    "date": "2026-11-15",
+    "kind": "article",
+    "category": "lists",
+    "title": "Inventions People Said Would Never Work (and Which Famous Quotes Are Fake)",
+    "seo_title": "Famous Wrong Predictions: Which Quotes Are Real and Which Are Fake",
+    "summary": "Gates and 640K, Watson and five computers, the patent office that closed: four famous 'it will never work' quotes were never said as told. Four were real, and one newspaper apologised after 49 years.",
+    "intro": [
+      "Every list of 'famous wrong predictions' has the same cast: a patent official who thought everything was invented, an IBM boss who saw a market for five computers, a billionaire who said 640K of memory was plenty. They are fun to repeat. The trouble is that several of them are not true.",
+      "We checked eight of the most repeated ones against the earliest records we could find. Four were never said the way they are told, or never said at all. Four are real, including a newspaper editorial that mocked a rocket pioneer and a retraction that arrived 49 years later, in the middle of the first Moon flight. Each entry below ends with a plain verdict."
+    ],
+    "sections": [
+      {
+        "h": "1. 'Everything that can be invented has been invented' (not proven)",
+        "paras": [
+          "The line is blamed on Charles H. Duell, who was Commissioner of the US Patent Office from 1898 to 1901. The story says he told President McKinley in 1899 that the office could close because nothing was left to invent.",
+          "Researchers have looked for a primary source for decades and found none (Quote Investigator; IPMall, a patent-history archive). Librarian Samuel Sass traced the claim in a 1989 article, and the earliest version he found in a book was in 1981. Older versions of the same idea float around too: a joke in Punch's Almanack for 1899 puts the sentence in the mouth of a boy in a publisher's office, not a patent official.",
+          "The numbers point the other way. US patents granted per year rose from 435 in 1837 to 25,527 in 1899 (Laser Focus World). Duell himself is reported to have said in 1902 that people kept telling him everything had been invented, and that in his opinion we had not scratched the surface (Barry Popik's research).",
+          "Verdict: fake, or at best unprovable. The man said to be giving up on invention said the opposite."
+        ]
+      },
+      {
+        "h": "2. 'A world market for maybe five computers' (no evidence)",
+        "paras": [
+          "This is pinned on Thomas Watson, the head of IBM, usually in 1943. Nobody has found it in any of his speeches or writing. Biographer Kevin Maney wrote in 2003 that no evidence exists that Watson said it, and Quote Investigator found the claim in print only decades later.",
+          "There are real remarks nearby, which is probably how the legend grew. Howard Aiken, the Harvard computer pioneer, is reported to have said that four or five computers could meet all of the United Kingdom's needs (Wikiquote, citing The Quote Verifier). And in April 1953 Watson's son, Thomas Watson Jr., told IBM's stockholders that a sales trip for the new 701 machine, which had been expected to bring orders for five, came home with 18 (Quote Investigator).",
+          "Verdict: unsupported. The real story is a company that expected to sell five of a machine and sold 18."
+        ]
+      },
+      {
+        "h": "3. 'No reason for anyone to have a computer in their home' (real words, wrong meaning)",
+        "paras": [
+          "Ken Olsen, founder of Digital Equipment Corporation, did say something like this at a World Future Society meeting in Boston in 1977 (Snopes; Quote Investigator). The quote is used to show that even computer makers missed the personal computer.",
+          "What went missing is the subject. Snopes reports that Olsen was talking about a single powerful computer that would run a whole house, switching lights, controlling the temperature, planning meals and monitoring food stocks. He said later that this was the idea he was rejecting, not the desktop machine. Personal computers such as the Altair 8800 already existed in 1977, and Olsen himself owned a computer at home (TechSpot).",
+          "Verdict: real sentence, stripped of its context. It is a comment on smart homes, not on PCs."
+        ]
+      },
+      {
+        "h": "4. '640K ought to be enough for anybody' (denied, never sourced)",
+        "paras": [
+          "The quote is credited to Bill Gates in 1981, when the IBM PC was launched with a design limit of 640 kilobytes of memory. Nobody has produced a recording, a transcript or a printed report from 1981. The oldest versions that Quote Investigator listed appear years later, and its conclusion was that the evidence is mixed at best.",
+          "Gates has denied it more than once. In interviews in 1996 and 2001 he said the quotation floats like a rumour with no citation, and in 2001 added that he had said the opposite: the machine was meant to start at 512K and the team kept pushing the limit up (Computerworld; InfoWorld).",
+          "Verdict: almost certainly fake. The 640K limit was real. The sentence is not."
+        ]
+      },
+      {
+        "h": "5. Lord Kelvin on flying machines (real, but not the famous version)",
+        "paras": [
+          "You will see 'heavier-than-air flying machines are impossible' credited to Lord Kelvin. There is no source for those words, and science-quote archives mark them as a misquote (Today in Science History).",
+          "What Kelvin did write is real and blunt. On 8 December 1896 Major Baden Baden-Powell invited him to join the Aeronautical Society. Kelvin declined, saying he had not the smallest molecule of faith in aerial navigation other than ballooning (Springer, Physics in Perspective; UCL research paper). That was an honest, well-known physicist doubting an unproven idea. Seven years later, on 17 December 1903, the Wright brothers flew.",
+          "Verdict: the famous line is a misquote; the real letter is a genuine wrong call."
+        ]
+      },
+      {
+        "h": "6. Wilbur Wright: 'Man would not fly for fifty years' (real, and his own)",
+        "paras": [
+          "This is the best answer to anyone who thinks inventors always know. After their 1901 glider results disappointed them, Wilbur Wright later admitted that he told Orville man would not fly for fifty years (Invention & Technology). The exact words differ in the record: Orville remembered 'a thousand years', and a note Wilbur wrote says he had predicted men would fly but not in their lifetime (Mississippi State Wright archive).",
+          "All the versions agree on the mood. The brothers had doubted they would ever resume their experiments. They flew in December 1903, about two years later.",
+          "Verdict: real. The inventors themselves lost faith, then went back to work."
+        ]
+      },
+      {
+        "h": "7. The New York Times vs. Robert Goddard, 1920 (real, and corrected in 1969)",
+        "paras": [
+          "On 13 January 1920 an unsigned editorial in the New York Times ridiculed Robert Goddard, the physicist who had proposed rockets that could climb beyond the atmosphere. Its argument was that a rocket has nothing to push against in a vacuum, and it accused him of lacking basic high-school physics (James Oberg; Astronautics Now).",
+          "The editorial had the physics backwards. A rocket pushes against its own exhaust, not the air (James Oberg). Goddard had already patented a liquid-fuel rocket in 1914 and launched the first liquid-fuel rocket on 14 March 1926 (Dallas Morning News).",
+          "On 17 July 1969, the day after Apollo 11 left for the Moon, the Times printed a correction. It said experiments had confirmed Newton's 17th-century findings, that a rocket works in a vacuum, and that the Times regretted the error. Goddard had been dead for more than 20 years.",
+          "Verdict: real, and the only entry here with a printed apology."
+        ]
+      },
+      {
+        "h": "8. Steve Ballmer on the iPhone, 2007 (real, with a catch)",
+        "paras": [
+          "In April 2007, two months before the iPhone went on sale, Microsoft CEO Steve Ballmer told USA Today there was no chance it would get significant market share. He called it a $500 subsidised item (InformationWeek; MacRumors).",
+          "The full answer is slightly more careful than the headline: he added that Apple might make a lot of money. His argument was about share, and at the time Microsoft's own Windows Mobile held about 6 percent of the smartphone market (Daring Fireball, citing Canalys). He was still wrong about what the iPhone would become.",
+          "Verdict: real, from a recorded on-stage interview."
+        ]
+      }
+    ],
+    "timeline": [
+      [
+        "1896",
+        "Lord Kelvin tells the Aeronautical Society he has no faith in aerial navigation other than ballooning."
+      ],
+      [
+        "1901",
+        "Wilbur Wright tells Orville man will not fly for fifty years, after a disappointing glider season."
+      ],
+      [
+        "1903",
+        "The Wright brothers fly at Kitty Hawk on 17 December."
+      ],
+      [
+        "1920",
+        "The New York Times ridicules Goddard's rocket idea in an editorial, 13 January."
+      ],
+      [
+        "1969",
+        "The Times prints a correction on 17 July, the day after Apollo 11 launched."
+      ],
+      [
+        "1977",
+        "Ken Olsen speaks to the World Future Society in Boston about computers that run the home."
+      ],
+      [
+        "2007",
+        "Steve Ballmer tells USA Today the iPhone has no chance of significant market share."
+      ]
+    ],
+    "lesson": "The wrong predictions that actually happened share one feature: they were opinions held by smart people about things nobody had seen working yet. The fake ones survive because they are neat. Before you repeat a famous quote, ask where it was first printed.",
+    "check_title": "Your check",
+    "check": [
+      "Think of a famous quote you have shared. Can you find where it was first printed?",
+      "What idea is someone doubting today that you would back after seeing one working demo?"
+    ],
+    "faq": [
+      [
+        "Did Bill Gates really say 640K is enough for anybody?",
+        "There is no record of it from 1981, and Gates has denied it, saying he said the opposite. The 640K limit of the original IBM PC was real, but the sentence is unsourced."
+      ],
+      [
+        "Did the head of the US Patent Office say everything had been invented?",
+        "No source has been found. Researchers trace the legend to a joke printed in 1899 and to a 1981 book. Patent numbers kept rising, from 435 in 1837 to 25,527 in 1899."
+      ],
+      [
+        "Did IBM's Thomas Watson say there was a market for five computers?",
+        "No evidence has been found that he did. A similar remark is linked to Howard Aiken, and in 1953 Watson Jr. said IBM expected five orders for the 701 and received 18."
+      ],
+      [
+        "Which famous 'it will never work' predictions are real?",
+        "Lord Kelvin's 1896 letter doubting aerial navigation, Wilbur Wright's 1901 doubt that man would fly soon, the New York Times editorial on Goddard in 1920, and Steve Ballmer's 2007 comment on the iPhone are all documented."
+      ],
+      [
+        "Did the New York Times ever apologise to Robert Goddard?",
+        "Yes, in a correction printed on 17 July 1969, 49 years after the editorial and the day after Apollo 11 launched, saying it regretted the error."
+      ]
+    ],
+    "keywords": [
+      "famous wrong predictions",
+      "fake famous quotes",
+      "inventions people said would never work",
+      "640K Bill Gates quote",
+      "world market for five computers",
+      "everything that can be invented has been invented",
+      "New York Times Goddard correction",
+      "Ballmer iPhone quote",
+      "Wilbur Wright fifty years"
+    ],
+    "sources": [
+      [
+        "Quote Investigator: Everything That Can Be Invented Has Been Invented (2023)",
+        "https://quoteinvestigator.com/2023/06/23/invented/"
+      ],
+      [
+        "IPMall (UNH): the story of the patent commissioner who thought everything was invented",
+        "https://ipmall.law.unh.edu/node/922"
+      ],
+      [
+        "Laser Focus World: 'Everything that can be invented has been'",
+        "https://www.laserfocusworld.com/test-measurement/research/article/16555061/everything-that-can-be-invented-has-been"
+      ],
+      [
+        "Barry Popik: 'Everything that can be invented has been invented'",
+        "https://barrypopik.com/blog/everything_that_can_be_invented_has_been_invented"
+      ],
+      [
+        "Quote Investigator: I Think There Is a World Market for About Five Computers",
+        "https://quoteinvestigator.com/2026/08/29/market-five/"
+      ],
+      [
+        "Wikiquote: Thomas J. Watson",
+        "https://en.wikiquote.org/wiki/Thomas_J._Watson"
+      ],
+      [
+        "Snopes: Ken Olsen and the computer in the home",
+        "https://www.snopes.com/quotes/kenolsen.asp"
+      ],
+      [
+        "TechSpot: Who famously said there is no reason anyone would want a computer at home",
+        "https://www.techspot.com/trivia/16-who-famously-there-no-reason-anyone-would-want"
+      ],
+      [
+        "Quote Investigator: 640K Ought to be Enough for Anyone",
+        "https://quoteinvestigator.com/2011/09/08/640k-enough/"
+      ],
+      [
+        "Computerworld: The quotable Bill Gates in his own words",
+        "https://www.computerworld.com/article/1564172/the-quotable-bill-gates-in-his-own-words.html"
+      ],
+      [
+        "Springer, Physics in Perspective: Lord Kelvin's 1896 letter to Baden-Powell",
+        "https://link.springer.com/article/10.1007/s00016-011-0077-2"
+      ],
+      [
+        "Today in Science History: Lord Kelvin quotes, including the misquote",
+        "https://todayinsci.com/K/Kelvin_Lord/KelvinLord-Quotations.htm"
+      ],
+      [
+        "Invention & Technology: Wilbur Wright's 1901 doubt",
+        "https://www.inventionandtech.com/node/86483"
+      ],
+      [
+        "Mississippi State: Wright brothers 1901 'Not within a thousand years'",
+        "https://invention.psychology.msstate.edu/i/Wrights/1901.html"
+      ],
+      [
+        "Astronautics Now: The New York Times trashes Robert Goddard in 1920 and regrets it in 1969",
+        "https://www.astronauticsnow.com/history/goddard/index.html"
+      ],
+      [
+        "James Oberg: Goddard, seeing the non-obvious",
+        "https://jamesoberg.com/goddard_per.html"
+      ],
+      [
+        "Dallas Morning News: Robert Goddard, father of space travel",
+        "https://www.dallasnews.com/opinion/commentary/2019/07/14/repeatedly-upstaged-by-the-wright-brothers-robert-goddard-was-the-real-father-of-space-travel"
+      ],
+      [
+        "InformationWeek: Steve Ballmer on the iPhone (USA Today interview, 2007)",
+        "https://www.informationweek.com/it-leadership/sometimes-steve-ballmer-just-takes-your-breath-away"
+      ],
+      [
+        "MacRumors: Ballmer on iPhone Marketshare (30 April 2007)",
+        "https://www.macrumors.com/2007/04/30/ballmer-on-iphone-marketshare/"
+      ],
+      [
+        "Daring Fireball: iPhone's funny price (May 2007)",
+        "https://daringfireball.net/2007/05/iphones_funny_price"
+      ]
+    ],
+    "photo": null
   }
 ]
