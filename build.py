@@ -21,7 +21,9 @@ SITE = 'https://www.borrowedhindsight.org'
 INSTAGRAM = 'https://www.instagram.com/borrowed.hindsight/'
 YOUTUBE = 'https://www.youtube.com/@borrowedhindsight'
 FACEBOOK = 'https://www.facebook.com/borrowedhindsight'
-NEWSLETTER = 'https://borrowedhindsight.substack.com'
+NEWSLETTER_URL = 'https://borrowedhindsight.substack.com'  # restore to NEWSLETTER below when the newsletter runs again
+NEWSLETTER = ''  # paused 15 Nov 2026: no issues since 21 Oct, so no subscribe prompts
+NL_LI = f'<li><a href="{NEWSLETTER}" rel="me noopener">Newsletter</a></li>' if NEWSLETTER else ''
 CONTACT_EMAIL = 'hello@borrowedhindsight.org'
 PROFILE = INSTAGRAM
 E = html.escape
@@ -121,7 +123,7 @@ def nav_html():
             f'<details><summary>Categories</summary><div class="menu"><a href="/stories/"><i class="dot" style="--c:#FFD60A"></i>All stories<small>{sum(COUNTS.values())}</small></a>{items}<a class="show-m" href="/about/">About</a></div></details>'
             f'<a class="hide-m" href="/about/">About</a>'
             f'<a class="search" href="/search/" aria-label="Search stories">{SEARCH_ICON}</a>'
-            f'<a class="cta hide-m" href="#newsletter">Newsletter</a></nav>')
+            + (f'<a class="cta hide-m" href="#newsletter">Newsletter</a>' if NEWSLETTER else '') + '</nav>')
 
 
 def page(title, desc, body, path='/', ld=None, og_type='website', extra='', image=None, noindex=False, ads=True, progress=False):
@@ -146,7 +148,7 @@ def page(title, desc, body, path='/', ld=None, og_type='website', extra='', imag
 <div><div class="fbrand"><img src="/assets/logo.svg" alt="" width="38" height="38">Borrowed Hindsight</div>
 <p>True, sourced stories of people who started with almost nothing, and one lesson to borrow from each.</p></div>
 <div><h2>Stories</h2><ul><li><a href="/stories/">All stories</a></li>{cats}</ul></div>
-<div><h2>Follow</h2><ul><li><a href="{INSTAGRAM}" rel="me noopener">Instagram</a></li><li><a href="{YOUTUBE}" rel="me noopener">YouTube</a></li><li><a href="{FACEBOOK}" rel="me noopener">Facebook</a></li><li><a href="{NEWSLETTER}" rel="me noopener">Newsletter</a></li></ul></div>
+<div><h2>Follow</h2><ul><li><a href="{INSTAGRAM}" rel="me noopener">Instagram</a></li><li><a href="{YOUTUBE}" rel="me noopener">YouTube</a></li><li><a href="{FACEBOOK}" rel="me noopener">Facebook</a></li>{NL_LI}</ul></div>
 <div><h2>About</h2><ul><li><a href="/about/">About us</a></li><li><a href="/editorial-standards/">Editorial standards</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy policy</a></li><li><a href="/terms/">Terms of use</a></li></ul></div></div>
 <p class="fine">© {dt.date.today().year} Borrowed Hindsight. General education, not personal or financial advice. Our videos are animated and narrated with an AI voice; every story is checked against its sources. Our publishing tool uses YouTube API Services: see our <a href="/privacy/">privacy policy</a> and the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.</p></div></footer>
 {SCRIPT}</body></html>'''
@@ -188,7 +190,7 @@ def write(rel, content):
 ORG = {'@type': 'Organization', '@id': f'{SITE}/#org', 'name': 'Borrowed Hindsight', 'url': SITE + '/',
        'description': 'An independent publisher of true, sourced stories of people who started with almost nothing.',
        'logo': {'@type': 'ImageObject', 'url': f'{SITE}/assets/apple-touch-icon.png', 'width': 180, 'height': 180},
-       'sameAs': [INSTAGRAM, YOUTUBE, FACEBOOK, NEWSLETTER], 'email': CONTACT_EMAIL,
+       'sameAs': [u for u in (INSTAGRAM, YOUTUBE, FACEBOOK, NEWSLETTER) if u], 'email': CONTACT_EMAIL,
        'publishingPrinciples': f'{SITE}/editorial-standards/', 'correctionsPolicy': f'{SITE}/editorial-standards/#corrections',
        'contactPoint': {'@type': 'ContactPoint', 'contactType': 'editorial', 'email': CONTACT_EMAIL, 'url': f'{SITE}/contact/'}}
 
@@ -584,7 +586,7 @@ q.addEventListener('input',run);q.focus();}})();
     about = f'''<h1>About Borrowed Hindsight</h1>
 <p class="lead">They started with almost nothing. Their hindsight is yours to borrow.</p>
 <p>Borrowed Hindsight is an independent publisher of true stories about people who started with very little, were told no, or started late, and built something remarkable anyway. Each story covers the low point, the choice, the climb, and one line of hindsight you can use in your own life.</p>
-<p>We publish short animated videos on <a href="{INSTAGRAM}">Instagram</a>, <a href="{YOUTUBE}">YouTube</a> and <a href="{FACEBOOK}">Facebook</a>, a weekly <a href="{NEWSLETTER}">newsletter</a>, and the full, sourced version of every story here. We are based in New Delhi, India, and write for readers everywhere.</p>
+<p>We publish short animated videos on <a href="{INSTAGRAM}">Instagram</a>, <a href="{YOUTUBE}">YouTube</a> and <a href="{FACEBOOK}">Facebook</a>, and the full, sourced version of every story here. We are based in New Delhi, India, and write for readers everywhere.</p>
 <h2>How we research</h2><p>Every story is built from primary or reputable sources: company and official records, major newspapers and magazines, books, peer-reviewed studies and official statistics. Every number is checked in at least two independent sources, and each page lists its sources. If a popular story or statistic can't be traced to a real source, we say so instead of repeating it. Read our full <a href="/editorial-standards/">editorial standards</a>.</p>
 <h2>How we use AI</h2><p>AI tools help us research, draft and narrate. People choose every story, and every fact is checked against its sources before it is published. Our short videos are animated and narrated with an AI voice. We never create fake photos of real people.</p>
 <h2>What we don't do</h2><p>We don't give personal financial, investment, legal or career advice, and we don't recommend products, stocks or apps. We don't publish political or religious content, and we never mock anyone. We judge decisions by what was known at the time, not by how they turned out.</p>
@@ -601,7 +603,7 @@ q.addEventListener('input',run);q.focus();}})();
 <li><b>Story suggestions.</b> Know a true story of someone who started small or came back from a setback? Tell us, with a link to where it was reported.</li>
 <li><b>Partnerships and press.</b> Brands, publishers and educators: tell us what you have in mind.</li>
 <li><b>Privacy requests.</b> See our <a href="/privacy/">privacy policy</a>.</li></ul>
-<h2>Find us elsewhere</h2><p><a href="{INSTAGRAM}">Instagram</a>, <a href="{YOUTUBE}">YouTube</a>, <a href="{FACEBOOK}">Facebook</a> and our <a href="{NEWSLETTER}">newsletter</a>.</p>
+<h2>Find us elsewhere</h2><p><a href="{INSTAGRAM}">Instagram</a>, <a href="{YOUTUBE}">YouTube</a>, <a href="{FACEBOOK}">Facebook</a>.</p>
 <p class="note">We usually reply within two working days (India time). We never ask for passwords, payments or personal documents.</p>'''
     write('contact/index.html', page('Contact Borrowed Hindsight', 'How to reach Borrowed Hindsight for corrections, story suggestions, partnerships and privacy requests.',
           f'<main class="wrap narrow legal">{crumbs_html([("Home", "/"), ("Contact", "/contact/")])}{contact}</main>', '/contact/',
