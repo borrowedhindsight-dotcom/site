@@ -181,6 +181,11 @@ def site_data():
               'and nothing in them is advice from us.</p>')
     return t
 
+REDIRECTS = {
+    'lego-comeback-from-near-bankruptcy-back-to-the-brick': 'biggest-business-comebacks-in-history-apple-lego-marvel',
+    'steve-sasson-kodak-first-digital-camera-1975': 'steve-sasson-kodak-first-digital-camera-shelved-story',
+}
+
 
 def write(rel, content):
     p = OUT / rel; p.parent.mkdir(parents=True, exist_ok=True)
@@ -649,6 +654,12 @@ q.addEventListener('input',run);q.focus();}})();
         + '</url>' for u, m, pr in urls) + '</urlset>')
     if ADSENSE_CLIENT:
         write('ads.txt', f'google.com, {ADSENSE_CLIENT.replace("ca-", "")}, DIRECT, f08c47fec0942fa0\n')
+    # Moved pages: Google had seen these URLs, so send visitors and Google to the page that replaced them.
+    for old, new in REDIRECTS.items():
+        t = f'{SITE}/stories/{new}/'
+        write(f'stories/{old}/index.html', f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Moved: Borrowed Hindsight</title>'
+              f'<link rel="canonical" href="{t}"><meta http-equiv="refresh" content="0; url={t}"><meta name="robots" content="noindex,follow"></head>'
+              f'<body><p>This story moved to <a href="{t}">{t}</a>.</p></body></html>')
     write('robots.txt', f'User-agent: *\nAllow: /\nDisallow: /search/?\n\nSitemap: {SITE}/sitemap.xml\n')
     items = ''.join(f'<item><title>{E(s["title"])}</title><link>{SITE}/stories/{s["slug"]}/</link><guid>{SITE}/stories/{s["slug"]}/</guid>'
                     f'<category>{E(CATS[cat_of(s)][0])}</category>'
