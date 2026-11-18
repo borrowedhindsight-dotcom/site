@@ -26,6 +26,21 @@ NEWSLETTER = ''  # paused 15 Nov 2026: no issues since 21 Oct, so no subscribe p
 NL_LI = f'<li><a href="{NEWSLETTER}" rel="me noopener">Newsletter</a></li>' if NEWSLETTER else ''
 CONTACT_EMAIL = 'hello@borrowedhindsight.org'
 PROFILE = INSTAGRAM
+# Reels archived on Instagram (Nov 2026). Stories linking to these point to the profile instead, and drop the
+# VideoObject schema. Kept here rather than in stories.json because bh-publisher overwrites that file on every sync.
+ARCHIVED_REELS = {
+    'Des5AIoixAc', 'DewpCmagvx_', 'DezJfq9iGjx', 'De1xO77E0Kh', 'De1b9jZDhvu',
+    'De2Cb7Kj9nX', 'De82tyrAEJj', 'De65fgxEQ2m', 'De3rrk-CVVp', 'De3Cq-sgVGt',
+    'De6QXaaDSaX', 'De4UpTnEXbp', 'De9jUfnlVdW', 'De_bixbFVO_', 'DfAG8c-FAsd',
+    'DfCq_jhlYra', 'DfCBMCElSTk', 'DfFPz1YDPjS', 'DfHKTgqlSHi', 'DfJuEo0FLaN',
+    'DfKXdwWFFwF', 'DfM8RvTD5B4', 'DfO4wadibi2', 'DfPjrbbCsI-', 'DfRc5T7CV2z',
+    'DfSH5OOAuEP', 'DfUtOUtD_St', 'DfWou5RkwNb', 'DfXR1R9DM3d',
+}
+
+
+def reel_id(url):
+    m = re.search(r'/reels?/([^/?#]+)', url or '')
+    return m.group(1) if m else ''
 E = html.escape
 PER_PAGE = 18
 BYLINE = 'Borrowed Hindsight editors'   # who is responsible for the stories (shown on every story and in Article schema)
@@ -432,7 +447,7 @@ def story_page(s, prev_s, next_s, related):
     srcs = ''.join(f'<li>{f"<a href={chr(34)}{E(u)}{chr(34)} rel=\"nofollow noopener\">{E(t)}</a>" if u else E(t)}</li>' for t, u in s['sources'])
     faq = s.get('faq', [])
     faq_html = ('<section class="faq" id="faq"><h2>Questions people ask</h2>' + ''.join(f'<details><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in faq) + '</section>') if faq else ''
-    has_reel = bool(s.get('reel')) and s['reel'] != PROFILE
+    has_reel = bool(s.get('reel')) and s['reel'] != PROFILE and reel_id(s['reel']) not in ARCHIVED_REELS
     reel_url = s['reel'] if has_reel else PROFILE
     frame = (ROOT / 'assets' / 'reels' / f'{s["slug"]}.jpg').exists()
     reel_html = '' if is_article else (
