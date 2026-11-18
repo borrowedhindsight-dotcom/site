@@ -462,9 +462,10 @@ def story_page(s, prev_s, next_s, related):
           (f'<a class="next" href="/stories/{next_s["slug"]}/"><span>Next story</span>{E(next_s["title"])}</a>' if next_s else '<span></span>') + '</nav>'
     rel_html = ('<section class="related block"><div class="shead"><h2>Keep reading</h2><a class="all" href="/stories/">All stories</a></div>' + grid(related) + '</section>') if related else ''
     upd = f'<span>Updated {fmt_date(mod)}</span>' if mod != s['date'] else ''
+    answer_html = f'<div class="answer"><b>Quick answer</b><p>{E(s["answer"])}</p></div>' if s.get('answer') else ''
     body = f'''<main class="wrap">{crumbs_html([("Home", "/"), ("Stories", "/stories/"), (cname, f"/category/{c}/"), (s["title"], url)])}
 <article>
-<header class="story-head">{kicker(c, True)}<h1>{E(s["title"])}</h1><p class="lead">{E(s["summary"])}</p>
+<header class="story-head">{kicker(c, True)}<h1>{E(s["title"])}</h1><p class="lead">{E(s["summary"])}</p>{answer_html}
 <div class="byline"><img src="/assets/logo.svg" alt="" width="42" height="42"><div><b>{E(BYLINE)}</b><div class="facts"><time datetime="{s["date"]}">{fmt_date(s["date"])}</time>{upd}<span>{rt} min read</span><span>Checked against {nsrc} sources</span></div></div></div></header>
 <figure class="cover">{img_tag(s, "(max-width:1240px) 100vw, 1200px", eager=True)}</figure>{f'<p class="figcap">{E(caption_of(s))}</p>' if caption_of(s) else ''}
 <div class="layout"><div class="prose">
@@ -484,7 +485,7 @@ def story_page(s, prev_s, next_s, related):
            'image': [{'@type': 'ImageObject', 'url': img, 'width': 1200, 'height': 675, 'caption': alt_of(s), 'contentUrl': img}], 'mainEntityOfPage': SITE + url, 'articleSection': cname, 'inLanguage': 'en', 'wordCount': words_of(s),
            'keywords': ', '.join(s.get('keywords', [])) or None, 'citation': [u for _, u in s['sources'] if u] or None,
            'abstract': s['lesson'], 'isAccessibleForFree': True,
-           'speakable': {'@type': 'SpeakableSpecification', 'cssSelector': ['.story-head .lead', '.lesson p']}}
+           'speakable': {'@type': 'SpeakableSpecification', 'cssSelector': ['.story-head .lead', '.answer p', '.lesson p']}}
     if has_reel:
         art['video'] = {'@type': 'VideoObject', 'name': s['title'], 'description': s['summary'], 'thumbnailUrl': SITE + f'/assets/reels/{s["slug"]}.jpg',
                         'uploadDate': f'{s["date"]}T19:30:00+05:30', 'url': reel_url} if frame else None
@@ -528,6 +529,10 @@ def main():
     shutil.rmtree(OUT, ignore_errors=True); OUT.mkdir()
     shutil.copytree(ROOT / 'assets', OUT / 'assets', ignore=shutil.ignore_patterns('fonts')); shutil.copy(ROOT / 'CNAME', OUT / 'CNAME')
     stories = sorted([s for s in json.load(open(ROOT / 'stories.json')) if s['date'] <= TODAY], key=lambda s: (s['date'], s['slug']), reverse=True)
+    # Site-side edits (search titles, quick answers) that bh-publisher must not overwrite: overrides.json, keyed by slug.
+    ovr = json.load(open(ROOT / 'overrides.json')) if (ROOT / 'overrides.json').exists() else {}
+    for s in stories:
+        s.update(ovr.get(s['slug'], {}))
     THUMBS = make_images(stories)
     TITLES.update({s['slug']: s['title'] for s in stories})
     popular = sorted(stories, key=lambda s: (POP.get(s['slug'], 0), s['date']), reverse=True)   # most-watched first, then newest
