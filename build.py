@@ -43,7 +43,10 @@ def reel_id(url):
     return m.group(1) if m else ''
 E = html.escape
 PER_PAGE = 18
-BYLINE = 'Borrowed Hindsight editors'   # who is responsible for the stories (shown on every story and in Article schema)
+BYLINE = 'Manisha Aggarwal'   # owner and author: shown on every story, in Article schema and on the author page
+AUTHOR_PATH = '/author/manisha-aggarwal/'
+AUTHOR_BIO = ('Manisha Aggarwal is an accounting professional based in New Delhi, India. Manisha runs Borrowed Hindsight as a hobby: '
+              'to keep learning, to spread awareness, and to share true stories that motivate people to start, or start again.')
 
 # Google Analytics 4 measurement ID and AdSense publisher ID. Empty = that tag is left out entirely.
 # AdSense uses Auto ads: Google chooses ad placement. The AdSense script is left off pages without publisher content
@@ -212,7 +215,10 @@ ORG = {'@type': 'Organization', '@id': f'{SITE}/#org', 'name': 'Borrowed Hindsig
        'logo': {'@type': 'ImageObject', 'url': f'{SITE}/assets/apple-touch-icon.png', 'width': 180, 'height': 180},
        'sameAs': [u for u in (INSTAGRAM, YOUTUBE, FACEBOOK, NEWSLETTER) if u], 'email': CONTACT_EMAIL,
        'publishingPrinciples': f'{SITE}/editorial-standards/', 'correctionsPolicy': f'{SITE}/editorial-standards/#corrections',
-       'contactPoint': {'@type': 'ContactPoint', 'contactType': 'editorial', 'email': CONTACT_EMAIL, 'url': f'{SITE}/contact/'}}
+       'contactPoint': {'@type': 'ContactPoint', 'contactType': 'editorial', 'email': CONTACT_EMAIL, 'url': f'{SITE}/contact/'},
+       'founder': {'@id': f'{SITE}{AUTHOR_PATH}#person'}}
+PERSON = {'@type': 'Person', '@id': f'{SITE}{AUTHOR_PATH}#person', 'name': BYLINE, 'url': SITE + AUTHOR_PATH,
+          'jobTitle': 'Accounting professional', 'description': AUTHOR_BIO, 'homeLocation': {'@type': 'Place', 'name': 'New Delhi, India'}}
 
 
 def crumbs(items):
@@ -466,7 +472,7 @@ def story_page(s, prev_s, next_s, related):
     body = f'''<main class="wrap">{crumbs_html([("Home", "/"), ("Stories", "/stories/"), (cname, f"/category/{c}/"), (s["title"], url)])}
 <article>
 <header class="story-head">{kicker(c, True)}<h1>{E(s["title"])}</h1><p class="lead">{E(s["summary"])}</p>{answer_html}
-<div class="byline"><img src="/assets/logo.svg" alt="" width="42" height="42"><div><b>{E(BYLINE)}</b><div class="facts"><time datetime="{s["date"]}">{fmt_date(s["date"])}</time>{upd}<span>{rt} min read</span><span>Checked against {nsrc} sources</span></div></div></div></header>
+<div class="byline"><img src="/assets/logo.svg" alt="" width="42" height="42"><div><b><a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a></b><div class="facts"><time datetime="{s["date"]}">{fmt_date(s["date"])}</time>{upd}<span>{rt} min read</span><span>Checked against {nsrc} sources</span></div></div></div></header>
 <figure class="cover">{img_tag(s, "(max-width:1240px) 100vw, 1200px", eager=True)}</figure>{f'<p class="figcap">{E(caption_of(s))}</p>' if caption_of(s) else ''}
 <div class="layout"><div class="prose">
 {toc_m}{intro}{secs}{photo_html}{tl_html}
@@ -481,7 +487,7 @@ def story_page(s, prev_s, next_s, related):
     img = SITE + thumb(s)
     art = {'@context': 'https://schema.org', '@type': 'Article', '@id': SITE + url + '#article', 'headline': s['title'][:110], 'description': s['summary'],
            'datePublished': f'{s["date"]}T19:30:00+05:30', 'dateModified': f'{mod}T19:30:00+05:30',
-           'author': {'@type': 'Organization', 'name': BYLINE, 'url': SITE + '/about/'}, 'publisher': ORG,
+           'author': PERSON, 'publisher': ORG,
            'image': [{'@type': 'ImageObject', 'url': img, 'width': 1200, 'height': 675, 'caption': alt_of(s), 'contentUrl': img}], 'mainEntityOfPage': SITE + url, 'articleSection': cname, 'inLanguage': 'en', 'wordCount': words_of(s),
            'keywords': ', '.join(s.get('keywords', [])) or None, 'citation': [u for _, u in s['sources'] if u] or None,
            'abstract': s['lesson'], 'isAccessibleForFree': True,
@@ -544,7 +550,7 @@ def main():
     feat = stories[0]; fc = cat_of(feat)
     latest = stories[1:7]
     shown = stories[:7]
-    watched = [s for s in popular if POP.get(s['slug'], 0) > 0][:4]   # the top story stays in Most watched even when it is also featured (Deepak, 6 Nov)
+    watched = [s for s in popular if POP.get(s['slug'], 0) > 0][:4]   # the top story stays in Most watched even when it is also featured (owner's request, 6 Nov)
     most_html = (f'<section class="block"><div class="shead"><h2>Most watched</h2><a class="all" href="{INSTAGRAM}" rel="noopener">Watch on Instagram</a></div>'
                  f'<p class="sdesc">The stories people watched most on Instagram. Read the full, sourced version here.</p>'
                  f'<div class="row">{"".join(card(s, summary=False) for s in watched)}</div></section>') if len(watched) >= 3 else ''
@@ -615,10 +621,21 @@ q.addEventListener('input',run);q.focus();}})();
 <h2>How we research</h2><p>Every story is built from primary or reputable sources: company and official records, major newspapers and magazines, books, peer-reviewed studies and official statistics. Every number is checked in at least two independent sources, and each page lists its sources. If a popular story or statistic can't be traced to a real source, we say so instead of repeating it. Read our full <a href="/editorial-standards/">editorial standards</a>.</p>
 <h2>How we use AI</h2><p>AI tools help us research, draft and narrate. People choose every story, and every fact is checked against its sources before it is published. Our short videos are animated and narrated with an AI voice. We never create fake photos of real people.</p>
 <h2>What we don't do</h2><p>We don't give personal financial, investment, legal or career advice, and we don't recommend products, stocks or apps. We don't publish political or religious content, and we never mock anyone. We judge decisions by what was known at the time, not by how they turned out.</p>
-<h2>Who publishes this site</h2><p>Borrowed Hindsight is published by Manisha Aggarwal, New Delhi, India. Stories are researched and written by the Borrowed Hindsight editorial team, following our <a href="/editorial-standards/">editorial standards</a>.</p>
+<h2>Who publishes this site</h2><p>Borrowed Hindsight is owned, written and published by <a href="{AUTHOR_PATH}">Manisha Aggarwal</a>, an accounting professional in New Delhi, India, who runs it as a hobby: to keep learning, to spread awareness, and to share stories that motivate. Every story follows our <a href="/editorial-standards/">editorial standards</a>.</p>
 <h2>Contact</h2><p>Corrections, story suggestions or partnership questions: email <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or see our <a href="/contact/">contact page</a>.</p>'''
     write('about/index.html', page('About Borrowed Hindsight: who we are and how we research', 'Who we are, how every Borrowed Hindsight story is researched and sourced, and how to reach us.',
           f'<main class="wrap narrow legal">{crumbs_html([("Home", "/"), ("About", "/about/")])}{about}</main>', '/about/', ld=[{'@context': 'https://schema.org', '@type': 'AboutPage', 'url': SITE + '/about/', 'about': ORG, 'publisher': ORG}]))
+
+    n_auth = len(stories)
+    author = f'''<h1>Manisha Aggarwal</h1>
+<p class="lead">Owner and author of Borrowed Hindsight.</p>
+<p>{E(AUTHOR_BIO)}</p>
+<p>Manisha chooses every story on this site and is responsible for what is published. Each story is checked against its sources, following our <a href="/editorial-standards/">editorial standards</a>, and lists those sources at the end.</p>
+<h2>Stories by Manisha</h2><p>{n_auth} stories so far, from founders and late starters to comebacks and record-breakers. <a href="/stories/">Read all stories</a>.</p>
+<h2>Contact</h2><p>Email <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> with corrections, story ideas or questions.</p>'''
+    write('author/manisha-aggarwal/index.html', page('Manisha Aggarwal, author of Borrowed Hindsight', AUTHOR_BIO,
+          f'<main class="wrap narrow legal">{crumbs_html([("Home", "/"), ("About", "/about/"), ("Manisha Aggarwal", AUTHOR_PATH)])}{author}</main>', AUTHOR_PATH,
+          ld=[{'@context': 'https://schema.org', '@type': 'ProfilePage', 'url': SITE + AUTHOR_PATH, 'mainEntity': PERSON}]))
 
     contact = f'''<h1>Contact us</h1>
 <p class="lead">We read every message. The fastest way to reach us is email.</p>
@@ -665,7 +682,7 @@ q.addEventListener('input',run);q.focus();}})();
     # ---------- feeds and machine-readable files ----------
     newest = stories[0]['date'] if stories else TODAY
     urls = [('/', newest, '1.0'), ('/stories/', newest, '0.9'), ('/about/', None, '0.5'), ('/contact/', None, '0.4'), ('/editorial-standards/', None, '0.4'),
-            ('/privacy/', None, '0.2'), ('/terms/', None, '0.2')] + \
+            ('/privacy/', None, '0.2'), ('/terms/', None, '0.2'), (AUTHOR_PATH, None, '0.4')] + \
            [(f'/category/{c}/', by_cat[c][0]['date'], '0.7') for c in CATS if by_cat[c]] + \
            [(f'/stories/{s["slug"]}/', s.get('updated', s['date']), '0.8') for s in stories]
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' + ''.join(
