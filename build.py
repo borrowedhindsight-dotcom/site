@@ -148,6 +148,10 @@ def nav_html():
 
 def page(title, desc, body, path='/', ld=None, og_type='website', extra='', image=None, noindex=False, ads=True, progress=False):
     img = image or f'{SITE}/assets/og.png'
+    # Google shows about 60 characters of a title: drop the brand suffix rather than have the topic cut off.
+    if title.endswith(' | Borrowed Hindsight') and len(title) > 60: title = title[:-len(' | Borrowed Hindsight')]
+    # Descriptions: Google shows about 155 characters; cut long ones at a word boundary.
+    if len(desc) > 158: desc = desc[:155].rsplit(' ', 1)[0].rstrip(',;:') + '…'
     ld_html = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in (ld or []))
     robots = 'noindex,follow' if noindex else 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
     cats = ''.join(f'<li><a href="/category/{c}/">{E(v[0])}</a></li>' for c, v in CATS.items() if c in LIVE_CATS)
@@ -586,7 +590,7 @@ def main():
                'description': 'True, sourced stories of people who started small and built something big, with one lesson to borrow.', 'publisher': {'@id': f'{SITE}/#org'}, 'inLanguage': 'en',
                'potentialAction': {'@type': 'SearchAction', 'target': {'@type': 'EntryPoint', 'urlTemplate': f'{SITE}/search/?q={{search_term_string}}'}, 'query-input': 'required name=search_term_string'}},
                {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE}/stories/{s["slug"]}/'} for i, s in enumerate(stories[:20])]}]}]
-    write('index.html', page('Borrowed Hindsight: true stories of people who started from nothing', 'True, sourced stories of founders, late starters, comebacks and record-breakers, and one lesson you can borrow from each.', home, ld=home_ld,
+    write('index.html', page('Borrowed Hindsight: true stories of people who started small', 'True, sourced stories of founders, late starters, comebacks and record-breakers, and one lesson you can borrow from each.', home, ld=home_ld,
                              extra=f'<link rel="preload" as="image" href="{thumb(feat)}" imagesrcset="{thumb(feat, True)} 640w, {thumb(feat)} 1200w" imagesizes="(max-width:900px) 100vw, 690px">'))
 
     # ---------- all stories + categories ----------
@@ -596,7 +600,7 @@ def main():
     for c, (n, dsc, col, intro) in CATS.items():
         if by_cat[c]:
             head = (f'<div class="catintro">{"".join(f"<p>{E(p)}</p>" for p in intro)}</div>{chips_html(by_cat, c)}')
-            list_pages(f'/category/{c}/', by_cat[c], f'{n}: true stories | Borrowed Hindsight', dsc, n, head,
+            list_pages(f'/category/{c}/', by_cat[c], f'{n}: true stories | Borrowed Hindsight', dsc if len(dsc) >= 90 else dsc + ' True, sourced stories, each with one lesson you can borrow.', n, head,
                        [('Home', '/'), ('Stories', '/stories/'), (n, f'/category/{c}/')], hide=len(by_cat[c]) < MIN_CAT_INDEX)
 
     # ---------- search ----------
@@ -779,7 +783,8 @@ o.innerHTML='<b>₹'+f.format(a)+' in '+x+' is worth about ₹'+f.format(v)+' in
           f'<description>True stories of people who started from nothing, and the lesson to borrow.</description><language>en</language>{items}</channel></rss>')
     llms = [f'# Borrowed Hindsight', '',
             '> True, sourced stories of people who started with almost nothing (founders, late starters, comebacks, record-breakers), each ending with one practical lesson ("the borrowed hindsight"). Every number is checked in at least two sources and every story lists its sources.', '',
-            f'Publisher: Borrowed Hindsight, New Delhi, India. Contact: {CONTACT_EMAIL}. Editorial standards: {SITE}/editorial-standards/', '']
+            f'Owner and author: Manisha Aggarwal, accounting professional, New Delhi, India ({SITE}{AUTHOR_PATH}). Contact: {CONTACT_EMAIL}. Editorial standards: {SITE}/editorial-standards/', '',
+             '## Tools', '', f'- [Rupee inflation calculator]({SITE}{CALC_PATH}): what any rupee amount from 1960 to 2025 is worth in another year, using the World Bank consumer price index for India.', '']
     for c, v in CATS.items():
         if by_cat[c]:
             llms += [f'## {v[0]}', '', v[1], '']
