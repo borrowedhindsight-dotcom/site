@@ -43,6 +43,7 @@ def reel_id(url):
     return m.group(1) if m else ''
 E = html.escape
 PER_PAGE = 18
+MIN_CAT_INDEX = 6   # category pages with fewer stories stay on the site but are hidden from Google (noindex, no ads, not in sitemap)
 BYLINE = 'Manisha Aggarwal'   # owner and author: shown on every story, in Article schema and on the author page
 AUTHOR_PATH = '/author/manisha-aggarwal/'
 AUTHOR_BIO = ('Manisha Aggarwal is an accounting professional based in New Delhi, India. Manisha runs Borrowed Hindsight as a hobby: '
@@ -516,7 +517,7 @@ def chips_html(by_cat, current=None):
     return out + '</nav>'
 
 
-def list_pages(base, items, title, desc, heading, head_html, crumb_items, below=''):
+def list_pages(base, items, title, desc, heading, head_html, crumb_items, below='', hide=False):
     total = max(1, math.ceil(len(items) / PER_PAGE))
     for n in range(1, total + 1):
         chunk = items[(n - 1) * PER_PAGE: n * PER_PAGE]
@@ -527,7 +528,7 @@ def list_pages(base, items, title, desc, heading, head_html, crumb_items, below=
               {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': heading, 'url': SITE + path, 'description': desc, 'publisher': ORG,
                'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE}/stories/{s["slug"]}/', 'name': s['title']} for i, s in enumerate(chunk)]}}]
         # page 2+ of a list: crawlable for links, kept out of the index (thin list pages)
-        write(path.lstrip('/') + 'index.html', page(title + (f' (page {n})' if n > 1 else ''), desc, body, path, ld=ld, noindex=n > 1, ads=n == 1))
+        write(path.lstrip('/') + 'index.html', page(title + (f' (page {n})' if n > 1 else ''), desc, body, path, ld=ld, noindex=hide or n > 1, ads=n == 1 and not hide))
 
 
 def main():
@@ -584,7 +585,7 @@ def main():
         if by_cat[c]:
             head = (f'<div class="catintro">{"".join(f"<p>{E(p)}</p>" for p in intro)}</div>{chips_html(by_cat, c)}')
             list_pages(f'/category/{c}/', by_cat[c], f'{n}: true stories | Borrowed Hindsight', dsc, n, head,
-                       [('Home', '/'), ('Stories', '/stories/'), (n, f'/category/{c}/')])
+                       [('Home', '/'), ('Stories', '/stories/'), (n, f'/category/{c}/')], hide=len(by_cat[c]) < MIN_CAT_INDEX)
 
     # ---------- search ----------
     write('search.json', json.dumps([{'u': f'/stories/{s["slug"]}/', 't': s['title'], 's': s['summary'], 'c': CATS[cat_of(s)][0],
@@ -683,7 +684,7 @@ q.addEventListener('input',run);q.focus();}})();
     newest = stories[0]['date'] if stories else TODAY
     urls = [('/', newest, '1.0'), ('/stories/', newest, '0.9'), ('/about/', None, '0.5'), ('/contact/', None, '0.4'), ('/editorial-standards/', None, '0.4'),
             ('/privacy/', None, '0.2'), ('/terms/', None, '0.2'), (AUTHOR_PATH, None, '0.4')] + \
-           [(f'/category/{c}/', by_cat[c][0]['date'], '0.7') for c in CATS if by_cat[c]] + \
+           [(f'/category/{c}/', by_cat[c][0]['date'], '0.7') for c in CATS if len(by_cat[c]) >= MIN_CAT_INDEX] + \
            [(f'/stories/{s["slug"]}/', s.get('updated', s['date']), '0.8') for s in stories]
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' + ''.join(
         f'<url><loc>{SITE}{u}</loc>{f"<lastmod>{m}</lastmod>" if m else ""}<priority>{pr}</priority>'
