@@ -207,5 +207,537 @@
       ],
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     }
+  },
+  "airbnb-rejected-by-seven-investors-2008-150000-cereal-boxes": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "In 2008 the founders asked for $150,000 for 10% of the company, which valued Airbnb at $1.5 million. In today's dollars that is about $220,000 for a tenth of the business. Seven investors said no.",
+        "At its first close as a public company in 2020, Airbnb was worth about $86.5 billion, roughly 58,000 times that 2008 valuation. As an accountant I would add one caution: early shares get diluted by every later funding round, so a 10% stake would have shrunk well before 2020. It would still have been worth billions."
+      ],
+      "table": [
+        [
+          "Asking price in 2008: $150,000 for 10%",
+          "about $220,000 today"
+        ],
+        [
+          "Valuation implied in 2008",
+          "$1.5 million"
+        ],
+        [
+          "Value at first close as a public company (2020)",
+          "about $86.5 billion"
+        ],
+        [
+          "Cereal-box sales that kept them going",
+          "about $30,000 (about $44,000 today)"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "jensen-huang-cleaned-toilets-dennys-dishwasher-nvidia-5-trillion": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "After Nvidia launched CUDA in 2006, its costs rose while revenue stood still, and its market value fell from about $12 billion to roughly $2 to $3 billion. Investors were treating the extra cost as waste.",
+        "On 29 October 2025 Nvidia closed at about $5.03 trillion, roughly 2,000 times its low point. In accounting terms, CUDA was spending that looked like an expense for years but behaved like an investment. The balance sheet could not show its value until the market for AI chips arrived."
+      ],
+      "table": [
+        [
+          "Market value before the fall",
+          "about $12 billion"
+        ],
+        [
+          "Low point after CUDA",
+          "about $2 to $3 billion"
+        ],
+        [
+          "Market value on 29 October 2025",
+          "about $5.03 trillion"
+        ],
+        [
+          "Growth from the low point",
+          "roughly 2,000 times"
+        ]
+      ],
+      "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
+    }
+  },
+  "blockbuster-netflix-50-million-offer-2000": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Netflix's asking price in 2000 was $50 million, about $91 million in today's dollars. Blockbuster had about $6 billion of annual revenue, so the price was less than 1% of one year's sales.",
+        "But price is not the only number an accountant looks at. Netflix expected to lose about $57 million that year, more than its own asking price. Buying it meant taking on those losses as well. The deal looked expensive on the profit and loss account and cheap only in hindsight."
+      ],
+      "table": [
+        [
+          "Netflix's asking price (2000), in today's dollars",
+          "about $91 million"
+        ],
+        [
+          "Price as a share of Blockbuster's yearly revenue",
+          "under 1%"
+        ],
+        [
+          "Netflix's expected loss that year",
+          "about $57 million"
+        ],
+        [
+          "Blockbuster debt when it filed for bankruptcy (2010)",
+          "nearly $1 billion"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "kailash-katkar-quick-heal-calculator-repair-to-antivirus": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Kailash Katkar put ₹15,000 into his repair business in 1991, about ₹1.3 lakh in today's money. The first Quick Heal sold in 1995 for ₹700, about ₹4,300 today. Software was expensive then, even for a small firm.",
+        "Two decades later, in 2016, the company raised about ₹451 crore in its share issue at ₹321 a share. The shares opened about 5% below that price. A modest first day does not change the underlying story: a repair shop that started with ₹15,000 became a listed company."
+      ],
+      "table": [
+        [
+          "Starting capital (₹15,000, 1991), in today's money",
+          "about ₹1.3 lakh"
+        ],
+        [
+          "First Quick Heal price (₹700, 1995), in today's money",
+          "about ₹4,300"
+        ],
+        [
+          "Share issue in 2016",
+          "about ₹451 crore at ₹321 a share"
+        ]
+      ],
+      "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "flipkart-story-two-friends-small-flat-online-bookstore": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Flipkart's first outside money was $1 million from Accel in 2009, about $1.5 million in today's dollars. In 2018 Walmart's deal valued the company at around $20.8 billion, roughly 20,800 times that first cheque.",
+        "The headline $16 billion is often misread as the price of the whole company. It actually bought a stake of about 77%, including $2 billion of new money that went into Flipkart itself rather than to the sellers."
+      ],
+      "table": [
+        [
+          "First outside funding (2009), in today's dollars",
+          "about $1.5 million"
+        ],
+        [
+          "Walmart's payment (2018)",
+          "about $16 billion for about 77%"
+        ],
+        [
+          "Of which new money for Flipkart",
+          "$2 billion"
+        ],
+        [
+          "Company value in the deal",
+          "about $20.8 billion"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "amul-story-247-litres-of-milk-two-villages-india-biggest-dairy-brand": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "In 2025-26 the Amul brand's turnover crossed ₹1 lakh crore. Spread across about 36 lakh farmer-owners, that is roughly ₹2.8 lakh of sales for each farmer family, though it is turnover, not profit.",
+        "The federation's own turnover rose from ₹65,911 crore to ₹73,450 crore, about 11% in a year. Even the film Manthan (1976) was paid for by about five lakh farmers giving ₹2 each. That ₹2 is worth about ₹63 today, and the total of about ₹10 lakh would be about ₹3.1 crore."
+      ],
+      "table": [
+        [
+          "Amul brand turnover (2025-26)",
+          "over ₹1 lakh crore"
+        ],
+        [
+          "Sales per farmer-owner",
+          "about ₹2.8 lakh"
+        ],
+        [
+          "Federation turnover growth in 2025-26",
+          "about 11%"
+        ],
+        [
+          "Farmers' ₹2 each for Manthan (1976), today",
+          "about ₹63 each"
+        ]
+      ],
+      "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "alakh-pandey-physicswallah-free-youtube-lessons-to-unicorn": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "PhysicsWallah's first outside round, in June 2022, valued it at $1.1 billion. By September 2024 it was valued at $2.8 billion, about 2.5 times higher in just over two years.",
+        "Its share issue then raised about ₹3,480 crore at ₹109 a share. For an accountant, the interesting part is the order: years of free YouTube lessons built the audience first, and paid courses came later. The audience was the asset, even though it never appeared on a balance sheet."
+      ],
+      "table": [
+        [
+          "First valuation (June 2022)",
+          "$1.1 billion"
+        ],
+        [
+          "Valuation in September 2024",
+          "$2.8 billion"
+        ],
+        [
+          "Share issue",
+          "about ₹3,480 crore at ₹109 a share"
+        ]
+      ],
+      "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
+    }
+  },
+  "karsanbhai-patel-nirma-detergent-3-rupees-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "In 1969 Nirma sold at ₹3 a kilo when the cheapest rival cost ₹13. In today's money that is about ₹160 against about ₹690. Nirma was about 77% cheaper.",
+        "A price that low only works with very low costs. Patel made the powder himself, had no shop and no advertising at first, and sold door to door by bicycle while keeping his day job. As an accountant, I see a business that kept its overheads near zero until sales could carry them."
+      ],
+      "table": [
+        [
+          "Nirma's price (₹3 a kilo, 1969), today",
+          "about ₹160"
+        ],
+        [
+          "Rival brand (₹13 a kilo), today",
+          "about ₹690"
+        ],
+        [
+          "Price advantage",
+          "about 77% cheaper"
+        ],
+        [
+          "Lafarge India cement purchase (2016)",
+          "about $1.4 billion"
+        ]
+      ],
+      "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "brian-acton-rejected-by-facebook-whatsapp-19-billion": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Facebook's 2014 deal was worth up to $19 billion for WhatsApp, which had more than 450 million monthly users. That is about $42 for each user.",
+        "Only $4 billion, about 21%, was cash. About $12 billion was Facebook shares, and $3 billion was restricted stock for founders and staff that they had to stay to earn. As an accountant, I would say the headline number tells you the value. The mix of cash and shares tells you how much risk the sellers took on."
+      ],
+      "table": [
+        [
+          "Total deal value (2014)",
+          "up to $19 billion"
+        ],
+        [
+          "Value per monthly user",
+          "about $42"
+        ],
+        [
+          "Cash part",
+          "$4 billion (about 21%)"
+        ],
+        [
+          "Acton's later gift to the Signal Foundation (2018)",
+          "$50 million"
+        ]
+      ],
+      "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
+    }
+  },
+  "stewart-butterfield-glitch-game-slack-origin-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Glitch cost about $17 million to develop, about $24 million in today's dollars, and it failed. The chat tool the team built for themselves while making it became Slack.",
+        "In December 2020 Salesforce agreed to pay $27.7 billion, about 1,600 times what Glitch cost. That was also about 69 times Slack's yearly revenue of around $400 million. Accountants would call Glitch a sunk cost, but here the cost bought a tool nobody had planned to sell."
+      ],
+      "table": [
+        [
+          "Glitch development cost (about $17 million), today",
+          "about $24 million"
+        ],
+        [
+          "Slack's yearly revenue (early 2019)",
+          "about $400.6 million"
+        ],
+        [
+          "Salesforce price (2020)",
+          "$27.7 billion"
+        ],
+        [
+          "Price vs Glitch's cost",
+          "about 1,600 times"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "phil-knight-50-dollars-shoes-car-trunk-nike-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Phil Knight's $50 from his father is worth only about $500 in today's dollars. His first year of sales, about $8,000, would be about $81,000 today. It was a side business run from a car boot, not a company.",
+        "The Swoosh logo cost $35 in 1971, about $270 today, possibly the best-value design fee ever paid. By 2016 Nike's yearly sales topped $30 billion. The early years show a familiar pattern: sales grew, but the business kept running short of cash, because growing a stock business ties money up in shoes before customers pay."
+      ],
+      "table": [
+        [
+          "$50 loan (1964), in today's dollars",
+          "about $500"
+        ],
+        [
+          "First-year sales (about $8,000), today",
+          "about $81,000"
+        ],
+        [
+          "Swoosh design fee ($35, 1971), today",
+          "about $270"
+        ],
+        [
+          "Nike's yearly sales (2016)",
+          "over $30 billion"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "instagram-13-employees-1-billion-facebook-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Facebook's offer of about $1 billion for a 13-person company works out to about $77 million per employee. Because much of it was paid in Facebook shares, which fell after Facebook's stock market listing, it was worth about $715 million at completion, still $55 million per person.",
+        "Instagram had no revenue at all. Facebook was paying for users and growth, not for profits. The founders' $500,000 seed round in 2010, about $720,000 today, bought a stake in something worth over a thousand times more within two years."
+      ],
+      "table": [
+        [
+          "Deal value announced (2012)",
+          "about $1 billion"
+        ],
+        [
+          "Value at completion",
+          "about $715 million"
+        ],
+        [
+          "Per employee at completion",
+          "about $55 million"
+        ],
+        [
+          "Seed round (2010), in today's dollars",
+          "about $720,000"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "colonel-sanders-started-over-at-65-kfc-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "In 1964 Sanders sold most of the business for $2 million, about $20 million in today's dollars, plus $40,000 a year for life, about $400,000 a year today.",
+        "Britannica estimates he was earning about $300,000 a year from it by then. So the price was under seven years of his income, plus a salary. For a man in his seventies, swapping uncertain future earnings for cash and a guaranteed income was a reasonable choice."
+      ],
+      "table": [
+        [
+          "Sale price (1964), in today's dollars",
+          "about $20 million"
+        ],
+        [
+          "Lifetime salary ($40,000), in today's dollars",
+          "about $400,000 a year"
+        ],
+        [
+          "Earnings before the sale",
+          "about $300,000 a year"
+        ],
+        [
+          "Price vs yearly earnings",
+          "under 7 years"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "tata-indica-ford-talks-to-buying-jaguar-land-rover-2008": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Tata Motors paid Ford a net US$2.3 billion in cash for Jaguar Land Rover in 2008, about $3.4 billion in today's dollars.",
+        "The word 'net' matters. Ford also put about US$600 million into Jaguar Land Rover's pension plans, so Ford received less than the headline figure. The deal was on a cash-free, debt-free basis, meaning Tata did not take on the brands' existing borrowings."
+      ],
+      "table": [
+        [
+          "Price paid (2008), in today's dollars",
+          "about $3.4 billion"
+        ],
+        [
+          "Ford's pension contribution",
+          "about $600 million"
+        ],
+        [
+          "Deal basis",
+          "cash-free, debt-free"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "stephen-king-carrie-first-novel-in-the-trash-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Doubleday's advance for Carrie was $2,500. The paperback rights then sold for $400,000, 160 times as much.",
+        "For a teacher earning a modest salary, that difference was life-changing. King said he realised he would not have to teach any more. An advance is a prepayment against future royalties; the paperback sale showed what the book was actually worth to the market."
+      ],
+      "table": [
+        [
+          "Hardback advance",
+          "$2,500"
+        ],
+        [
+          "Paperback rights sale",
+          "$400,000"
+        ],
+        [
+          "Paperback vs advance",
+          "160 times"
+        ]
+      ],
+      "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
+    }
+  },
+  "kiran-mazumdar-shaw-biocon-garage-10000-rupees-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Kiran Mazumdar-Shaw started Biocon in 1978 with ₹10,000, about ₹2.8 lakh in today's money. Prices have risen about 28 times since then.",
+        "When Biocon listed in 2004, its market value at the first day's close was about $1.11 billion. Starting in a rented garage kept fixed costs tiny in the years before the business could support more."
+      ],
+      "table": [
+        [
+          "Starting capital (₹10,000, 1978), today",
+          "about ₹2.8 lakh"
+        ],
+        [
+          "How much prices rose, 1978 to 2025",
+          "about 28 times"
+        ],
+        [
+          "Market value at listing (2004)",
+          "about $1.11 billion"
+        ]
+      ],
+      "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "sara-blakely-spanx-5000-savings-kept-day-job": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Sara Blakely's $5,000 of savings in 2000 is worth about $9,100 in today's dollars. In 2021 Blackstone bought a majority stake at a valuation of $1.2 billion, about 240,000 times that starting sum.",
+        "What an accountant notices is that she funded Spanx herself for 21 years. With no outside investors, she did not have to give away ownership along the way, so the growth in value stayed largely with her."
+      ],
+      "table": [
+        [
+          "Starting savings ($5,000, 2000), today",
+          "about $9,100"
+        ],
+        [
+          "Valuation in 2021",
+          "$1.2 billion"
+        ],
+        [
+          "Value vs starting sum",
+          "about 240,000 times"
+        ],
+        [
+          "Years with no outside investors",
+          "21"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "steve-sasson-kodak-first-digital-camera-shelved-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Kodak's first commercial digital camera system in 1991 cost about $20,000, about $46,000 in today's dollars. At that price it was a professional tool, so it could not threaten Kodak's film business yet.",
+        "During its 2012 bankruptcy, Kodak sold about 1,100 digital-imaging patents for roughly $525 million, about $720 million today. The company had invented valuable technology and still lost the market, because film profits made it hard to sell something that would replace them."
+      ],
+      "table": [
+        [
+          "First digital camera system (1991), today",
+          "about $46,000"
+        ],
+        [
+          "Patent sale in bankruptcy (2012)",
+          "about $525 million"
+        ],
+        [
+          "Patent sale, in today's dollars",
+          "about $720 million"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "james-dyson-5127-prototypes": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "James Dyson has said he eventually owed over a million dollars while developing his vacuum. In 1993 Lloyds Bank lent him about $1 million for tooling, about $2.2 million in today's dollars.",
+        "Tooling is the expensive part of making a physical product: the moulds must be paid for before a single machine is sold. Before that, a small Japanese company had sold his design under licence as the G-Force, at close to $2,000 each."
+      ],
+      "table": [
+        [
+          "Lloyds tooling loan (1993), today",
+          "about $2.2 million"
+        ],
+        [
+          "G-Force price in Japan",
+          "about $2,000"
+        ],
+        [
+          "Prototypes before success",
+          "5,127"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "falguni-nayar-nykaa-started-at-49-story": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Nykaa's 2021 share issue raised about ₹5,350 crore, roughly $720 million, about $830 million in today's dollars. The shares nearly doubled on the first day.",
+        "Because Falguni Nayar and her family still owned about half the company, the listing took her net worth to about $7 billion. Keeping a large stake through years of growth is what turned a business started at 49 into one of India's biggest fortunes."
+      ],
+      "table": [
+        [
+          "Share issue (2021)",
+          "about ₹5,350 crore (about $720 million)"
+        ],
+        [
+          "First-day rise",
+          "about 89% to 96%"
+        ],
+        [
+          "Family stake",
+          "about half"
+        ],
+        [
+          "Nayar's net worth after listing",
+          "about $7 billion"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
   }
 }
