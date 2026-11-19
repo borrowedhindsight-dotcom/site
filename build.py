@@ -439,6 +439,8 @@ def story_page(s, prev_s, next_s, related):
         intro = ''; secs = '<h2 id="the-story">The story</h2>' + ''.join(f'<p>{para(p)}</p>' for p in s.get('body', []))
         toc_items = [('the-story', 'The story')]
     tl = s.get('timeline') or []
+    money = s.get('money')
+    if money: toc_items.append(('money', money.get('h', 'The money behind it')))
     if tl: toc_items.append(('timeline', 'Timeline'))
     toc_items.append(('lesson', 'The borrowed hindsight'))
     if s.get('faq'): toc_items.append(('faq', 'Questions people ask'))
@@ -446,6 +448,14 @@ def story_page(s, prev_s, next_s, related):
     toc_li = ''.join(f'<li><a href="#{i}">{E(h)}</a></li>' for i, h in toc_items)
     toc_m = f'<details class="toc-m"><summary>In this story</summary><ol>{toc_li}</ol></details>'
     tl_html = ('<section class="timeline" id="timeline"><h2>Timeline</h2><ol>' + ''.join(f'<li><b>{E(str(y))}</b>{E(ev)}</li>' for y, ev in tl) + '</ol></section>') if tl else ''
+    money_html = ''
+    if money:
+        rows = ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in money.get('table', []))
+        money_html = (f'<section class="money" id="money"><h2>{E(money.get("h", "The money behind it"))}</h2>'
+                      f'<p class="mby">By <a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a>, accounting professional</p>'
+                      + ''.join(f'<p>{para(x)}</p>' for x in money.get('paras', []))
+                      + (f'<table><tbody>{rows}</tbody></table>' if rows else '')
+                      + (f'<p class="mnote">{E(money["note"])}</p>' if money.get('note') else '') + '</section>')
     photo = s.get('photo')
     photo_html = (f'<figure class="photo"><img src="{E(photo["url"])}" alt="{E(s["title"])}" loading="lazy"><figcaption>Photo: '
                   f'<a href="{E(photo["page"])}" rel="nofollow noopener">{E(photo.get("credit") or "Wikimedia Commons")}</a>, {E(photo.get("license", ""))}, via Wikimedia Commons</figcaption></figure>') if photo else ''
@@ -476,7 +486,7 @@ def story_page(s, prev_s, next_s, related):
 <div class="byline"><img src="/assets/logo.svg" alt="" width="42" height="42"><div><b><a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a></b><div class="facts"><time datetime="{s["date"]}">{fmt_date(s["date"])}</time>{upd}<span>{rt} min read</span><span>Checked against {nsrc} sources</span></div></div></div></header>
 <figure class="cover">{img_tag(s, "(max-width:1240px) 100vw, 1200px", eager=True)}</figure>{f'<p class="figcap">{E(caption_of(s))}</p>' if caption_of(s) else ''}
 <div class="layout"><div class="prose">
-{toc_m}{intro}{secs}{photo_html}{tl_html}
+{toc_m}{intro}{secs}{photo_html}{money_html}{tl_html}
 <section class="lesson" id="lesson"><small>The borrowed hindsight</small><p><span class="hl">{E(s["lesson"])}</span></p></section>
 {f'<div class="check"><h3>{E(s.get("check_title", "Ask yourself"))}</h3><ul>{checks}</ul></div>' if checks else ''}
 {reel_html}{share(url, s["title"])}{faq_html}
