@@ -190,6 +190,14 @@ section.block{padding:8px 0 40px}
 .toc-m ol{margin:0 0 14px;padding-left:20px}.toc-m li{margin:6px 0}
 @media(min-width:1100px){.toc-m{display:none}}
 
+.money{margin:2.4em 0;padding:24px 24px 18px;border:2px solid var(--line);border-radius:var(--r-md);background:#fff}
+.money h2{margin-top:0}
+.money .mby{margin:-6px 0 14px;font:600 14px/1.4 var(--sans);color:var(--ink2)}
+.money table{width:100%;border-collapse:collapse;margin:18px 0 8px;font:500 16px/1.4 var(--sans)}
+.money th,.money td{padding:10px 8px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.money th{font-weight:500;color:var(--ink2);width:58%}
+.money td{font-weight:700;color:var(--ink)}
+.money .mnote{font:400 13px/1.5 var(--sans);color:var(--ink2);margin:10px 0 0}
 .timeline{margin:2.2em 0}
 .timeline ol{list-style:none;margin:0;padding:0;position:relative}
 .timeline ol:before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line)}

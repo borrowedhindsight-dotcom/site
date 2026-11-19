@@ -17,7 +17,38 @@
   },
   "lijjat-papad-seven-women-80-rupees-story": {
     "seo_title": "Lijjat Papad turnover 2026, founders and ₹80 start",
-    "answer": "Lijjat Papad's annual turnover is reported at more than ₹1,600 crore. Seven women in Girgaum, Mumbai, started it on 15 March 1959 with ₹80 borrowed money, and about 45,000 women now co-own it."
+    "answer": "Lijjat Papad's annual turnover is reported at more than ₹1,600 crore. Seven women in Girgaum, Mumbai, started it on 15 March 1959 with ₹80 borrowed money, and about 45,000 women now co-own it.",
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "As an accountant, the number I keep coming back to is the ₹80. Adjusted for India's consumer price inflation, it is worth roughly ₹7,400 in today's money. That is less than many people spend on a phone. It was never the capital that built Lijjat.",
+        "What built it was compounding. Sales in the first year were just over ₹6,000. Reports now put turnover at about ₹1,600 crore. That is roughly 27 lakh times larger, which works out to sales growing about 26% a year, every year, for more than six decades. Even after removing inflation, real growth was about 18% a year. Very few Indian businesses of any kind have sustained that for so long.",
+        "One caution when reading these figures: ₹1,600 crore is turnover, not profit, and it is shared across about 45,000 members. That is roughly ₹3.6 lakh of sales per member each year, before the cost of flour, spices and packing. Lijjat's real achievement is not one big number. It is thousands of steady, modest earnings that the women own outright."
+      ],
+      "table": [
+        [
+          "The 1959 loan of ₹80, in today's money",
+          "about ₹7,400"
+        ],
+        [
+          "First-year sales (just over ₹6,000), in today's money",
+          "about ₹5.5 lakh"
+        ],
+        [
+          "Sales in 1962-63 (close to ₹2 lakh), in today's money",
+          "about ₹1.7 crore"
+        ],
+        [
+          "Growth from first-year sales to ₹1,600 crore",
+          "about 26% a year (about 18% after inflation)"
+        ],
+        [
+          "Turnover per member (₹1,600 crore ÷ 45,000)",
+          "about ₹3.6 lakh a year"
+        ]
+      ],
+      "note": "How we calculated this: inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, 1960 to 2025; 1960 is the earliest year available, so it stands in for 1959). Growth rates are compound annual rates from first-year sales (1959-60) to the ₹1,600 crore turnover reported in 2023. Figures are rounded. General education, not financial advice."
+    }
   },
   "ray-kroc-52-milkshake-mixer-salesman-built-mcdonalds": {
     "seo_title": "How old was Ray Kroc when he met the McDonald brothers?",
