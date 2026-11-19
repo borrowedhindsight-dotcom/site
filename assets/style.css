@@ -198,6 +198,23 @@ section.block{padding:8px 0 40px}
 .money th{font-weight:500;color:var(--ink2);width:58%}
 .money td{font-weight:700;color:var(--ink)}
 .money .mnote{font:400 13px/1.5 var(--sans);color:var(--ink2);margin:10px 0 0}
+.money .mtry{font:600 15px/1.5 var(--sans);margin:12px 0 0}
+.mby,.legal .mby{font:600 14px/1.4 var(--sans);color:var(--ink2)}
+.legal .mnote,.money .mnote{font:400 13px/1.5 var(--sans);color:var(--ink2)}
+.calc{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:26px 0 30px;padding:22px;border-radius:var(--r-md);background:var(--mist);border:2px solid var(--line)}
+.calc label{display:grid;gap:6px;font:700 14px/1.2 var(--sans);color:var(--ink2)}
+.calc input,.calc select{font:600 18px/1.2 var(--sans);color:var(--ink);padding:12px;border:2px solid var(--line);border-radius:var(--r-sm);background:#fff;width:100%;box-sizing:border-box}
+.calc input:focus,.calc select:focus{outline:none;border-color:var(--vio)}
+.calc output{grid-column:1/-1;display:grid;gap:4px;padding:16px;border-radius:var(--r-sm);background:#fff;border-left:4px solid var(--vio)}
+.calc output b{font:800 22px/1.3 var(--sans);color:var(--ink)}
+.calc output span{font:500 15px/1.4 var(--sans);color:var(--ink2)}
+.tablewrap{overflow-x:auto}
+.ctable{width:100%;border-collapse:collapse;font:500 16px/1.4 var(--sans)}
+.ctable th,.ctable td{padding:10px 8px;border-top:1px solid var(--line);text-align:left}
+.ctable thead th{color:var(--ink2);font-weight:700;border-top:0}
+.ctable td{font-weight:700}
+.calcpage h3{font:700 20px/1.3 var(--sans);margin:22px 0 6px}
+@media (max-width:640px){.calc{grid-template-columns:1fr;padding:16px}}
 .timeline{margin:2.2em 0}
 .timeline ol{list-style:none;margin:0;padding:0;position:relative}
 .timeline ol:before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line)}

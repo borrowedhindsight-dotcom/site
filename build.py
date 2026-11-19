@@ -46,6 +46,7 @@ PER_PAGE = 18
 MIN_CAT_INDEX = 6   # category pages with fewer stories stay on the site but are hidden from Google (noindex, no ads, not in sitemap)
 BYLINE = 'Manisha Aggarwal'   # owner and author: shown on every story, in Article schema and on the author page
 AUTHOR_PATH = '/author/manisha-aggarwal/'
+CALC_PATH = '/tools/rupee-inflation-calculator/'
 AUTHOR_BIO = ('Manisha Aggarwal is an accounting professional based in New Delhi, India. Manisha runs Borrowed Hindsight as a hobby: '
               'to keep learning, to spread awareness, and to share true stories that motivate people to start, or start again.')
 
@@ -139,14 +140,18 @@ def nav_html():
     items = ''.join(f'<a href="/category/{c}/"><i class="dot" style="--c:{v[2]}"></i>{E(v[0])}<small>{COUNTS.get(c, 0)}</small></a>'
                     for c, v in CATS.items() if c in LIVE_CATS)
     return (f'<nav class="nav" aria-label="Main"><a class="hide-m" href="/stories/">Stories</a>'
-            f'<details><summary>Categories</summary><div class="menu"><a href="/stories/"><i class="dot" style="--c:#FFD60A"></i>All stories<small>{sum(COUNTS.values())}</small></a>{items}<a class="show-m" href="/about/">About</a></div></details>'
-            f'<a class="hide-m" href="/about/">About</a>'
+            f'<details><summary>Categories</summary><div class="menu"><a href="/stories/"><i class="dot" style="--c:#FFD60A"></i>All stories<small>{sum(COUNTS.values())}</small></a>{items}<a class="show-m" href="{CALC_PATH}">Inflation calculator</a><a class="show-m" href="/about/">About</a></div></details>'
+            f'<a class="hide-m" href="{CALC_PATH}">Calculator</a><a class="hide-m" href="/about/">About</a>'
             f'<a class="search" href="/search/" aria-label="Search stories">{SEARCH_ICON}</a>'
             + (f'<a class="cta hide-m" href="#newsletter">Newsletter</a>' if NEWSLETTER else '') + '</nav>')
 
 
 def page(title, desc, body, path='/', ld=None, og_type='website', extra='', image=None, noindex=False, ads=True, progress=False):
     img = image or f'{SITE}/assets/og.png'
+    # Google shows about 60 characters of a title: drop the brand suffix rather than have the topic cut off.
+    if title.endswith(' | Borrowed Hindsight') and len(title) > 60: title = title[:-len(' | Borrowed Hindsight')]
+    # Descriptions: Google shows about 155 characters; cut long ones at a word boundary.
+    if len(desc) > 158: desc = desc[:155].rsplit(' ', 1)[0].rstrip(',;:') + '…'
     ld_html = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in (ld or []))
     robots = 'noindex,follow' if noindex else 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
     cats = ''.join(f'<li><a href="/category/{c}/">{E(v[0])}</a></li>' for c, v in CATS.items() if c in LIVE_CATS)
@@ -455,7 +460,8 @@ def story_page(s, prev_s, next_s, related):
                       f'<p class="mby">By <a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a>, accounting professional</p>'
                       + ''.join(f'<p>{para(x)}</p>' for x in money.get('paras', []))
                       + (f'<table><tbody>{rows}</tbody></table>' if rows else '')
-                      + (f'<p class="mnote">{E(money["note"])}</p>' if money.get('note') else '') + '</section>')
+                      + (f'<p class="mnote">{E(money["note"])}</p>' if money.get('note') else '')
+                      + f'<p class="mtry">Try it yourself: <a href="{CALC_PATH}">what is any rupee amount from 1960 to 2025 worth today?</a></p></section>')
     photo = s.get('photo')
     photo_html = (f'<figure class="photo"><img src="{E(photo["url"])}" alt="{E(s["title"])}" loading="lazy"><figcaption>Photo: '
                   f'<a href="{E(photo["page"])}" rel="nofollow noopener">{E(photo.get("credit") or "Wikimedia Commons")}</a>, {E(photo.get("license", ""))}, via Wikimedia Commons</figcaption></figure>') if photo else ''
@@ -584,7 +590,7 @@ def main():
                'description': 'True, sourced stories of people who started small and built something big, with one lesson to borrow.', 'publisher': {'@id': f'{SITE}/#org'}, 'inLanguage': 'en',
                'potentialAction': {'@type': 'SearchAction', 'target': {'@type': 'EntryPoint', 'urlTemplate': f'{SITE}/search/?q={{search_term_string}}'}, 'query-input': 'required name=search_term_string'}},
                {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE}/stories/{s["slug"]}/'} for i, s in enumerate(stories[:20])]}]}]
-    write('index.html', page('Borrowed Hindsight: true stories of people who started from nothing', 'True, sourced stories of founders, late starters, comebacks and record-breakers, and one lesson you can borrow from each.', home, ld=home_ld,
+    write('index.html', page('Borrowed Hindsight: true stories of people who started small', 'True, sourced stories of founders, late starters, comebacks and record-breakers, and one lesson you can borrow from each.', home, ld=home_ld,
                              extra=f'<link rel="preload" as="image" href="{thumb(feat)}" imagesrcset="{thumb(feat, True)} 640w, {thumb(feat)} 1200w" imagesizes="(max-width:900px) 100vw, 690px">'))
 
     # ---------- all stories + categories ----------
@@ -594,7 +600,7 @@ def main():
     for c, (n, dsc, col, intro) in CATS.items():
         if by_cat[c]:
             head = (f'<div class="catintro">{"".join(f"<p>{E(p)}</p>" for p in intro)}</div>{chips_html(by_cat, c)}')
-            list_pages(f'/category/{c}/', by_cat[c], f'{n}: true stories | Borrowed Hindsight', dsc, n, head,
+            list_pages(f'/category/{c}/', by_cat[c], f'{n}: true stories | Borrowed Hindsight', dsc if len(dsc) >= 90 else dsc + ' True, sourced stories, each with one lesson you can borrow.', n, head,
                        [('Home', '/'), ('Stories', '/stories/'), (n, f'/category/{c}/')], hide=len(by_cat[c]) < MIN_CAT_INDEX)
 
     # ---------- search ----------
@@ -636,6 +642,67 @@ q.addEventListener('input',run);q.focus();}})();
 <h2>Contact</h2><p>Corrections, story suggestions or partnership questions: email <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or see our <a href="/contact/">contact page</a>.</p>'''
     write('about/index.html', page('About Borrowed Hindsight: who we are and how we research', 'Who we are, how every Borrowed Hindsight story is researched and sourced, and how to reach us.',
           f'<main class="wrap narrow legal">{crumbs_html([("Home", "/"), ("About", "/about/")])}{about}</main>', '/about/', ld=[{'@context': 'https://schema.org', '@type': 'AboutPage', 'url': SITE + '/about/', 'about': ORG, 'publisher': ORG}]))
+
+    # ---------- rupee inflation calculator ----------
+    cpi_d = json.load(open(ROOT / 'data' / 'india_cpi.json'))
+    CPI = {int(k): v for k, v in cpi_d['cpi'].items()}
+    y0, y1 = min(CPI), max(CPI)
+    def worth(a, fy, ty): return a * CPI[ty] / CPI[fy]
+    def inr(x):
+        x = round(x)
+        s = str(x); head, tail = s[:-3], s[-3:]
+        while len(head) > 2: tail = head[-2:] + ',' + tail; head = head[:-2]
+        return '₹' + (head + ',' + tail if head else tail)
+    avg = (CPI[y1] / CPI[y0]) ** (1 / (y1 - y0)) - 1
+    decade_rows = ''.join(f'<tr><th scope="row">₹100 in {y}</th><td>{inr(worth(100, y, y1))}</td><td>{CPI[y1] / CPI[y]:.1f}×</td></tr>'
+                          for y in range(1960, y1, 5))
+    lj = {x['slug'] for x in stories}
+    lij = '/stories/lijjat-papad-seven-women-80-rupees-story/' if 'lijjat-papad-seven-women-80-rupees-story' in lj else None
+    opts = ''.join(f'<option{" selected" if y == 1990 else ""}>{y}</option>' for y in range(y0, y1 + 1))
+    opts2 = ''.join(f'<option{" selected" if y == y1 else ""}>{y}</option>' for y in range(y0, y1 + 1))
+    v1990 = worth(100, 1990, y1)
+    faqs = [
+        (f'What is ₹100 from 1960 worth today?', f'About {inr(worth(100, 1960, y1))} in {y1} money. Consumer prices in India rose about {CPI[y1] / CPI[1960]:.0f} times between 1960 and {y1}, based on the World Bank consumer price index.'),
+        (f'What is ₹100 from 1990 worth today?', f'About {inr(v1990)} in {y1} money. Prices rose about {CPI[y1] / CPI[1990]:.1f} times between 1990 and {y1}.'),
+        (f'What has India\'s average inflation rate been since 1960?', f'About {avg * 100:.1f}% a year on average from 1960 to {y1}, measured by the consumer price index. Some decades were much higher, and recent years have been lower.'),
+        ('Can I use this to value gold, property or shares?', 'No. This calculator measures the general cost of living (a basket of consumer goods and services). Gold, property and shares have their own price histories and can rise much faster or slower than general inflation.'),
+        ('Where does the data come from?', f'From the World Bank\'s consumer price index for India (series FP.CPI.TOTL, {cpi_d["base"]}), covering {y0} to {y1}. It is based on India\'s official consumer price statistics. Values are yearly averages, so results are approximate.'),
+    ]
+    faq_c = ''.join(f'<h3>{E(q)}</h3><p>{E(a)}</p>' for q, a in faqs)
+    calc_body = f"""<h1>Rupee inflation calculator</h1>
+<p class="lead">See what any rupee amount from {y0} to {y1} is worth in another year.</p>
+<p class="mby">By <a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a>, accounting professional · Data: World Bank consumer price index for India, {y0}–{y1}</p>
+<form class="calc" id="calc" onsubmit="return false">
+<label>Amount (₹)<input id="amt" type="number" inputmode="decimal" min="0" step="any" value="100"></label>
+<label>From year<select id="fy">{opts}</select></label>
+<label>To year<select id="ty">{opts2}</select></label>
+<output id="out" for="amt fy ty" aria-live="polite"><b>₹100 in 1990 is worth about {inr(v1990)} in {y1}.</b><span>Prices rose {CPI[y1] / CPI[1990]:.1f} times, an average of {((CPI[y1] / CPI[1990]) ** (1 / (y1 - 1990)) - 1) * 100:.1f}% a year.</span></output>
+</form>
+<script>(function(){{var C={json.dumps(CPI)};var f0=new Intl.NumberFormat('en-IN',{{maximumFractionDigits:0}}),f2=new Intl.NumberFormat('en-IN',{{minimumFractionDigits:2,maximumFractionDigits:2}});function f_(v){{return v<100?f2.format(v):f0.format(v);}}var f={{format:f_}};
+function g(i){{return document.getElementById(i);}}
+function run(){{var a=parseFloat(g('amt').value),x=+g('fy').value,y=+g('ty').value,o=g('out');
+if(!(a>=0)){{o.innerHTML='<b>Enter an amount.</b>';return;}}
+var v=a*C[y]/C[x],r=C[y]/C[x],n=Math.abs(y-x),avg=n?(Math.pow(Math.max(r,1/r),1/n)-1)*100:0;
+o.innerHTML='<b>₹'+f.format(a)+' in '+x+' is worth about ₹'+f.format(v)+' in '+y+'.</b><span>'+(x===y?'Same year, no change.':r>=1?'Prices rose '+r.toFixed(r<10?2:1)+' times, an average of '+avg.toFixed(1)+'% a year.':'Prices in '+y+' were '+(1/r).toFixed(1/r<10?2:1)+' times lower than in '+x+'.')+'</span>';}}
+['amt','fy','ty'].forEach(function(i){{g(i).addEventListener('input',run);}});}})();</script>
+<h2>What ₹100 from each year is worth in {y1}</h2>
+<div class="tablewrap"><table class="ctable"><thead><tr><th>Amount</th><th>Worth in {y1}</th><th>Prices rose</th></tr></thead><tbody>{decade_rows}</tbody></table></div>
+<h2>How this calculator works</h2>
+<p>It compares India's consumer price index in the two years you choose. If the index is ten times higher in the later year, ₹100 then buys roughly what ₹1,000 buys later. The index tracks the average price of everyday goods and services, such as food, housing, clothing and transport.</p>
+<p>India's prices rose about {CPI[y1] / CPI[y0]:.0f} times between {y0} and {y1}, an average of about {avg * 100:.1f}% a year. That is why old salaries, prices and business figures look tiny today, and why money kept as cash slowly buys less each year.</p>
+<h2>Why we built it</h2>
+<p>Many of our stories start with a small sum: a ₹80 loan, a ₹10,000 investment, a first salary. Those numbers only make sense when you see them in today's money.{f' In the <a href="{lij}">Lijjat Papad story</a>, for example, the ₹80 the founders borrowed in 1959 is worth only about {inr(worth(80, 1960, y1))} today.' if lij else ''}</p>
+<h2>Limits to keep in mind</h2>
+<p>Results are approximate. The index uses yearly averages and a national basket of goods, so your own costs, city or lifestyle may have risen faster or slower. The earliest year available is {y0}. This is general education, not financial advice.</p>
+<h2>Questions people ask</h2>{faq_c}
+<p class="mnote">Source: <a href="{cpi_d['source_url']}" rel="noopener">{E(cpi_d['source'])}</a>, retrieved {cpi_d['retrieved']}.</p>"""
+    calc_desc = f'Free rupee inflation calculator for India: see what any amount from {y0} to {y1} is worth today, using official consumer price data. ₹100 in 1990 = {inr(v1990)} in {y1}.'
+    write(CALC_PATH.strip('/') + '/index.html', page(f'Rupee inflation calculator: value of ₹ from {y0} to {y1}', calc_desc,
+          f'<main class="wrap narrow legal calcpage">{crumbs_html([("Home", "/"), ("Rupee inflation calculator", CALC_PATH)])}{calc_body}</main>', CALC_PATH,
+          ld=[{'@context': 'https://schema.org', '@type': 'WebApplication', 'name': 'Rupee inflation calculator', 'url': SITE + CALC_PATH, 'applicationCategory': 'FinanceApplication',
+               'operatingSystem': 'Any', 'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'INR'}, 'author': PERSON, 'publisher': ORG, 'description': calc_desc},
+              {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faqs]},
+              crumbs([('Home', '/'), ('Rupee inflation calculator', CALC_PATH)])]))
 
     n_auth = len(stories)
     author = f'''<h1>Manisha Aggarwal</h1>
@@ -693,7 +760,7 @@ q.addEventListener('input',run);q.focus();}})();
     # ---------- feeds and machine-readable files ----------
     newest = stories[0]['date'] if stories else TODAY
     urls = [('/', newest, '1.0'), ('/stories/', newest, '0.9'), ('/about/', None, '0.5'), ('/contact/', None, '0.4'), ('/editorial-standards/', None, '0.4'),
-            ('/privacy/', None, '0.2'), ('/terms/', None, '0.2'), (AUTHOR_PATH, None, '0.4')] + \
+            ('/privacy/', None, '0.2'), ('/terms/', None, '0.2'), (AUTHOR_PATH, None, '0.4'), (CALC_PATH, None, '0.8')] + \
            [(f'/category/{c}/', by_cat[c][0]['date'], '0.7') for c in CATS if len(by_cat[c]) >= MIN_CAT_INDEX] + \
            [(f'/stories/{s["slug"]}/', s.get('updated', s['date']), '0.8') for s in stories]
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' + ''.join(
@@ -716,7 +783,8 @@ q.addEventListener('input',run);q.focus();}})();
           f'<description>True stories of people who started from nothing, and the lesson to borrow.</description><language>en</language>{items}</channel></rss>')
     llms = [f'# Borrowed Hindsight', '',
             '> True, sourced stories of people who started with almost nothing (founders, late starters, comebacks, record-breakers), each ending with one practical lesson ("the borrowed hindsight"). Every number is checked in at least two sources and every story lists its sources.', '',
-            f'Publisher: Borrowed Hindsight, New Delhi, India. Contact: {CONTACT_EMAIL}. Editorial standards: {SITE}/editorial-standards/', '']
+            f'Owner and author: Manisha Aggarwal, accounting professional, New Delhi, India ({SITE}{AUTHOR_PATH}). Contact: {CONTACT_EMAIL}. Editorial standards: {SITE}/editorial-standards/', '',
+             '## Tools', '', f'- [Rupee inflation calculator]({SITE}{CALC_PATH}): what any rupee amount from 1960 to 2025 is worth in another year, using the World Bank consumer price index for India.', '']
     for c, v in CATS.items():
         if by_cat[c]:
             llms += [f'## {v[0]}', '', v[1], '']
