@@ -52,7 +52,33 @@
   },
   "ray-kroc-52-milkshake-mixer-salesman-built-mcdonalds": {
     "seo_title": "How old was Ray Kroc when he met the McDonald brothers?",
-    "answer": "Ray Kroc was 52 when he met Dick and Mac McDonald in San Bernardino in 1954, while selling milkshake mixers. He opened his first McDonald's in 1955 and bought the brothers out for $2.7 million in 1961."
+    "answer": "Ray Kroc was 52 when he met Dick and Mac McDonald in San Bernardino in 1954, while selling milkshake mixers. He opened his first McDonald's in 1955 and bought the brothers out for $2.7 million in 1961.",
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "In 1961 Ray Kroc paid the McDonald brothers $2.7 million for their rights, about $28 million in today's dollars. Before that deal, the brothers took just 0.5% of their franchisees' sales. That is a small share of a fast-growing business, and Kroc's own cut was only 1.4%.",
+        "The money was really made in property. Harry Sonneborn's plan had the company own or lease the land and rent it to franchisees, so rent arrived every month whatever happened to burger prices. When McDonald's listed in 1965 at $22.50 a share, about $224 today, investors were buying a property business as much as a restaurant chain."
+      ],
+      "table": [
+        [
+          "Buyout of the brothers ($2.7 million, 1961), today",
+          "about $28 million"
+        ],
+        [
+          "Kroc's share of franchisee sales",
+          "1.4% (of a 1.9% fee)"
+        ],
+        [
+          "Listing price per share (1965), today",
+          "about $224"
+        ],
+        [
+          "How much US prices rose, 1961 to 2024",
+          "about 10.5 times"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
   },
   "oldest-olympic-medal-winners-athletes-who-won-medals-after-40": {
     "seo_title": "Oldest Olympic medal winners and gold medallists ever",
@@ -60,7 +86,33 @@
   },
   "marvel-bankruptcy-1996-to-disney-4-billion-comeback": {
     "seo_title": "Marvel bankruptcy 1996: why it went bust and what saved it",
-    "answer": "Marvel filed for Chapter 11 bankruptcy in December 1996 after the comics and trading-card boom collapsed. It merged with Toy Biz in 1998, financed its own films, made Iron Man in 2008, and Disney bought it for about $4 billion in 2009."
+    "answer": "Marvel filed for Chapter 11 bankruptcy in December 1996 after the comics and trading-card boom collapsed. It merged with Toy Biz in 1998, financed its own films, made Iron Man in 2008, and Disney bought it for about $4 billion in 2009.",
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "In 1998 Marvel reportedly offered Sony almost all its film characters for $25 million, about $48 million in today's dollars. Eleven years later Disney paid about $4 billion for the company, 160 times that offer, or nearly $5.8 billion today.",
+        "What changed in between was not the characters but who kept the profit. Selling film rights for a fixed fee turns a character into a one-off payment. In 2005 Marvel instead borrowed $525 million against its remaining rights to make its own films. Iron Man earned about $585 million, roughly $850 million today, and that income went to Marvel."
+      ],
+      "table": [
+        [
+          "Sony offer for nearly all characters (1998), today",
+          "about $48 million"
+        ],
+        [
+          "Spider-Man film rights ($10 million, 1998), today",
+          "about $19 million"
+        ],
+        [
+          "Disney price (2009), today",
+          "about $5.8 billion"
+        ],
+        [
+          "Disney price vs the 1998 offer",
+          "about 160 times"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
   },
   "ms-dhoni-ticket-collector-kharagpur-to-world-cup-2011": {
     "seo_title": "Was MS Dhoni a ticket collector? Kharagpur to World Cup 2011",
@@ -79,5 +131,81 @@
   },
   "sudha-murty-postcard-jrd-tata-telco-1974": {
     "seo_title": "Sudha Murty's postcard to JRD Tata (1974): the full story"
+  },
+  "how-infosys-started-with-10000-rupees-sudha-murty-1981": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "The famous ₹10,000 sounds tiny, but 1981 prices were very different. Adjusted for inflation, it is worth about ₹2.1 lakh today. That is real savings for a young family, and Sudha Murty still kept ₹250 back for emergencies. That habit tells you more about how Infosys was run than the headline number does.",
+        "The growth is the real lesson. In 1999, the year it listed on Nasdaq, Infosys crossed US$100 million in revenue. It now reports about US$20 billion, roughly 200 times more. That is about 23% growth a year for 26 years, at a company already large when the run began."
+      ],
+      "table": [
+        [
+          "₹10,000 in 1981, in today's money",
+          "about ₹2.1 lakh"
+        ],
+        [
+          "How much prices rose, 1981 to 2025",
+          "about 21 times"
+        ],
+        [
+          "Revenue in 1999 vs today",
+          "US$100 million → about US$20 billion"
+        ],
+        [
+          "Average yearly growth since 1999",
+          "about 23%"
+        ]
+      ],
+      "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "sunil-bharti-mittal-20000-rupees-ludhiana-to-airtel": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Sunil Mittal's ₹20,000 from 1976 is worth about ₹6.3 lakh in today's money. That is a serious sum for an 18-year-old, but it is roughly what a small trader might put into a shop today, not venture capital.",
+        "As an accountant, what stands out is that it was borrowed, from his father. Borrowed money has to come back, which forces a business to sell something early. A bicycle-parts workshop does exactly that: small, steady orders that pay the loan, long before anything as ambitious as a phone network."
+      ],
+      "table": [
+        [
+          "₹20,000 in 1976, in today's money",
+          "about ₹6.3 lakh"
+        ],
+        [
+          "How much prices rose, 1976 to 2025",
+          "about 31 times"
+        ]
+      ],
+      "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
+    }
+  },
+  "ronald-wayne-apple-800": {
+    "money": {
+      "h": "The money behind it",
+      "paras": [
+        "Ronald Wayne's $800 from 1976 is worth about $4,400 in today's dollars. Including the later $1,500, he received $2,300, about $12,700 today. Set against estimates of more than $400 billion for a 10% stake now, it looks like the worst trade in history.",
+        "The accountant's view is different. In a general partnership, each partner can be personally liable for the business's debts. Jobs had just borrowed $15,000 for parts, about $83,000 today, and Wayne had a house and savings that creditors could reach. He was not selling a share of Apple's future. He was buying protection from a debt he could not control."
+      ],
+      "table": [
+        [
+          "$800 in 1976, in today's dollars",
+          "about $4,400"
+        ],
+        [
+          "Total received ($2,300), in today's dollars",
+          "about $12,700"
+        ],
+        [
+          "The $15,000 parts loan, in today's dollars",
+          "about $83,000"
+        ],
+        [
+          "Price of the 1976 agreement at auction in 2011",
+          "about $1.59 million"
+        ]
+      ],
+      "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
+    }
   }
 }
