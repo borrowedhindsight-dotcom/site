@@ -216,6 +216,39 @@ section.block{padding:8px 0 40px}
 .ctable td{font-weight:700}
 .calcpage h3{font:700 20px/1.3 var(--sans);margin:22px 0 6px}
 @media (max-width:640px){.calc{grid-template-columns:1fr;padding:16px}}
+/* goal SIP planner */
+.gcalc{margin:26px 0 30px}
+.gset{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0;padding:20px;border-radius:var(--r-md);background:var(--mist);border:2px solid var(--line)}
+.gset legend{font:800 15px/1.2 var(--sans);color:var(--ink);padding:0 6px}
+.gcalc label{display:grid;gap:6px;align-content:end;font:700 14px/1.2 var(--sans);color:var(--ink2)}
+.gcalc input,.gcalc select{font:600 17px/1.2 var(--sans);color:var(--ink);padding:11px;border:2px solid var(--line);border-radius:var(--r-sm);background:#fff;width:100%;min-width:0}
+.gcalc input:focus,.gcalc select:focus{outline:none;border-color:var(--vio)}
+.gcalc .ghint{font:500 15px/1.5 var(--sans);color:var(--ink2)}
+.gcard{margin:0 0 14px;padding:16px;border:2px solid var(--line);border-radius:var(--r-md);background:#fff}
+.ghead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px;gap:10px;margin-bottom:12px}
+.ghead select{font-weight:700}
+.gdel{border:2px solid var(--line);border-radius:var(--r-sm);background:#fff;color:var(--ink2);font:700 22px/1 var(--sans);cursor:pointer}
+.gdel:hover{border-color:var(--pink);color:var(--pink)}
+.gfields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.gfields label{font-size:13px}
+.gres{margin:12px 0 0;padding:10px 12px;border-left:4px solid var(--vio);background:var(--mist);border-radius:6px;font:500 15px/1.5 var(--sans);color:var(--ink2)}
+.gres:empty{display:none}
+.gres b{color:var(--ink)}
+.gok{color:#137a3e;font-weight:700}
+.gshort{color:#b0185f;font-weight:700}
+.gbtn{font:700 16px/1 var(--sans);padding:13px 18px;border-radius:var(--r-sm);border:2px solid var(--vio);background:var(--vio);color:#fff;cursor:pointer}
+.gbtn:hover{background:var(--vio-d);border-color:var(--vio-d)}
+.gbtn.ghost{background:#fff;color:var(--vio)}
+#gadd{background:#fff;color:var(--vio);width:100%;border-style:dashed}
+#gout{display:grid;gap:6px;margin:22px 0 14px;padding:18px;border-radius:var(--r-sm);background:var(--ink);color:#fff}
+#gout b{font:800 24px/1.25 var(--sans)}
+#gout span{font:500 15px/1.45 var(--sans);color:#E3DEF7}
+#gout .gok{color:#7ee2a4}#gout .gshort{color:var(--sun-soft)}
+.gtab{font-size:14px}
+.gtab th,.gtab td{white-space:nowrap}
+.gtab tbody th{white-space:normal;min-width:120px}
+.gact{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+@media (max-width:640px){.gset{grid-template-columns:1fr 1fr;padding:14px;gap:10px}.gfields{grid-template-columns:1fr 1fr}.ghead{grid-template-columns:minmax(0,1fr) 44px}.ghead select{grid-column:1/-1}.gcard{padding:12px}}
 .mgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 .mcard{display:flex;flex-direction:column;gap:6px;padding:18px;border:2px solid var(--line);border-radius:var(--r-md);background:#fff;color:var(--ink);text-decoration:none}
 .mcard:hover{border-color:var(--vio)}
