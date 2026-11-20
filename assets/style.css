@@ -216,6 +216,15 @@ section.block{padding:8px 0 40px}
 .ctable td{font-weight:700}
 .calcpage h3{font:700 20px/1.3 var(--sans);margin:22px 0 6px}
 @media (max-width:640px){.calc{grid-template-columns:1fr;padding:16px}}
+.mgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.mcard{display:flex;flex-direction:column;gap:6px;padding:18px;border:2px solid var(--line);border-radius:var(--r-md);background:#fff;color:var(--ink);text-decoration:none}
+.mcard:hover{border-color:var(--vio)}
+.mcard .mfig{font:800 26px/1.1 var(--sans);color:var(--vio-d)}
+.mcard .mlab{font:500 14px/1.4 var(--sans);color:var(--ink2)}
+.mcard b{margin-top:auto;padding-top:8px;font:700 15px/1.35 var(--sans)}
+.mcard.tool{background:var(--mist)}
+@media (max-width:1000px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.mgrid{grid-template-columns:1fr}}
 .timeline{margin:2.2em 0}
 .timeline ol{list-style:none;margin:0;padding:0;position:relative}
 .timeline ol:before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--line)}

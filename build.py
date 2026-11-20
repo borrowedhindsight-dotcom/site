@@ -580,12 +580,22 @@ def main():
         f'<section class="block"><div class="shead"><h2><a href="/category/{c}/">{E(v[0])}</a></h2><a class="all" href="/category/{c}/">All {len(by_cat[c])}</a></div>'
         f'<p class="sdesc">{E(v[1])}</p><div class="row">{"".join(card(s, summary=False) for s in ([x for x in by_cat[c] if x not in shown] + [x for x in by_cat[c] if x in shown])[:4])}</div></section>'
         for c, v in CATS.items() if by_cat[c])
+    mpick = [x for x in (next((s for s in stories if s['slug'] == k), None) for k in (
+        'lijjat-papad-seven-women-80-rupees-story', 'how-infosys-started-with-10000-rupees-sudha-murty-1981', 'ronald-wayne-apple-800')) if x and x.get('money')]
+    money_home = ('<section class="block mhome"><div class="shead"><h2>The money behind the stories</h2><a class="all" href="' + TOOLS_PATH + '">Calculators</a></div>'
+                  f'<p class="sdesc">{E(BYLINE)}, an accounting professional, works out what the famous numbers really mean: in today\'s money, as yearly growth, and what they leave out.</p>'
+                  '<div class="mgrid">' + ''.join(
+                      f'<a class="mcard" href="/stories/{s["slug"]}/#money"><span class="mfig">{E(s["money"]["table"][0][1])}</span>'
+                      f'<span class="mlab">{E(s["money"]["table"][0][0])}</span><b>{E(s["title"])}</b></a>' for s in mpick)
+                  + f'<a class="mcard tool" href="{CALC_PATH}"><span class="mfig">₹ → today</span><span class="mlab">What is any amount from 1960 to 2025 worth now?</span><b>Rupee inflation calculator</b></a>'
+                  + f'<a class="mcard tool" href="{CAGR_PATH}"><span class="mfig">% a year</span><span class="mlab">The steady growth rate between two numbers</span><b>CAGR calculator</b></a>'
+                  + '</div></section>') if mpick else ''
     home = f'''<main>
 <div class="wrap"><section class="intro"><div class="intro-row"><h1>True stories of people who started with almost nothing</h1>
-<p class="lead">Founders, late starters, comebacks and record-breakers: the low point, the climb, and one line of hindsight you can borrow. Every story is researched, sourced and checked twice.</p></div></section>
+<p class="lead">Founders, late starters, comebacks and record-breakers: the low point, the climb, the money behind it, and one line of hindsight you can borrow. Every story is researched, sourced and checked twice.</p></div></section>
 <a class="feature" href="/stories/{feat["slug"]}/"><div class="pic">{img_tag(feat, "(max-width:900px) 100vw, 690px", eager=True)}</div>
 <div>{kicker(fc)}<h2>{E(feat["title"])}</h2><p>{E(feat["summary"])}</p><blockquote><span class="hl">{E(feat["lesson"])}</span></blockquote><span class="more">Read the story ({mins(feat)} min)</span></div></a>
-{most_html}<section class="block"><div class="shead"><h2>Latest stories</h2><a class="all" href="/stories/">All {len(stories)} stories</a></div>{grid(latest)}</section></div>
+{money_home}{most_html}<section class="block"><div class="shead"><h2>Latest stories</h2><a class="all" href="/stories/">All {len(stories)} stories</a></div>{grid(latest)}</section></div>
 <section class="wall"><div class="wrap"><h2>Lines worth borrowing</h2><p class="sub">Every story ends with one line of hindsight. Here are the latest. Tap one to read the story behind it.</p><div class="quotes">{wall_html}</div></div></section>
 <div class="wrap"><section class="block"><div class="shead"><h2>Browse by category</h2></div>{chips_html(by_cat)}</section>
 {rows}{signup('home')}</div></main>'''
@@ -593,7 +603,7 @@ def main():
                'description': 'True, sourced stories of people who started small and built something big, with one lesson to borrow.', 'publisher': {'@id': f'{SITE}/#org'}, 'inLanguage': 'en',
                'potentialAction': {'@type': 'SearchAction', 'target': {'@type': 'EntryPoint', 'urlTemplate': f'{SITE}/search/?q={{search_term_string}}'}, 'query-input': 'required name=search_term_string'}},
                {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE}/stories/{s["slug"]}/'} for i, s in enumerate(stories[:20])]}]}]
-    write('index.html', page('Borrowed Hindsight: true stories of people who started small', 'True, sourced stories of founders, late starters, comebacks and record-breakers, and one lesson you can borrow from each.', home, ld=home_ld,
+    write('index.html', page('Borrowed Hindsight: true stories of people who started small', 'True, sourced stories of founders, late starters and comebacks, the money behind them worked out by an accountant, and free inflation and CAGR calculators.', home, ld=home_ld,
                              extra=f'<link rel="preload" as="image" href="{thumb(feat)}" imagesrcset="{thumb(feat, True)} 640w, {thumb(feat)} 1200w" imagesizes="(max-width:900px) 100vw, 690px">'))
 
     # ---------- all stories + categories ----------
@@ -638,6 +648,7 @@ q.addEventListener('input',run);q.focus();}})();
 <p class="lead">They started with almost nothing. Their hindsight is yours to borrow.</p>
 <p>Borrowed Hindsight is an independent publisher of true stories about people who started with very little, were told no, or started late, and built something remarkable anyway. Each story covers the low point, the choice, the climb, and one line of hindsight you can use in your own life.</p>
 <p>We publish short animated videos on <a href="{INSTAGRAM}">Instagram</a>, <a href="{YOUTUBE}">YouTube</a> and <a href="{FACEBOOK}">Facebook</a>, and the full, sourced version of every story here. We are based in New Delhi, India, and write for readers everywhere.</p>
+<h2>The money behind each story</h2><p>Borrowed Hindsight is run by <a href="{AUTHOR_PATH}">Manisha Aggarwal</a>, an accounting professional. Where a story involves money, such as a first loan, a sale price or a company's growth, Manisha adds a section called "The money behind it". It converts old amounts into today's money using official inflation data, works out growth rates, and points out what headline numbers leave out, such as turnover versus profit, or cash versus shares in a deal. You can run the same sums yourself with our free <a href="{TOOLS_PATH}">calculators</a>.</p>
 <h2>How we research</h2><p>Every story is built from primary or reputable sources: company and official records, major newspapers and magazines, books, peer-reviewed studies and official statistics. Every number is checked in at least two independent sources, and each page lists its sources. If a popular story or statistic can't be traced to a real source, we say so instead of repeating it. Read our full <a href="/editorial-standards/">editorial standards</a>.</p>
 <h2>How we use AI</h2><p>AI tools help us research, draft and narrate. People choose every story, and every fact is checked against its sources before it is published. Our short videos are animated and narrated with an AI voice. We never create fake photos of real people.</p>
 <h2>What we don't do</h2><p>We don't give personal financial, investment, legal or career advice, and we don't recommend products, stocks or apps. We don't publish political or religious content, and we never mock anyone. We judge decisions by what was known at the time, not by how they turned out.</p>
