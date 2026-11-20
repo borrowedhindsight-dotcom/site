@@ -56,6 +56,15 @@ AUTHOR_BIO = ('Manisha Aggarwal is an accounting professional based in New Delhi
 # AdSense uses Auto ads: Google chooses ad placement. The AdSense script is left off pages without publisher content
 # (contact, legal pages, search, 404), per AdSense policy.
 GA_ID = 'G-V6QHHCTWJT'
+# Google Analytics events, marked as key events in GA: story_read (reader reached the lesson), video_click (to Instagram/
+# YouTube), share (share buttons and Copy link), calculator_use (first edit on a calculator page). One script, all pages.
+GA_EVENTS = '''<script>document.addEventListener('DOMContentLoaded',function(){
+var path=location.pathname;function ev(n,p){try{gtag('event',n,p)}catch(e){}}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'';
+if(a.closest('.share')){ev('share',{method:a.tagName==='BUTTON'?'copy_link':a.textContent.trim().toLowerCase(),content_type:'story',item_id:path});return}
+if(/instagram\\.com|youtube\\.com/.test(h)){ev('video_click',{platform:/youtube/.test(h)?'youtube':'instagram',link_location:a.closest('.reel')?'story_video':a.closest('.reelmini')?'story_video_mini':a.closest('footer')?'footer':a.closest('header.top')?'header':'other',page_path:path})}},true);
+var l=document.getElementById('lesson');if(l&&'IntersectionObserver' in window){var o=new IntersectionObserver(function(x){if(x[0].isIntersecting){ev('story_read',{page_path:path});o.disconnect()}});o.observe(l)}
+var c=document.getElementById('calc');if(c){var d=0;c.addEventListener('input',function(){if(d)return;d=1;ev('calculator_use',{calculator:/cagr/.test(path)?'cagr':'inflation'})})}});</script>'''
 ADSENSE_CLIENT = 'ca-pub-8424876803254841'
 
 # Parent category: Stories. Child categories: slug -> (name, one-line description, colour, written introduction).
@@ -106,7 +115,8 @@ def tracking(ads=True):
     t = ''
     if GA_ID:
         t += (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'
-              f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>")
+              f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>"
+              + GA_EVENTS)
     if ADSENSE_CLIENT:
         t += f'<meta name="google-adsense-account" content="{ADSENSE_CLIENT}">'
         if ads:
