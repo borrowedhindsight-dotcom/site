@@ -56,65 +56,87 @@ AUTHOR_BIO = ('Manisha Aggarwal is an accounting professional based in New Delhi
 # Goal SIP planner (runs in the browser). Kept out of the f-strings so its braces need no escaping.
 GOAL_JS = r'''(function(){
 var Y0=new Date().getFullYear(),TY=['edu','mar','home','car','fi','oth'];
-var T={edu:{l:"Child's education",i:10,a:50,age:18,ch:1},mar:{l:"Child's marriage",i:7,a:30,age:25,ch:1},home:{l:'Buy a home',i:7,a:80},car:{l:'Buy a car',i:6,a:12},fi:{l:'Financial independence (retire)',i:6,a:100000},oth:{l:'Other goal',i:6,a:10}};
-function dflt(){return {s:5,r:10,u:0,c:0,g:[
-{t:'edu',n:'Child 1 education',a:100,b:2024,k:18,i:10},{t:'mar',n:'Child 1 marriage',a:30,b:2024,k:25,i:7},
-{t:'edu',n:'Child 2 education',a:50,b:2027,k:18,i:10},{t:'mar',n:'Child 2 marriage',a:30,b:2027,k:25,i:7},
-{t:'home',n:'Our home',a:80,y:Y0+6,i:7},{t:'fi',n:'Financial independence',a:100000,y:Y0+24,i:6,l:30,p:8}]};}
+var T={edu:{l:"Child's education",i:10,a:50,age:18,ch:1,h:"Look up today's full fees for the course you have in mind, with hostel and living costs. A commercial pilot licence, for example, costs about ₹1 crore today. If the course runs for several years, set how many years the fees are paid over."},
+mar:{l:"Child's marriage",i:7,a:30,age:25,ch:1,h:"Imagine your child is getting married today. Think of a wedding you attended whose scale and budget you liked: what would a wedding like that cost if it happened this year? Include the venue, food, clothes, jewellery and gifts."},
+home:{l:'Buy a home',i:7,a:80,h:"The price of the kind of home you want, in the area you want, if you bought it today. Enter only the part you will pay yourself (the down payment) if you plan to take a loan."},
+car:{l:'Buy a car',i:6,a:12,h:"Today's on-road price of the car you have in mind, including registration and insurance."},
+fi:{l:'Financial independence (retire)',i:6,a:100000,h:"Your household's monthly spending today on the life you want to keep after you stop working. Leave out EMIs and SIPs that will have ended by then."},
+oth:{l:'Other goal',i:6,a:10,h:"What this goal would cost if you paid for it today: a world trip, starting a business, a parent's care."}};
+function dflt(){return {s:5,r:10,u:10,c:0,g:[
+{t:'edu',n:'Child 1 education',a:100,b:2024,k:18,d:1,i:10},{t:'mar',n:'Child 1 marriage',a:30,b:2024,k:25,i:7},
+{t:'edu',n:'Child 2 education',a:50,b:2027,k:18,d:4,i:10},{t:'mar',n:'Child 2 marriage',a:30,b:2027,k:25,i:7},
+{t:'home',n:'Our home',a:80,y:Y0+6,i:7},{t:'fi',n:'Financial independence',a:100000,m:32,k:55,e:85,p:8,i:6}]};}
 var S=dflt();
 try{var h=location.hash.match(/^#p=(.+)$/);if(h){var o=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h[1])))));if(o&&o.g&&o.g.length<=20)S=o;}}catch(e){}
 function $(i){return document.getElementById(i);}
 function num(v,d){v=parseFloat(v);return isFinite(v)?v:d;}
 function inr(x){return '₹'+Math.round(x).toLocaleString('en-IN');}
-function big(x){var a=Math.abs(x);if(a>=1e7)return '₹'+(a/1e7).toLocaleString('en-IN',{maximumFractionDigits:2,minimumFractionDigits:2})+' crore';if(a>=1e5)return '₹'+(a/1e5).toFixed(2)+' lakh';return inr(a);}
+function big(x){var a=Math.abs(x);if(a>=1e7)return '₹'+(a/1e7).toFixed(2)+' crore';if(a>=1e5)return '₹'+(a/1e5).toFixed(2)+' lakh';return inr(a);}
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function fld(k,lab,v){return '<label>'+lab+'<input data-k="'+k+'" type="number" inputmode="decimal" step="any" value="'+esc(v)+'"></label>';}
 function card(g,ix){var t=T[g.t]||T.oth,o='<div class="gcard" data-ix="'+ix+'"><div class="ghead"><select data-k="t" aria-label="Type of goal">';
 TY.forEach(function(k){o+='<option value="'+k+'"'+(k==g.t?' selected':'')+'>'+esc(T[k].l)+'</option>';});
 o+='</select><input data-k="n" type="text" maxlength="40" aria-label="Name of goal" value="'+esc(g.n)+'"><button type="button" class="gdel" data-del aria-label="Remove this goal">×</button></div><div class="gfields">';
-if(g.t=='fi')o+=fld('a','Monthly expenses today (₹)',g.a)+fld('y','Stop working in (year)',g.y)+fld('l','Money must last (years)',g.l)+fld('p','Return after that (% a year)',g.p);
-else{o+=fld('a','Cost today (₹ lakh)',g.a);o+=t.ch?fld('b',"Child's birth year",g.b)+fld('k','Needed at age',g.k):fld('y','Needed in (year)',g.y);}
-return o+fld('i','Price rise (% a year)',g.i)+'</div><p class="gres"></p></div>';}
+if(g.t=='fi')o+=fld('a','Monthly expenses today (₹)',g.a)+fld('m','Your age now',g.m)+fld('k','Stop working at age',g.k)+fld('e','Plan for money till age',g.e)+fld('p','Return after that (% a year)',g.p);
+else{o+=fld('a',(g.t=='edu'?'Total fees today':'Cost today')+' (₹ lakh)',g.a);o+=t.ch?fld('b',"Child's birth year",g.b)+fld('k',g.t=='edu'?'Course starts at age':'Marriage at age',g.k)+(g.t=='edu'?fld('d','Fees paid over (years)',g.d||1):''):fld('y','Needed in (year)',g.y);}
+return o+fld('i','Price rise (% a year)',g.i)+'</div><details class="ghelp"><summary>How do I pick this amount?</summary><p>'+esc(t.h)+'</p></details><p class="gres"></p></div>';}
 function render(){$('glist').innerHTML=S.g.map(card).join('');$('gadd').hidden=S.g.length>=15;calc();}
 function sipFactor(n,mr,s){var N=n*12,f=0;for(var j=0;j<N;j++)f+=Math.pow(1+s,Math.floor(j/12))*Math.pow(1+mr,N-j);return f;}
-function calc(){var r=num(S.r,0)/100,s=num(S.u,0)/100,mr=Math.pow(1+r,1/12)-1,cards=$('glist').children,rows=[];
-S.g.forEach(function(g,ix){var t=T[g.t]||T.oth,y=Math.round(t.ch?num(g.b,NaN)+num(g.k,NaN):num(g.y,NaN)),n=y-Y0,i=num(g.i,0)/100,a=Math.max(0,num(g.a,0)),R={g:g,ix:ix,y:y,n:n,ok:isFinite(y)&&n>=0&&n<=80};
-if(R.ok){if(g.t=='fi'){var E=a*Math.pow(1+i,n),L=Math.round(Math.min(60,Math.max(1,num(g.l,30)))),rp=Math.pow(1+num(g.p,8)/100,1/12)-1,gi=Math.pow(1+i,1/12)-1,c=0;
-for(var k=0;k<L*12;k++)c+=E*Math.pow((1+gi)/(1+rp),k);R.E=E;R.L=L;R.fv=c;}else R.fv=a*1e5*Math.pow(1+i,n);rows.push(R);}
-var el=cards[ix]&&cards[ix].querySelector('.gres');if(el&&!R.ok)el.innerHTML=isFinite(y)?(n<0?'This year has already passed. Change the year or age.':'Choose a year within 80 years.'):'Fill in the year.';});
-rows.sort(function(p,q){return p.y-q.y||p.ix-q.ix;});
-var bal=Math.max(0,num(S.s,0))*1e5,last=Y0,tot=0,need=0,cov=0,tb='';
-rows.forEach(function(R){bal*=Math.pow(1+r,R.y-last);last=R.y;R.bcf=bal;R.use=Math.min(bal,R.fv);R.gap=R.fv-R.use;bal-=R.use;need+=R.fv;cov+=R.use;
-R.sip=R.gap>0.5&&R.n>=1?R.gap/sipFactor(R.n,mr,s):0;tot+=R.sip;
-var el=cards[R.ix]&&cards[R.ix].querySelector('.gres'),w=R.n==0?'this year':'in '+R.n+' year'+(R.n==1?'':'s');
-var m='Needed in <b>'+R.y+'</b> ('+w+'): <b>'+big(R.fv)+'</b>.';
-if(R.g.t=='fi')m+=' Expenses then: '+inr(R.E)+' a month, paid for '+R.L+' years.';
-m+=R.gap<=0.5?' <span class="gok">Covered by your savings.</span>':(R.n<1?' Too close for a SIP: '+big(R.gap)+' must come from elsewhere.':' Monthly SIP: <b>'+inr(R.sip)+'</b>'+(s>0?' to start':'')+'.');
+var LAST=null;
+function calc(){var r=num(S.r,0)/100,s=Math.max(0,num(S.u,0))/100,mr=Math.pow(1+r,1/12)-1,cards=$('glist').children,goals=[],pays=[];
+S.g.forEach(function(g,ix){var t=T[g.t]||T.oth,i=num(g.i,0)/100,a=Math.max(0,num(g.a,0)),G={g:g,ix:ix,nm:g.n||t.l,fv:0,bcf:null,gap:0,f:0,st:0,y:NaN,y2:NaN,msg:''},y,cnt=1,per;
+if(g.t=='fi'){var m=num(g.m,NaN),k=num(g.k,NaN),e=num(g.e,85);y=Y0+Math.round(k-m);if(!(k>=m))G.msg='Stop-working age must be at least your age now.';}
+else y=Math.round(t.ch?num(g.b,NaN)+num(g.k,NaN):num(g.y,NaN));
+if(g.t=='edu')cnt=Math.round(Math.min(10,Math.max(1,num(g.d,1))));
+var n=y-Y0;G.y=y;G.y2=y+cnt-1;G.n=n;
+if(!G.msg){if(!isFinite(y))G.msg='Fill in the year or ages.';else if(n<0)G.msg='This year has already passed. Change the year or age.';else if(n>80)G.msg='Choose a goal within 80 years.';}
+if(G.msg){var el=cards[ix]&&cards[ix].querySelector('.gres');if(el)el.innerHTML=G.msg;return;}
+if(g.t=='fi'){var E=a*Math.pow(1+i,n),L=Math.round(Math.min(60,Math.max(1,e-k))),rp=Math.pow(1+num(g.p,8)/100,1/12)-1,gi=Math.pow(1+i,1/12)-1,c=0;
+for(var q=0;q<L*12;q++)c+=E*Math.pow((1+gi)/(1+rp),q);G.E=E;G.L=L;G.age=k;pays.push({G:G,y:y,fv:c});}
+else for(var j=0;j<cnt;j++)pays.push({G:G,y:y+j,fv:a*1e5/cnt*Math.pow(1+i,n+j)});
+goals.push(G);});
+pays.sort(function(p,q){return p.y-q.y||p.G.ix-q.G.ix;});
+var bal=Math.max(0,num(S.s,0))*1e5,last=Y0,F=0,ST=0,need=0,cov=0,late=0;
+pays.forEach(function(P){var G=P.G,n=P.y-Y0;bal*=Math.pow(1+r,P.y-last);last=P.y;if(G.bcf===null)G.bcf=bal;var use=Math.min(bal,P.fv),gap=P.fv-use;bal-=use;
+G.fv+=P.fv;G.gap+=gap;need+=P.fv;cov+=use;P.f=P.st=0;
+if(gap>0.5){if(n>=1){P.f=gap/sipFactor(n,mr,0);P.st=gap/sipFactor(n,mr,s);}else late+=gap;}
+G.f+=P.f;G.st+=P.st;F+=P.f;ST+=P.st;});
+var tb='';goals.sort(function(p,q){return p.y-q.y||p.ix-q.ix;});
+goals.forEach(function(G){var el=cards[G.ix]&&cards[G.ix].querySelector('.gres'),w=G.n==0?'this year':'in '+G.n+' year'+(G.n==1?'':'s'),yr=G.y2>G.y?G.y+' to '+G.y2:''+G.y;
+var m=(G.y2>G.y?'Needed from <b>'+yr+'</b> (starting '+w+'): <b>'+big(G.fv)+'</b> in all.':'Needed in <b>'+yr+'</b> ('+w+'): <b>'+big(G.fv)+'</b>.');
+if(G.g.t=='fi')m+=' Expenses then: '+inr(G.E)+' a month, for '+G.L+' years from age '+G.age+'.';
+if(G.gap<=0.5)m+=' <span class="gok">Covered by your savings.</span>';
+else if(G.f<0.5)m+=' Too close for a SIP: '+big(G.gap)+' must come from elsewhere.';
+else m+=' Monthly SIP: <b>'+inr(G.f)+'</b> fixed'+(s>0?', or <b>'+inr(G.st)+'</b> to start with a '+(s*100).toFixed(0)+'% yearly step-up':'')+'.';
 if(el)el.innerHTML=m;
-tb+='<tr><th scope="row">'+esc(R.g.n||T[R.g.t].l)+'</th><td>'+R.y+'</td><td>'+R.n+'</td><td>'+big(R.bcf)+'</td><td>'+big(R.fv)+'</td><td>'+big(R.gap)+'</td><td>'+(R.sip?inr(R.sip):'–')+'</td></tr>';});
-var c=Math.max(0,num(S.c,0)),o;
-if(!rows.length)o='<b>Add a goal to see your plan.</b>';
-else if(tot<0.5)o='<b>Your savings already cover every goal.</b><span>At '+(r*100).toFixed(1)+'% a year, the '+big(Math.max(0,num(S.s,0))*1e5)+' you have invested is enough for all '+rows.length+' goals.</span>';
-else{o='<b>Start a monthly SIP of '+inr(tot)+' today.</b><span>'+rows.length+' goal'+(rows.length==1?'':'s')+' will need '+big(need)+' in total on their dates. Your savings cover '+big(cov)+' of that'+(s>0?'; raise the SIP '+(s*100).toFixed(0)+'% every year':'')+'.</span>';
-if(c>0)o+=c>=tot-0.5?'<span class="gok">Your current SIP of '+inr(c)+' is enough for this plan.</span>':'<span class="gshort">You invest '+inr(c)+' a month now: '+inr(tot-c)+' a month short.</span>';}
-$('gout').innerHTML=o;
-$('gtable').innerHTML=rows.length?'<table class="ctable gtab"><thead><tr><th>Goal</th><th>Year</th><th>Years left</th><th>Savings carried forward</th><th>Needed on the day</th><th>Gap after savings</th><th>Monthly SIP now</th></tr></thead><tbody>'+tb+'</tbody></table>':'';
-var ys=[];rows.forEach(function(R){if(R.sip&&ys.indexOf(R.y)<0)ys.push(R.y);});ys.sort(function(p,q){return p-q;});
-var sh='',from=Y0;ys.forEach(function(y){var act=rows.filter(function(R){return R.sip&&R.y>from;}),a=0;act.forEach(function(R){a+=R.sip;});
-var st=a*Math.pow(1+s,from-Y0),en=a*Math.pow(1+s,y-1-Y0);
-sh+='<tr><th scope="row">'+(from==Y0?'Now':from)+' to '+y+'</th><td>'+inr(st)+(s>0&&y-1>from?' rising to '+inr(en):'')+'</td><td>'+act.map(function(R){return esc(R.g.n||T[R.g.t].l);}).join(', ')+'</td></tr>';from=y;});
-$('gsched').innerHTML=ys.length>1?'<h3>Your SIP falls as goals are reached</h3><div class="tablewrap"><table class="ctable"><thead><tr><th>Years</th><th>Monthly SIP</th><th>Goals being funded</th></tr></thead><tbody>'+sh+'</tbody></table></div>':'';}
+tb+='<tr><th scope="row">'+esc(G.nm)+'</th><td>'+yr+'</td><td>'+G.n+'</td><td>'+big(G.bcf||0)+'</td><td>'+big(G.fv)+'</td><td>'+big(G.gap)+'</td><td>'+(G.f?inr(G.f):'–')+'</td>'+(s>0?'<td>'+(G.st?inr(G.st):'–')+'</td>':'')+'</tr>';});
+var c=Math.max(0,num(S.c,0)),o,sv=big(Math.max(0,num(S.s,0))*1e5);
+if(!goals.length)o='<b>Add a goal to see your plan.</b>';
+else if(F<0.5&&late<0.5)o='<b>Your savings already cover every goal.</b><span>At '+(r*100).toFixed(1)+'% a year, the '+sv+' you have invested is enough for all '+goals.length+' goals.</span>';
+else{o='<span class="gk">Start this month</span><div class="gopts"><div><small>Fixed SIP</small><b>'+inr(F)+'</b><em>a month, the same every year</em></div>'+(s>0?'<div><small>Step-up SIP</small><b>'+inr(ST)+'</b><em>to start, then '+(s*100).toFixed(0)+'% more every year</em></div>':'')+'</div>'
++'<span>'+goals.length+' goal'+(goals.length==1?'':'s')+' will need '+big(need)+' in total on their dates. Your savings cover '+big(cov)+' of that.</span>';
+if(late>0.5)o+='<span class="gshort">'+big(late)+' is needed this year and is not covered by your savings.</span>';
+if(c>0){var nd=s>0?ST:F;o+=c>=nd-0.5?'<span class="gok">Your current SIP of '+inr(c)+' is enough for this plan'+(s>0?' if you step it up every year':'')+'.</span>':'<span class="gshort">You invest '+inr(c)+' a month now: '+inr(nd-c)+' a month short'+(s>0?' of the step-up plan':'')+'.</span>';}}
+$('gout').innerHTML=o;LAST={F:F,ST:ST,s:s,need:need,n:goals.length};
+$('gtable').innerHTML=goals.length?'<table class="ctable gtab"><thead><tr><th>Goal</th><th>Year</th><th>Years left</th><th>Savings carried forward</th><th>Needed on the day</th><th>Gap after savings</th><th>Fixed SIP</th>'+(s>0?'<th>Step-up SIP (start)</th>':'')+'</tr></thead><tbody>'+tb+'</tbody></table>':'';
+var ys=[];pays.forEach(function(P){if(P.f&&ys.indexOf(P.y)<0)ys.push(P.y);});ys.sort(function(p,q){return p-q;});
+var sh='',from=Y0;ys.forEach(function(y){var act=pays.filter(function(P){return P.f&&P.y>from;}),a=0,b=0,nm=[];act.forEach(function(P){a+=P.f;b+=P.st;if(nm.indexOf(P.G.nm)<0)nm.push(P.G.nm);});
+sh+='<tr><th scope="row">'+(from==Y0?'Now':from)+' to '+y+'</th><td>'+inr(a)+'</td>'+(s>0?'<td>'+inr(b*Math.pow(1+s,from-Y0))+(y-1>from?' rising to '+inr(b*Math.pow(1+s,y-1-Y0)):'')+'</td>':'')+'<td>'+nm.map(esc).join(', ')+'</td></tr>';from=y;});
+$('gsched').innerHTML=ys.length>1?'<h3>Your SIP falls as goals are reached</h3><div class="tablewrap"><table class="ctable"><thead><tr><th>Years</th><th>Fixed SIP</th>'+(s>0?'<th>Step-up SIP</th>':'')+'<th>Goals being funded</th></tr></thead><tbody>'+sh+'</tbody></table></div>':'';}
 function top(){$('gs').value=S.s;$('gr').value=S.r;$('gu').value=S.u;$('gc').value=S.c||'';}
 [['gs','s'],['gr','r'],['gu','u'],['gc','c']].forEach(function(p){$(p[0]).addEventListener('input',function(){S[p[1]]=this.value;calc();});});
 $('glist').addEventListener('input',function(e){var k=e.target.getAttribute('data-k'),cd=e.target.closest('.gcard');if(!k||!cd)return;var g=S.g[+cd.getAttribute('data-ix')];
-if(k=='t'){var t=T[e.target.value];g.t=e.target.value;g.a=t.a;g.i=t.i;if(t.ch){g.b=g.b||Y0;g.k=t.age;}else g.y=g.y||Y0+(g.t=='fi'?20:5);if(g.t=='fi'){g.l=g.l||30;g.p=g.p||8;}
+if(k=='t'){var t=T[e.target.value];g.t=e.target.value;g.a=t.a;g.i=t.i;if(t.ch){g.b=g.b||Y0;g.k=t.age;if(g.t=='edu')g.d=g.d||1;}else if(g.t=='fi'){g.m=g.m||32;g.k=55;g.e=g.e||85;g.p=g.p||8;}else g.y=g.y||Y0+5;
 if(!g.n||TY.some(function(x){return T[x].l==g.n;}))g.n=t.l;render();return;}
 g[k]=e.target.value;calc();});
 $('glist').addEventListener('click',function(e){if(!e.target.closest('[data-del]'))return;S.g.splice(+e.target.closest('.gcard').getAttribute('data-ix'),1);render();});
 $('gadd').addEventListener('click',function(){S.g.push({t:'oth',n:'New goal',a:10,y:Y0+5,i:6});render();var l=$('glist').lastElementChild;if(l)l.querySelector('[data-k=n]').focus();});
 $('greset').addEventListener('click',function(){S=dflt();top();render();history.replaceState(null,'',location.pathname);});
-$('gcopy').addEventListener('click',function(){var b=this,u=location.origin+location.pathname+'#p='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(S)))));
-history.replaceState(null,'',u);function ok(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link to this plan';},2000);}
+function link(){var u=location.origin+location.pathname+'#p='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(S)))));history.replaceState(null,'',u);return u;}
+function msg(){var L=LAST||{};return 'Our family goal plan: '+(L.n||0)+' goals, '+big(L.need||0)+' needed in all. Monthly SIP: '+inr(L.F||0)+' fixed'+(L.s>0?', or '+inr(L.ST||0)+' rising '+(L.s*100).toFixed(0)+'% a year':'')+'. See the details and change the numbers:';}
+$('gwa').addEventListener('click',function(){window.open('https://wa.me/?text='+encodeURIComponent(msg()+' '+link()),'_blank','noopener');});
+if(navigator.share){$('gshare').hidden=false;$('gshare').addEventListener('click',function(){navigator.share({title:'Our family goal plan',text:msg(),url:link()}).catch(function(){});});}
+$('gcopy').addEventListener('click',function(){var b=this,u=link();function ok(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link';},2000);}
 if(navigator.clipboard)navigator.clipboard.writeText(u).then(ok,function(){prompt('Copy this link:',u);});else prompt('Copy this link:',u);});
 top();render();})();'''
 
@@ -860,6 +882,7 @@ o.innerHTML='<b>CAGR: about '+(r*100).toFixed(1)+'% a year.</b><span>The value '
     goal_rate_rows = ''.join(f'<tr><th scope="row">{E(a)}</th><td>{b}</td></tr>' for a, b in goal_rates)
     goal_faqs = [
         ('How much SIP do I need for my child\'s education?', f'Start with today\'s cost of the course, then grow it by education inflation until the year your child will start it. For example, a ₹1 crore commercial pilot course for a child born in 2024 who starts at 18 would cost about {lakh_cr(ex_fv)} in {2024 + 18} at 10% a year. At a 10% return, that needs a monthly SIP of about {inr(ex_sip)} from {gy}, or about {inr(ex_sip_up)} to begin with if you raise the SIP by 10% every year.'),
+        ('How do I decide what my child\'s wedding will cost?', 'Imagine your child is getting married today. Think of a wedding you attended whose scale and budget you liked, and estimate what a wedding like that would cost this year, including the venue, food, clothes, jewellery and gifts. Enter that amount; the planner adds the price rise until the wedding year.'),
         ('Why does the planner fund the earliest goal first?', 'The money you have already saved is used for goals in date order, the way most families spend it. Whatever is left after one goal stays invested and carries forward to the next. Any gap is covered by a separate SIP that runs only until that goal\'s year.'),
         ('How is the retirement or financial independence amount worked out?', 'Your monthly expenses today are grown by inflation until the year you want to stop working. The planner then finds the fund that can pay that amount every month, rising with inflation, for as many years as you choose, while the rest of the money keeps earning the return you set for those years.'),
         ('What is a step-up SIP?', 'A SIP that you raise by a fixed percentage every year, usually in line with your salary. Starting smaller and stepping up 10% a year can reach the same goal with a much lower first instalment.'),
@@ -872,19 +895,19 @@ o.innerHTML='<b>CAGR: about '+(r*100).toFixed(1)+'% a year.</b><span>The value '
 <p class="mby">By <a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a>, accounting professional</p>
 <form class="gcalc" id="calc" onsubmit="return false">
 <fieldset class="gset"><legend>Your money today</legend>
-<label>Savings already invested (₹ lakh)<input id="gs" type="number" inputmode="decimal" min="0" step="any"></label>
-<label>Expected return (% a year)<input id="gr" type="number" inputmode="decimal" min="0" step="any"></label>
-<label>Raise SIP every year by (%)<input id="gu" type="number" inputmode="decimal" min="0" step="any"></label>
-<label>Monthly SIP you already do (₹)<input id="gc" type="number" inputmode="decimal" min="0" step="any"></label>
+<label>Savings already invested (₹ lakh)<small>Mutual funds, shares, PF or FDs you will use for these goals</small><input id="gs" type="number" inputmode="decimal" min="0" step="any"></label>
+<label>Expected return (% a year)<small>What you expect your investments to earn</small><input id="gr" type="number" inputmode="decimal" min="0" step="any"></label>
+<label>Step-up: raise SIP every year by (%)<small>Usually in line with your salary rise. Enter 0 for a fixed SIP only.</small><input id="gu" type="number" inputmode="decimal" min="0" step="any"></label>
+<label>Monthly SIP you already do (₹)<small>Optional, to check if it is enough</small><input id="gc" type="number" inputmode="decimal" min="0" step="any"></label>
 </fieldset>
 <h2>Your goals</h2>
-<p class="ghint">Enter each cost as it would be <b>today</b>. For a child's goal, enter the child's birth year (or the expected one) and the age the money is needed.</p>
+<p class="ghint">Enter each cost as it would be <b>today</b>. For a child's goal, enter the child's birth year (or the expected one, if the child is not born yet) and the age when the money is needed. Not sure what amount to enter? Open <b>How do I pick this amount?</b> under each goal.</p>
 <div id="glist"></div>
 <button type="button" id="gadd" class="gbtn">+ Add a goal</button>
 <output id="gout" aria-live="polite"></output>
 <div id="gtable" class="tablewrap"></div>
 <div id="gsched"></div>
-<div class="gact"><button type="button" id="gcopy" class="gbtn">Copy link to this plan</button><button type="button" id="greset" class="gbtn ghost">Start again</button></div>
+<h3>Share this plan with your family</h3><p class="ghint">The link opens this planner with your goals filled in, so your spouse or parents can see it and try their own numbers.</p><div class="gact"><button type="button" id="gwa" class="gbtn gwa">Share on WhatsApp</button><button type="button" id="gshare" class="gbtn" hidden>Share…</button><button type="button" id="gcopy" class="gbtn ghost">Copy link</button><button type="button" id="greset" class="gbtn ghost">Start again</button></div>
 <noscript><p>This planner needs JavaScript turned on.</p></noscript>
 </form>
 <script>{GOAL_JS}</script>
@@ -893,6 +916,9 @@ o.innerHTML='<b>CAGR: about '+(r*100).toFixed(1)+'% a year.</b><span>The value '
 <li><b>Cost on the day.</b> Each goal's cost today is grown by its own price rise until the year it is needed: cost today × (1 + price rise)<sup>years left</sup>.</li>
 <li><b>Your savings go first.</b> The money you have already invested keeps earning your expected return and is used for goals in date order. What is left after one goal carries forward to the next.</li>
 <li><b>A SIP for each gap.</b> Whatever your savings cannot cover is filled by a monthly SIP that runs from now until that goal's year. When a goal is reached, its SIP stops, so your total SIP falls over time.</li>
+<li><b>Two ways to pay.</b> A <b>fixed SIP</b> stays the same every month until the goal. A <b>step-up SIP</b> starts lower and rises by the percentage you choose every year, which suits a growing salary. Both reach the same amount.</li>
+<li><b>Fees over several years.</b> For a course paid over, say, four years, the fees are split evenly across those years and each year's share grows with inflation until it is due.</li>
+<li><b>Retirement.</b> Your monthly expenses today are grown by inflation until the age you stop working. The planner then works out the fund that pays those expenses, still rising with inflation, until the age you plan for.</li>
 </ol>
 <h2>Example: a pilot course and a ₹1 crore price tag</h2>
 <p>A commercial pilot course costs about ₹1 crore today. For a child born in 2024 who starts training after Class 12, at 18, the money is needed in {2024 + 18}, {ex_n} years from now. If course fees rise 10% a year, the same course will cost about <b>{lakh_cr(ex_fv)}</b> by then.</p>
