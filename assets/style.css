@@ -160,6 +160,7 @@ section.block{padding:8px 0 40px}
 .answer{margin:18px 0 0;padding:16px 20px;background:var(--mist);border-left:4px solid var(--vio);border-radius:var(--r-sm)}
 .answer b{display:block;font:700 13px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--vio-d);margin-bottom:8px}
 .answer p{margin:0;font-size:18px;line-height:1.55;color:var(--ink)}
+.answer p.aq{font:700 17px/1.4 var(--sans);margin:0 0 6px}
 .byline{display:flex;align-items:center;gap:12px;margin:26px 0 0;font-size:14px;color:var(--ink2)}
 .byline img{width:42px;height:42px;border-radius:50%;background:var(--sun)}
 .byline b{color:var(--ink);display:block;font-size:15px}

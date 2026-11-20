@@ -485,7 +485,8 @@ def story_page(s, prev_s, next_s, related):
           (f'<a class="next" href="/stories/{next_s["slug"]}/"><span>Next story</span>{E(next_s["title"])}</a>' if next_s else '<span></span>') + '</nav>'
     rel_html = ('<section class="related block"><div class="shead"><h2>Keep reading</h2><a class="all" href="/stories/">All stories</a></div>' + grid(related) + '</section>') if related else ''
     upd = f'<span>Updated {fmt_date(mod)}</span>' if mod != s['date'] else ''
-    answer_html = f'<div class="answer"><b>Quick answer</b><p>{E(s["answer"])}</p></div>' if s.get('answer') else ''
+    answer_html = (f'<div class="answer"><b>Quick answer</b>' + (f'<p class="aq">{E(s["answer_q"])}</p>' if s.get('answer_q') else '')
+                   + f'<p>{E(s["answer"])}</p></div>') if s.get('answer') else ''
     body = f'''<main class="wrap">{crumbs_html([("Home", "/"), ("Stories", "/stories/"), (cname, f"/category/{c}/"), (s["title"], url)])}
 <article>
 <header class="story-head">{kicker(c, True)}<h1>{E(s["title"])}</h1><p class="lead">{E(s["summary"])}</p>{answer_html}
