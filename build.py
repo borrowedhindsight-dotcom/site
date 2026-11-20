@@ -47,6 +47,8 @@ MIN_CAT_INDEX = 6   # category pages with fewer stories stay on the site but are
 BYLINE = 'Manisha Aggarwal'   # owner and author: shown on every story, in Article schema and on the author page
 AUTHOR_PATH = '/author/manisha-aggarwal/'
 CALC_PATH = '/tools/rupee-inflation-calculator/'
+CAGR_PATH = '/tools/cagr-calculator/'
+TOOLS_PATH = '/tools/'
 AUTHOR_BIO = ('Manisha Aggarwal is an accounting professional based in New Delhi, India. Manisha runs Borrowed Hindsight as a hobby: '
               'to keep learning, to spread awareness, and to share true stories that motivate people to start, or start again.')
 
@@ -140,8 +142,8 @@ def nav_html():
     items = ''.join(f'<a href="/category/{c}/"><i class="dot" style="--c:{v[2]}"></i>{E(v[0])}<small>{COUNTS.get(c, 0)}</small></a>'
                     for c, v in CATS.items() if c in LIVE_CATS)
     return (f'<nav class="nav" aria-label="Main"><a class="hide-m" href="/stories/">Stories</a>'
-            f'<details><summary>Categories</summary><div class="menu"><a href="/stories/"><i class="dot" style="--c:#FFD60A"></i>All stories<small>{sum(COUNTS.values())}</small></a>{items}<a class="show-m" href="{CALC_PATH}">Inflation calculator</a><a class="show-m" href="/about/">About</a></div></details>'
-            f'<a class="hide-m" href="{CALC_PATH}">Calculator</a><a class="hide-m" href="/about/">About</a>'
+            f'<details><summary>Categories</summary><div class="menu"><a href="/stories/"><i class="dot" style="--c:#FFD60A"></i>All stories<small>{sum(COUNTS.values())}</small></a>{items}<a class="show-m" href="{TOOLS_PATH}">Calculators</a><a class="show-m" href="/about/">About</a></div></details>'
+            f'<a class="hide-m" href="{TOOLS_PATH}">Calculators</a><a class="hide-m" href="/about/">About</a>'
             f'<a class="search" href="/search/" aria-label="Search stories">{SEARCH_ICON}</a>'
             + (f'<a class="cta hide-m" href="#newsletter">Newsletter</a>' if NEWSLETTER else '') + '</nav>')
 
@@ -461,7 +463,7 @@ def story_page(s, prev_s, next_s, related):
                       + ''.join(f'<p>{para(x)}</p>' for x in money.get('paras', []))
                       + (f'<table><tbody>{rows}</tbody></table>' if rows else '')
                       + (f'<p class="mnote">{E(money["note"])}</p>' if money.get('note') else '')
-                      + f'<p class="mtry">Try it yourself: <a href="{CALC_PATH}">what is any rupee amount from 1960 to 2025 worth today?</a></p></section>')
+                      + f'<p class="mtry">Try it yourself: <a href="{CALC_PATH}">inflation calculator</a> · <a href="{CAGR_PATH}">growth-rate (CAGR) calculator</a></p></section>')
     photo = s.get('photo')
     photo_html = (f'<figure class="photo"><img src="{E(photo["url"])}" alt="{E(s["title"])}" loading="lazy"><figcaption>Photo: '
                   f'<a href="{E(photo["page"])}" rel="nofollow noopener">{E(photo.get("credit") or "Wikimedia Commons")}</a>, {E(photo.get("license", ""))}, via Wikimedia Commons</figcaption></figure>') if photo else ''
@@ -699,11 +701,71 @@ o.innerHTML='<b>₹'+f.format(a)+' in '+x+' is worth about ₹'+f.format(v)+' in
 <p class="mnote">Source: <a href="{cpi_d['source_url']}" rel="noopener">{E(cpi_d['source'])}</a>, retrieved {cpi_d['retrieved']}.</p>"""
     calc_desc = f'Free rupee inflation calculator for India: see what any amount from {y0} to {y1} is worth today, using official consumer price data. ₹100 in 1990 = {inr(v1990)} in {y1}.'
     write(CALC_PATH.strip('/') + '/index.html', page(f'Rupee inflation calculator: value of ₹ from {y0} to {y1}', calc_desc,
-          f'<main class="wrap narrow legal calcpage">{crumbs_html([("Home", "/"), ("Rupee inflation calculator", CALC_PATH)])}{calc_body}</main>', CALC_PATH,
+          f'<main class="wrap narrow legal calcpage">{crumbs_html([("Home", "/"), ("Calculators", TOOLS_PATH), ("Rupee inflation calculator", CALC_PATH)])}{calc_body}</main>', CALC_PATH,
           ld=[{'@context': 'https://schema.org', '@type': 'WebApplication', 'name': 'Rupee inflation calculator', 'url': SITE + CALC_PATH, 'applicationCategory': 'FinanceApplication',
                'operatingSystem': 'Any', 'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'INR'}, 'author': PERSON, 'publisher': ORG, 'description': calc_desc},
               {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faqs]},
-              crumbs([('Home', '/'), ('Rupee inflation calculator', CALC_PATH)])]))
+              crumbs([('Home', '/'), ('Calculators', TOOLS_PATH), ('Rupee inflation calculator', CALC_PATH)])]))
+
+    # ---------- CAGR calculator ----------
+    def pct(x): return f'{x * 100:.1f}%'
+    ex = []
+    if 'lijjat-papad-seven-women-80-rupees-story' in lj: ex.append(('/stories/lijjat-papad-seven-women-80-rupees-story/', 'Lijjat Papad', 'sales from just over ₹6,000 in its first year to about ₹1,600 crore', 6000, 1600e7, 63))
+    if 'how-infosys-started-with-10000-rupees-sudha-murty-1981' in lj: ex.append(('/stories/how-infosys-started-with-10000-rupees-sudha-murty-1981/', 'Infosys', 'revenue from US$100 million in 1999 to about US$20 billion', 100e6, 20e9, 26))
+    ex_html = ''.join(f'<li><a href="{u}">{E(n)}</a>: {E(d)} over {y} years is about <b>{((b / a) ** (1 / y) - 1) * 100:.0f}% a year</b>.</li>' for u, n, d, a, b, y in ex)
+    grid_rows = ''.join('<tr><th scope="row">' + f'{r}% a year' + '</th>' + ''.join(f'<td>{inr(100000 * (1 + r / 100) ** n)}</td>' for n in (5, 10, 20, 30)) + '</tr>' for r in (6, 8, 10, 12, 15, 20))
+    cagr_faqs = [
+        ('What is CAGR?', 'CAGR, or compound annual growth rate, is the steady yearly rate that would take a value from its starting amount to its ending amount over a given number of years. It smooths out good and bad years into one average.'),
+        ('What is the CAGR formula?', 'CAGR = (ending value ÷ starting value)^(1 ÷ number of years) − 1. For example, ₹1 lakh growing to ₹2 lakh in 5 years is (2)^(1/5) − 1, about 14.9% a year.'),
+        ('How is CAGR different from average return?', 'A simple average adds each year\'s growth and divides by the number of years, which overstates results when growth goes up and down. CAGR uses only the start, the end and the time, so it shows the rate that really connects them.'),
+        ('How long does it take money to double?', 'A quick rule is to divide 72 by the yearly growth rate. At 8% a year, money roughly doubles in 9 years; at 12%, in about 6 years.'),
+        ('Can CAGR predict future growth?', 'No. CAGR describes the past. It says nothing about what will happen next, and it hides the ups and downs along the way. This calculator is for education, not investment advice.'),
+    ]
+    cagr_faq_c = ''.join(f'<h3>{E(q)}</h3><p>{E(a)}</p>' for q, a in cagr_faqs)
+    v0 = ((200000 / 100000) ** (1 / 5) - 1)
+    cagr_body = f"""<h1>CAGR calculator</h1>
+<p class="lead">Find the average yearly growth rate between a starting value and an ending value.</p>
+<p class="mby">By <a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a>, accounting professional</p>
+<form class="calc" id="calc" onsubmit="return false">
+<label>Starting value (₹)<input id="sv" type="number" inputmode="decimal" min="0" step="any" value="100000"></label>
+<label>Ending value (₹)<input id="ev" type="number" inputmode="decimal" min="0" step="any" value="200000"></label>
+<label>Number of years<input id="ny" type="number" inputmode="decimal" min="0" step="any" value="5"></label>
+<output id="out" for="sv ev ny" aria-live="polite"><b>CAGR: about {pct(v0)} a year.</b><span>The value grew 2.0 times in 5 years.</span></output>
+</form>
+<script>(function(){{function g(i){{return document.getElementById(i);}}
+function run(){{var a=parseFloat(g('sv').value),b=parseFloat(g('ev').value),n=parseFloat(g('ny').value),o=g('out');
+if(!(a>0)||!(b>=0)||!(n>0)){{o.innerHTML='<b>Enter a starting value above 0, an ending value and the number of years.</b>';return;}}
+var r=Math.pow(b/a,1/n)-1,m=b/a;
+o.innerHTML='<b>CAGR: about '+(r*100).toFixed(1)+'% a year.</b><span>The value '+(m>=1?'grew ':'shrank to ')+(m<10?m.toFixed(2):new Intl.NumberFormat('en-IN',{{maximumFractionDigits:0}}).format(m))+' times'+(m>=1?'':' its start')+' in '+n+' year'+(n==1?'':'s')+'.</span>';}}
+['sv','ev','ny'].forEach(function(i){{g(i).addEventListener('input',run);}});}})();</script>
+<h2>What ₹1 lakh grows to at a steady rate</h2>
+<div class="tablewrap"><table class="ctable"><thead><tr><th>Growth rate</th><th>5 years</th><th>10 years</th><th>20 years</th><th>30 years</th></tr></thead><tbody>{grid_rows}</tbody></table></div>
+<h2>How CAGR works</h2>
+<p>CAGR is the single yearly rate that would turn your starting value into your ending value over the years you enter, if growth had been perfectly steady. The formula is: <b>(ending value ÷ starting value)<sup>1 ÷ years</sup> − 1</b>.</p>
+<p>Real growth is never that smooth. A business might grow 40% one year and shrink the next. CAGR ignores that path and asks only one question: what steady rate connects the start and the end? That makes it the fairest way to compare growth over different lengths of time.</p>
+<h2>Examples from our stories</h2><ul>{ex_html}</ul>
+<p>Compare those with the table above. Even 15% a year turns ₹1 lakh into about ₹66 lakh over 30 years, which is why decades of steady growth matter more than any single good year.</p>
+<h2>Growth and inflation</h2>
+<p>A CAGR in rupees includes inflation. To see real growth, compare it with the rise in prices over the same years using our <a href="{CALC_PATH}">rupee inflation calculator</a>. Indian prices rose about {avg * 100:.1f}% a year on average between {y0} and {y1}.</p>
+<h2>Questions people ask</h2>{cagr_faq_c}
+<p class="mnote">General education, not investment advice. Past growth does not predict future results.</p>"""
+    cagr_desc = 'Free CAGR calculator: find the compound annual growth rate between any starting and ending value, with the formula, a growth table and real examples.'
+    write(CAGR_PATH.strip('/') + '/index.html', page('CAGR calculator: compound annual growth rate, with examples', cagr_desc,
+          f'<main class="wrap narrow legal calcpage">{crumbs_html([("Home", "/"), ("Calculators", TOOLS_PATH), ("CAGR calculator", CAGR_PATH)])}{cagr_body}</main>', CAGR_PATH,
+          ld=[{'@context': 'https://schema.org', '@type': 'WebApplication', 'name': 'CAGR calculator', 'url': SITE + CAGR_PATH, 'applicationCategory': 'FinanceApplication',
+               'operatingSystem': 'Any', 'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'INR'}, 'author': PERSON, 'publisher': ORG, 'description': cagr_desc},
+              {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in cagr_faqs]},
+              crumbs([('Home', '/'), ('Calculators', TOOLS_PATH), ('CAGR calculator', CAGR_PATH)])]))
+
+    # ---------- tools index ----------
+    tools_body = f"""<h1>Money calculators</h1>
+<p class="lead">Simple, free calculators that put the numbers in our stories into perspective.</p>
+<p class="mby">By <a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a>, accounting professional</p>
+<h2><a href="{CALC_PATH}">Rupee inflation calculator</a></h2><p>What is a rupee amount from any year between {y0} and {y1} worth in another year? Uses the World Bank consumer price index for India.</p>
+<h2><a href="{CAGR_PATH}">CAGR calculator</a></h2><p>Find the average yearly growth rate between a starting value and an ending value, with a growth table and examples.</p>"""
+    write(TOOLS_PATH.strip('/') + '/index.html', page('Money calculators: inflation and CAGR | Borrowed Hindsight', 'Free money calculators from Borrowed Hindsight: a rupee inflation calculator (1960 to 2025) and a CAGR growth-rate calculator.',
+          f'<main class="wrap narrow legal calcpage">{crumbs_html([("Home", "/"), ("Calculators", TOOLS_PATH)])}{tools_body}</main>', TOOLS_PATH,
+          ld=[crumbs([('Home', '/'), ('Calculators', TOOLS_PATH)])]))
 
     n_auth = len(stories)
     author = f'''<h1>Manisha Aggarwal</h1>
@@ -761,7 +823,7 @@ o.innerHTML='<b>₹'+f.format(a)+' in '+x+' is worth about ₹'+f.format(v)+' in
     # ---------- feeds and machine-readable files ----------
     newest = stories[0]['date'] if stories else TODAY
     urls = [('/', newest, '1.0'), ('/stories/', newest, '0.9'), ('/about/', None, '0.5'), ('/contact/', None, '0.4'), ('/editorial-standards/', None, '0.4'),
-            ('/privacy/', None, '0.2'), ('/terms/', None, '0.2'), (AUTHOR_PATH, None, '0.4'), (CALC_PATH, None, '0.8')] + \
+            ('/privacy/', None, '0.2'), ('/terms/', None, '0.2'), (AUTHOR_PATH, None, '0.4'), (CALC_PATH, None, '0.8'), (CAGR_PATH, None, '0.8'), (TOOLS_PATH, None, '0.6')] + \
            [(f'/category/{c}/', by_cat[c][0]['date'], '0.7') for c in CATS if len(by_cat[c]) >= MIN_CAT_INDEX] + \
            [(f'/stories/{s["slug"]}/', s.get('updated', s['date']), '0.8') for s in stories]
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' + ''.join(
@@ -785,7 +847,8 @@ o.innerHTML='<b>₹'+f.format(a)+' in '+x+' is worth about ₹'+f.format(v)+' in
     llms = [f'# Borrowed Hindsight', '',
             '> True, sourced stories of people who started with almost nothing (founders, late starters, comebacks, record-breakers), each ending with one practical lesson ("the borrowed hindsight"). Every number is checked in at least two sources and every story lists its sources.', '',
             f'Owner and author: Manisha Aggarwal, accounting professional, New Delhi, India ({SITE}{AUTHOR_PATH}). Contact: {CONTACT_EMAIL}. Editorial standards: {SITE}/editorial-standards/', '',
-             '## Tools', '', f'- [Rupee inflation calculator]({SITE}{CALC_PATH}): what any rupee amount from 1960 to 2025 is worth in another year, using the World Bank consumer price index for India.', '']
+             '## Tools', '', f'- [Rupee inflation calculator]({SITE}{CALC_PATH}): what any rupee amount from 1960 to 2025 is worth in another year, using the World Bank consumer price index for India.',
+             f'- [CAGR calculator]({SITE}{CAGR_PATH}): the average yearly growth rate between a starting and ending value, with examples from our stories.', '']
     for c, v in CATS.items():
         if by_cat[c]:
             llms += [f'## {v[0]}', '', v[1], '']
