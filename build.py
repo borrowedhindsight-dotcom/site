@@ -57,13 +57,17 @@ AUTHOR_BIO = ('Manisha Aggarwal is an accounting professional based in New Delhi
 GOAL_JS = r'''(function(){
 var Y0=new Date().getFullYear(),KEY='bh-goal-plan-v2',W=document.getElementById('gw');if(!W)return;
 var T={home:{e:'🏠',l:'Buy a home',d:'A place that is yours',i:7,a:80},
-edu:{e:'🎓',l:"Children's education",d:'The course they dream of',i:10,a:50,age:18,ch:1},
+edu:{e:'🎓',l:"Children's higher education",d:'The course they dream of',i:10,a:50,age:18,ch:1},
+sch:{e:'🏫',l:"Children's school fees",d:'Every year until Class 12',i:10,a:1.5,age:3,ch:1},
 mar:{e:'💍',l:"Children's wedding",d:'Their big day, your way',i:7,a:30,age:25,ch:1},
 car:{e:'🚗',l:'Buy a car',d:'Paid for, not on EMI',i:6,a:12},
 fi:{e:'🌴',l:'Financial freedom',d:'Work because you want to',i:6,a:100000},
-oth:{e:'✨',l:'Something else',d:'A world trip, a business, a parent\'s care',i:6,a:10}};
-var ORDER=['home','edu','mar','car','fi','oth'];
-function fresh(){return {v:2,at:0,name:'',age:30,kids:[],sel:{},g:[],s:0,c:0,r:10,u:10};}
+par:{e:'🤲',l:"Parents' care",d:'Their health and comfort',i:8,a:25000},
+trip:{e:'✈️',l:'Dream trip',d:'The one you keep postponing',i:6,a:8},
+biz:{e:'🚀',l:'Start a business',d:'Capital to back yourself',i:6,a:25},
+oth:{e:'✨',l:'Something else',d:'Anything that matters to you',i:6,a:10}};
+var ORDER=['home','edu','sch','mar','car','fi','par','trip','biz','oth'];
+function fresh(){return {v:2,at:0,name:'',age:30,kids:[],sel:{},g:[],s:0,c:0,cap:'',r:10,u:10};}
 var S=fresh();
 try{var h=location.hash.match(/^#p=(.+)$/);if(h){var o=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(h[1])))));if(o&&o.v==2&&o.g){S=o;S.at=steps().length-1;}}
 else{var ls=JSON.parse(localStorage.getItem(KEY)||'null');if(ls&&ls.v==2)S=ls;}}catch(e){}
@@ -71,143 +75,223 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function num(v,d){v=parseFloat(v);return isFinite(v)?v:d;}
 function inr(x){return '₹'+Math.round(x).toLocaleString('en-IN');}
 function big(x){var a=Math.abs(x);if(a>=1e7)return '₹'+(a/1e7).toFixed(2)+' crore';if(a>=1e5)return '₹'+(a/1e5).toFixed(2)+' lakh';return inr(a);}
+function lk(x){return big(num(x,0)*1e5);}
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function age(){return Math.round(num(S.age,30));}
 function kid(g){return S.kids[g.c]||{n:'',b:Y0};}
 function kname(g){var k=kid(g);return k.n||('Child '+(g.c+1));}
-function gname(g){if(g.t=='edu')return kname(g)+'’s education';if(g.t=='mar')return kname(g)+'’s wedding';if(g.t=='fi')return 'Financial freedom at '+Math.round(num(g.k,50));return g.n||T[g.t].l;}
+function gname(g){var t=g.t;if(t=='edu')return kname(g)+'’s '+(g.n?g.n:'higher education');if(t=='sch')return kname(g)+'’s school fees';if(t=='mar')return kname(g)+'’s wedding';if(t=='fi')return 'Financial freedom at '+Math.round(num(g.k,50));return g.n||T[t].l;}
 function steps(){var a=['you','kids','pick'];S.g.forEach(function(g,i){a.push(i);});a.push('money','plan');return a;}
-function sync(){var out=[];S.kids=S.kids.filter(function(k){return k;});
+function newGoal(t){var x=T[t];if(t=='fi')return {t:t,a:x.a,k:Math.max(50,age()+5),e:85,p:8,i:x.i,rb:'',rc:'',rr:8,pn:''};
+if(t=='par')return {t:t,a:x.a,y:Y0+5,d:15,i:x.i,n:''};return {t:t,a:x.a,y:Y0+5,pp:100,lr:8.5,lt:20,i:x.i,n:''};}
+function sync(){var out=[];
 ORDER.forEach(function(t){if(!S.sel[t])return;var ex=S.g.filter(function(g){return g.t==t;});
-if(T[t].ch)S.kids.forEach(function(k,ci){var f=ex.filter(function(g){return g.c==ci;})[0];out.push(f||{t:t,c:ci,a:T[t].a,k:T[t].age,d:1,i:T[t].i,n:''});});
-else if(ex.length)out=out.concat(ex);
-else out.push(t=='fi'?{t:t,a:T.fi.a,k:Math.max(50,age()+5),e:85,p:8,i:6}:{t:t,a:T[t].a,y:Y0+5,pp:100,i:T[t].i,n:''});});S.g=out;}
+if(T[t].ch)S.kids.forEach(function(k,ci){var f=ex.filter(function(g){return g.c==ci;})[0];out.push(f||{t:t,c:ci,a:T[t].a,k:T[t].age,k2:17,d:1,i:T[t].i,n:''});});
+else if(ex.length)out=out.concat(ex);else out.push(newGoal(t));});S.g=out;}
 /* ---- maths ---- */
 function sipFactor(n,mr,s){var N=n*12,f=0;for(var j=0;j<N;j++)f+=Math.pow(1+s,Math.floor(j/12))*Math.pow(1+mr,N-j);return f;}
-function rates(){var r=num(S.r,10)/100;return {r:r,s:Math.max(0,num(S.u,0))/100,mr:Math.pow(1+r,1/12)-1};}
-function pays(g){var y,cnt=1,i=num(g.i,0)/100,a=Math.max(0,num(g.a,0)),x={P:[]};
-if(g.t=='fi')y=Y0+Math.round(num(g.k,50))-age();else if(T[g.t].ch)y=Math.round(num(kid(g).b,Y0)+num(g.k,18));else y=Math.round(num(g.y,Y0+5));
-if(g.t=='edu')cnt=Math.round(Math.min(10,Math.max(1,num(g.d,1))));
-var n=y-Y0;x.y=y;x.y2=y+cnt-1;x.n=n;
+function mrate(p){return Math.pow(1+p/100,1/12)-1;}
+function gr(g){return num(g.r,num(S.r,10));}
+function emi(P,rate,yrs){var m=rate/1200,N=Math.round(yrs*12);if(N<1)return 0;return m>0?P*m/(1-Math.pow(1+m,-N)):P/N;}
+function pays(g){var t=g.t,y,i=num(g.i,0)/100,a=Math.max(0,num(g.a,0)),x={P:[]},j,n;
+if(t=='fi')y=Y0+Math.round(num(g.k,50))-age();
+else if(t=='sch'){var b=num(kid(g).b,Y0),k1=Math.round(num(g.k,3)),k2=Math.round(num(g.k2,17));for(j=k1;j<=k2&&j-k1<30;j++){n=b+j-Y0;if(n>=1&&n<=80)x.P.push({y:b+j,fv:a*1e5*Math.pow(1+i,n)});}
+if(!x.P.length){x.err='All of these school years are this year or already past. This year’s fees come from your income.';return x;}
+x.y=x.P[0].y;x.y2=x.P[x.P.length-1].y;x.n=x.y-Y0;x.cnt=x.P.length;return x;}
+else if(T[t].ch)y=Math.round(num(kid(g).b,Y0)+num(g.k,18));else y=Math.round(num(g.y,Y0+5));
+var cnt=t=='edu'?Math.round(Math.min(10,Math.max(1,num(g.d,1)))):t=='par'?Math.round(Math.min(40,Math.max(1,num(g.d,15)))):1;
+n=y-Y0;x.y=y;x.y2=y+cnt-1;x.n=n;x.cnt=cnt;
 if(!isFinite(y)){x.err='Fill in when you need this.';return x;}if(n<0){x.err='That date has already passed. Pick a later one.';return x;}if(n>80){x.err='Pick a date within the next 80 years.';return x;}
-if(g.t=='fi'){var E=a*Math.pow(1+i,n),L=Math.round(Math.min(60,Math.max(1,num(g.e,85)-num(g.k,50)))),rp=Math.pow(1+num(g.p,8)/100,1/12)-1,gi=Math.pow(1+i,1/12)-1,c=0;
-for(var q=0;q<L*12;q++)c+=E*Math.pow((1+gi)/(1+rp),q);x.E=E;x.L=L;x.P.push({y:y,fv:c});}
-else{var pp=g.t=='home'?Math.min(100,Math.max(0,num(g.pp,100)))/100:1;for(var j=0;j<cnt;j++)x.P.push({y:y+j,fv:a*1e5*pp/cnt*Math.pow(1+i,n+j)});}
+if(t=='fi'){var net=Math.max(0,a-Math.max(0,num(g.pn,0))),E=net*Math.pow(1+i,n),L=Math.round(Math.min(60,Math.max(1,num(g.e,85)-num(g.k,50)))),rp=mrate(num(g.p,8)),gi=Math.pow(1+i,1/12)-1,c=0;
+for(var q=0;q<L*12;q++)c+=E*Math.pow((1+gi)/(1+rp),q);
+var rr=num(g.rr,8),ret=Math.max(0,num(g.rb,0))*1e5*Math.pow(1+rr/100,n)+(n>=1?Math.max(0,num(g.rc,0))*sipFactor(n,mrate(rr),0):0);
+x.E=E;x.Eall=a*Math.pow(1+i,n);x.L=L;x.corpus=c;x.ret=ret;x.P.push({y:y,fv:Math.max(0,c-ret)});}
+else if(t=='par')for(j=0;j<cnt;j++)x.P.push({y:y+j,fv:a*12*Math.pow(1+i,n+j)});
+else{var pp=t=='home'?Math.min(100,Math.max(0,num(g.pp,100)))/100:1,full=a*1e5*Math.pow(1+i,n);
+if(t=='home'&&pp<1){x.loan=full*(1-pp);x.emi=emi(x.loan,num(g.lr,8.5),num(g.lt,20));}
+for(j=0;j<cnt;j++)x.P.push({y:y+j,fv:a*1e5*pp/cnt*Math.pow(1+i,n+j)});}
 return x;}
-function solo(g){var x=pays(g),R=rates(),o={x:x,fv:0,f:0,st:0};x.P.forEach(function(p){var n=p.y-Y0;o.fv+=p.fv;if(n>=1){o.f+=p.fv/sipFactor(n,R.mr,0);o.st+=p.fv/sipFactor(n,R.mr,R.s);}});return o;}
-function plan(){var R=rates(),goals=[],P=[];
-S.g.forEach(function(g,ix){var x=pays(g);if(x.err)return;var G={g:g,ix:ix,nm:gname(g),y:x.y,y2:x.y2,n:x.n,E:x.E,L:x.L,fv:0,gap:0,f:0,st:0,bcf:null};goals.push(G);x.P.forEach(function(p){P.push({G:G,y:p.y,fv:p.fv});});});
+function solo(g){var x=pays(g),mr=mrate(gr(g)),s=Math.max(0,num(S.u,0))/100,o={x:x,fv:0,f:0,st:0,late:0};x.P.forEach(function(p){var n=p.y-Y0;o.fv+=p.fv;if(n>=1){o.f+=p.fv/sipFactor(n,mr,0);o.st+=p.fv/sipFactor(n,mr,s);}else o.late+=p.fv;});return o;}
+function plan(){var r=num(S.r,10)/100,s=Math.max(0,num(S.u,0))/100,goals=[],P=[];
+S.g.forEach(function(g,ix){var x=pays(g);if(x.err)return;var G={g:g,ix:ix,nm:gname(g),x:x,y:x.y,y2:x.y2,n:x.n,fv:0,gap:0,f:0,st:0,bcf:null,mr:mrate(gr(g))};goals.push(G);x.P.forEach(function(p){P.push({G:G,y:p.y,fv:p.fv});});});
 P.sort(function(a,b){return a.y-b.y||a.G.ix-b.G.ix;});
-var bal=Math.max(0,num(S.s,0))*1e5,last=Y0,o={goals:goals,P:P,F:0,ST:0,need:0,cov:0,late:0,R:R};
-P.forEach(function(p){var G=p.G,n=p.y-Y0;bal*=Math.pow(1+R.r,p.y-last);last=p.y;if(G.bcf===null)G.bcf=bal;var use=Math.min(bal,p.fv),gap=p.fv-use;bal-=use;
-G.fv+=p.fv;G.gap+=gap;o.need+=p.fv;o.cov+=use;p.f=p.st=0;if(gap>0.5){if(n>=1){p.f=gap/sipFactor(n,R.mr,0);p.st=gap/sipFactor(n,R.mr,R.s);}else o.late+=gap;}
+var bal=Math.max(0,num(S.s,0))*1e5,last=Y0,o={goals:goals,P:P,F:0,ST:0,need:0,cov:0,late:0,r:r,s:s};
+P.forEach(function(p){var G=p.G,n=p.y-Y0;bal*=Math.pow(1+r,p.y-last);last=p.y;if(G.bcf===null)G.bcf=bal;var use=Math.min(bal,p.fv),gap=p.fv-use;bal-=use;
+G.fv+=p.fv;G.gap+=gap;o.need+=p.fv;o.cov+=use;p.f=p.st=0;if(gap>0.5){if(n>=1){p.f=gap/sipFactor(n,G.mr,0);p.st=gap/sipFactor(n,G.mr,s);}else o.late+=gap;}
 G.f+=p.f;G.st+=p.st;o.F+=p.f;o.ST+=p.st;});
-goals.sort(function(a,b){return a.y-b.y||a.ix-b.ix;});return o;}
+goals.sort(function(a,b){return a.y-b.y||a.ix-b.ix;});o.start=s>0?o.ST:o.F;return o;}
+function tryWith(fn){var bk=S;S=JSON.parse(JSON.stringify(bk));fn(S);var o=plan();S=bk;return o;}
+function ideas(o){var cap=num(S.cap,0),need=o.start,out=[];if(!(cap>0)||need<=cap+0.5)return out;
+if(num(S.u,0)<15){var a=tryWith(function(z){z.u=15;});out.push({t:'Raise your SIP 15% every year instead of '+num(S.u,0)+'%',save:need-a.start,f:function(z){z.u=15;}});}
+o.goals.forEach(function(G){var g=G.g,ix=G.ix;if(G.f<1||g.t=='sch')return;
+var d=function(z){var h=z.g[ix];if(h.t=='fi'||T[h.t].ch)h.k=num(h.k,0)+2;else h.y=num(h.y,Y0)+2;};
+var b=tryWith(d);if(need-b.start>1)out.push({t:'Move “'+esc(G.nm)+'” 2 years later'+(g.t=='fi'?' (free at '+(num(g.k,50)+2)+')':' ('+(G.y+2)+')'),save:need-b.start,f:d});
+var c=function(z){var h=z.g[ix];h.a=Math.round(num(h.a,0)*0.8*100)/100;};var cc=tryWith(c);if(need-cc.start>1)out.push({t:g.t=='fi'?'Plan to spend 20% less each month after you stop working':g.t=='par'?'Plan 20% less monthly support for “'+esc(G.nm)+'”':'Aim for a 20% smaller budget for “'+esc(G.nm)+'”',save:need-cc.start,f:c});});
+out.sort(function(a,b){return b.save-a.save;});return out.slice(0,4);}
 /* ---- building blocks ---- */
-function inp(attr,v,o){o=o||{};return '<span class="wz-in">'+(o.pre?'<b>'+o.pre+'</b>':'')+'<input '+attr+' type="'+(o.text?'text':'number')+'"'+(o.text?' maxlength="40"':' inputmode="decimal" step="any"')+(o.ph?' placeholder="'+esc(o.ph)+'"':'')+' value="'+esc(v)+'">'+(o.suf?'<i>'+o.suf+'</i>':'')+'</span>';}
+function inp(attr,v,o){o=o||{};return '<span class="wz-in">'+(o.pre?'<b>'+o.pre+'</b>':'')+'<input '+attr+' type="'+(o.text?'text':'number')+'"'+(o.text?' maxlength="40"':' inputmode="decimal" step="any"')+(o.ph!=null?' placeholder="'+esc(o.ph)+'"':'')+' value="'+esc(v)+'">'+(o.suf?'<i>'+o.suf+'</i>':'')+'</span>';}
 function q(label,field,help){return '<div class="wz-q"><label><span class="wz-ql">'+label+'</span>'+field+'</label>'+(help?'<p class="wz-help">'+help+'</p>':'')+'</div>';}
 function G(ix,k){return 'data-g="'+ix+'" data-k="'+k+'"';}
 function slider(ix,k,min,max,v){return '<div class="wz-slide"><input type="range" '+G(ix,k)+' min="'+min+'" max="'+max+'" step="1" value="'+v+'"><output id="wz-when" aria-live="polite"></output></div>';}
-function adv(inner){return '<details class="wz-adv"><summary>Fine-tune the assumptions</summary>'+inner+'</details>';}
+function adv(ix,g,extra){var x=T[g.t];return '<details class="wz-adv"><summary>Fine-tune the assumptions</summary>'+(extra||'')
++q('How fast will this cost rise?',inp(G(ix,'i'),g.i,{suf:'% a year'}),'Our starting point: '+x.i+'% a year.'+(g.t=='edu'||g.t=='sch'?' Education costs in India have usually risen faster than everyday prices.':g.t=='par'?' Health care costs usually rise faster than everyday prices.':''))
++q('Expected return on money saved for this goal',inp(G(ix,'r'),g.r==null?'':g.r,{suf:'% a year',ph:num(S.r,10)}),'Leave empty to use your overall '+num(S.r,10)+'%. For a goal less than 5 years away, money usually sits in safer funds: 6% to 7% is more realistic.')+'</details>';}
 /* ---- steps ---- */
 function stepYou(){return '<p class="wz-kick">Step 1 · You</p><h2>First, a little about you.</h2><p class="wz-lead">Your age lets us show how old you will be when each goal arrives.</p>'
-+q('What should we call you? <em>(optional)</em>',inp('data-s="name"',S.name,{text:1,ph:'Your first name'}),'Used only to title your plan when you share it.')
++q('What should we call you? <em>(optional)</em>',inp('data-s="name"',S.name,{text:1,ph:'Your first name'}),'Used only to title your plan and PDF.')
 +q('How old are you today?',inp('data-s="age"',S.age,{suf:'years'}));}
 function stepKids(){var r='';S.kids.forEach(function(k,i){r+='<div class="wz-kid"><span class="wz-in"><input data-kid="'+i+'" data-k="n" type="text" maxlength="30" placeholder="Child '+(i+1)+'’s name" value="'+esc(k.n)+'"></span><span class="wz-in"><input data-kid="'+i+'" data-k="b" type="number" inputmode="numeric" aria-label="Birth year" value="'+esc(k.b)+'"><i>born</i></span><button type="button" class="wz-x" data-delkid="'+i+'" aria-label="Remove child">×</button></div>';});
-return '<p class="wz-kick">Step 2 · Family</p><h2>Do you have children, or plan to?</h2><p class="wz-lead">Add each child with the year they were born. Planning one? Add the year you expect. Their biggest money moments, school and a wedding, are timed from it.</p>'
+return '<p class="wz-kick">Step 2 · Family</p><h2>Do you have children, or plan to?</h2><p class="wz-lead">Add each child with the year they were born. Planning one? Add the year you expect. Their school years, higher education and wedding are all timed from it.</p>'
 +r+'<button type="button" class="wz-add" data-addkid>+ Add '+(S.kids.length?'another':'a')+' child</button>'+(S.kids.length?'':'<p class="wz-help">No children, or not planning yet? Just press Next.</p>');}
-function stepPick(){var t='';ORDER.forEach(function(k){var x=T[k],off=x.ch&&!S.kids.length;t+='<button type="button" class="wz-tile'+(S.sel[k]&&!off?' on':'')+'" data-tile="'+k+'"'+(off?' disabled':'')+' aria-pressed="'+(S.sel[k]&&!off?'true':'false')+'"><span class="wz-emo">'+x.e+'</span><b>'+x.l+'</b><small>'+(off?'Add a child in step 2 first':x.ch?x.d+' (for each child)':x.d)+'</small></button>';});
+function stepPick(){var t='';ORDER.forEach(function(k){var x=T[k],off=x.ch&&!S.kids.length;t+='<button type="button" class="wz-tile'+(S.sel[k]&&!off?' on':'')+'" data-tile="'+k+'"'+(off?' disabled':'')+' aria-pressed="'+(S.sel[k]&&!off?'true':'false')+'"><span class="wz-emo">'+x.e+'</span><b>'+x.l+'</b><small>'+(off?'Add a child in step 2 first':x.ch?x.d+', for each child':x.d)+'</small></button>';});
 return '<p class="wz-kick">Step 3 · Dreams</p><h2>What must your money make possible?</h2><p class="wz-lead">Picture the next 20 years. The home, the school fees, the wedding, the day you stop working because you choose to. Tap everything that matters to you.</p><div class="wz-tiles">'+t+'</div><p class="wz-err" id="wz-err" hidden>Choose at least one goal to plan.</p>';}
-function stepGoal(ix){var g=S.g[ix],x=T[g.t],nG=S.g.length,head='<p class="wz-kick">Goal '+(ix+1)+' of '+nG+' · '+x.e+' '+esc(x.l)+'</p>',b='',pr=adv(q('How fast will this cost rise?',inp(G(ix,'i'),g.i,{suf:'% a year'}),'Our starting point: '+x.i+'% a year. Education costs in India have usually risen faster than everyday prices.'));
-var yn=Math.max(1,Math.min(40,num(g.y,Y0+5)-Y0));
+function costQ(ix,g,label,help){return q(label,inp(G(ix,'a'),g.a,{pre:'₹',suf:'lakh'}),help);}
+function stepGoal(ix){var g=S.g[ix],x=T[g.t],nG=S.g.length,head='<p class="wz-kick">Goal '+(ix+1)+' of '+nG+' · '+x.e+' '+esc(x.l)+'</p>',b='';
+var yn=Math.max(1,Math.min(40,num(g.y,Y0+5)-Y0)),when=function(l){return q(l,slider(ix,'yn',1,40,yn));},kn=esc(kname(g));
 if(g.t=='home')b='<h2>Picture your home.</h2><p class="wz-lead">Not any house. Yours. The more real you make it, the more real your plan becomes.</p>'
 +q('What kind of home, and where?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. 3BHK in Whitefield, Bengaluru'}))
-+q('What does a home like that cost there today?',inp(G(ix,'a'),g.a,{pre:'₹',suf:'lakh'}),'Look at 3 or 4 real listings in that area on a property website, or ask a local broker. Use today’s price; we add the future price rise for you.')
++costQ(ix,g,'What does a home like that cost there today?','Look at 3 or 4 real listings in that area on a property website, or ask a local broker. Use today’s price; we add the future price rise for you.')
 +q('How much of the price will you pay yourself?',inp(G(ix,'pp'),g.pp,{suf:'%'}),'100% if you will buy without a loan. If you will take a home loan, enter your down payment, usually 20%.')
-+q('When do you want to move in?',slider(ix,'yn',1,40,yn))+pr;
++when('When do you want to move in?')+adv(ix,g,q('Home loan interest rate',inp(G(ix,'lr'),g.lr,{suf:'% a year'}))+q('Home loan length',inp(G(ix,'lt'),g.lt,{suf:'years'})));
 else if(g.t=='car')b='<h2>Which car is in your future?</h2><p class="wz-lead">Buy it with money you saved, not with an EMI that eats next year’s salary.</p>'
-+q('Which car?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. a family SUV'}))+q('Its on-road price today',inp(G(ix,'a'),g.a,{pre:'₹',suf:'lakh'}),'Include registration and insurance. A dealer quote or the maker’s website will tell you.')
-+q('When do you want to drive it home?',slider(ix,'yn',1,40,yn))+pr;
-else if(g.t=='oth')b='<h2>What else is on your list?</h2><p class="wz-lead">A world trip, your own business, your parents’ care. If it matters, it deserves a plan.</p>'
-+q('What is the goal?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. Europe trip with the family'}))+q('What would it cost if you paid for it today?',inp(G(ix,'a'),g.a,{pre:'₹',suf:'lakh'}))
-+q('When?',slider(ix,'yn',1,40,yn))+pr;
-else if(g.t=='edu'){var kn=esc(kname(g));b='<h2>Dream big for '+kn+'.</h2><p class="wz-lead">Pilot, doctor, engineer, an MBA abroad: the right course costs more each year you wait. What do you see '+kn+' becoming?</p>'
-+q('The dream course',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. Commercial pilot training'}))
-+q('What do the full fees cost today?',inp(G(ix,'a'),g.a,{pre:'₹',suf:'lakh'}),'Check today’s fees on the college website and add hostel and living costs. A commercial pilot licence in India costs about ₹1 crore today.')
++q('Which car?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. a family SUV'}))+costQ(ix,g,'Its on-road price today','Include registration and insurance. A dealer quote or the maker’s website will tell you.')
++when('When do you want to drive it home?')+adv(ix,g);
+else if(g.t=='trip')b='<h2>The trip you keep postponing.</h2><p class="wz-lead">Kids grow up and knees grow old. Put a date on it and it stops being “someday”.</p>'
++q('Where to?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. Europe with the family'}))+costQ(ix,g,'What would it cost if you went today?','Flights, stays, visas and spending money for everyone going, at today’s prices.')
++when('When do you want to go?')+adv(ix,g);
+else if(g.t=='biz')b='<h2>Back yourself.</h2><p class="wz-lead">Many of the people in our stories started with a small pot of their own savings. How much would you need to start yours?</p>'
++q('What would you start?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. a café, a clinic, a design studio'}))+costQ(ix,g,'Money needed to start, at today’s prices','Equipment, deposits, first stock, and 6 to 12 months of your own living costs while it grows.')
++when('When do you want to start?')+adv(ix,g);
+else if(g.t=='oth')b='<h2>What else is on your list?</h2><p class="wz-lead">If it matters to you, it deserves a plan and a date.</p>'
++q('What is the goal?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. a gift for our 25th anniversary'}))+costQ(ix,g,'What would it cost if you paid for it today?')
++when('When?')+adv(ix,g);
+else if(g.t=='par')b='<h2>Care for the people who cared for you.</h2><p class="wz-lead">Health care and support for parents is one of the biggest costs families don’t plan for, until it arrives.</p>'
++q('Whose care is this for?',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. Mummy and Papa'}))
++q('Monthly support at today’s prices',inp(G(ix,'a'),g.a,{pre:'₹',suf:'a month'}),'Medicines, a helper at home, health insurance premiums, regular visits.')
++when('When do you expect to start paying for it?')+q('For how many years?',inp(G(ix,'d'),g.d,{suf:'years'}))+adv(ix,g);
+else if(g.t=='edu')b='<h2>Dream big for '+kn+'.</h2><p class="wz-lead">Pilot, doctor, engineer, an MBA abroad: the right course costs more every year you wait. What do you see '+kn+' becoming?</p>'
++q('The dream course',inp(G(ix,'n'),g.n,{text:1,ph:'e.g. commercial pilot training'}))
++costQ(ix,g,'What do the full fees cost today?','Check today’s fees on the college website and add hostel and living costs. A commercial pilot licence in India costs about ₹1 crore today.')
 +q('At what age will '+kn+' start it?',inp(G(ix,'k'),g.k,{suf:'years old'}),'Most degrees and pilot training start at 17 or 18, right after Class 12. A master’s usually starts around 22.')
-+q('Fees are paid over',inp(G(ix,'d'),g.d||1,{suf:'years'}),'Enter 1 if you will pay it all at once.')+pr;}
-else if(g.t=='mar'){var kn2=esc(kname(g));b='<h2>'+kn2+'’s wedding day.</h2><p class="wz-lead">Imagine '+kn2+' is getting married today. Think of a wedding you attended whose scale and budget you liked: the venue, the food, the clothes, the jewellery. What would a wedding like that cost this year?</p>'
-+q('That wedding, at today’s prices',inp(G(ix,'a'),g.a,{pre:'₹',suf:'lakh'}),'Ask the family who hosted it, or add up quotes for venue, catering, clothes, jewellery and gifts.')
-+q('At what age do you see '+kn2+' getting married?',inp(G(ix,'k'),g.k,{suf:'years old'}))+pr;}
++q('Fees are paid over',inp(G(ix,'d'),g.d||1,{suf:'years'}),'Enter 1 if you will pay it all at once.')+adv(ix,g);
+else if(g.t=='sch')b='<h2>Every school year for '+kn+'.</h2><p class="wz-lead">School fees arrive every single year until Class 12, and most schools raise them every year. Plan for the years still ahead.</p>'
++q('Yearly fees at the school you have in mind, today',inp(G(ix,'a'),g.a,{pre:'₹',suf:'lakh a year'}),'Tuition plus transport, books, uniforms and activities. Ask the school, or a parent whose child studies there.')
++q('School starts at age',inp(G(ix,'k'),g.k,{suf:'years old'}))+q('Last year of school at age',inp(G(ix,'k2'),g.k2==null?17:g.k2,{suf:'years old'}),'Class 12 usually ends at 17 or 18. This year’s fees come from your income, so the plan starts with next year’s.')+adv(ix,g);
+else if(g.t=='mar')b='<h2>'+kn+'’s wedding day.</h2><p class="wz-lead">Imagine '+kn+' is getting married today. Think of a wedding you attended whose scale and budget you liked: the venue, the food, the clothes, the jewellery. What would a wedding like that cost this year?</p>'
++costQ(ix,g,'That wedding, at today’s prices','Ask the family who hosted it, or add up quotes for venue, catering, clothes, jewellery and gifts.')
++q('At what age do you see '+kn+' getting married?',inp(G(ix,'k'),g.k,{suf:'years old'}))+adv(ix,g);
 else if(g.t=='fi')b='<h2>The day work becomes optional.</h2><p class="wz-lead">Financial freedom means your investments pay the monthly bills, so you work only because you want to. Most people never put a number on it. You are about to.</p>'
 +q('At what age do you want to be financially free?',slider(ix,'k',Math.min(75,age()+1),75,Math.round(num(g.k,50))))
 +q('What does your household spend each month today?',inp(G(ix,'a'),g.a,{pre:'₹',suf:'a month'}),'Rent, groceries, bills, school fees, travel, help at home. Leave out EMIs and SIPs that will have ended by then.')
 +q('Plan for the money to last until age',inp(G(ix,'e'),g.e,{suf:'years old'}),'People are living longer. 85 or 90 is a safe planning age.')
-+adv(q('Prices rise by',inp(G(ix,'i'),g.i,{suf:'% a year'}),'Our starting point: 6%, close to India’s long-run average.')+q('Your money earns, after you stop working',inp(G(ix,'p'),g.p,{suf:'% a year'}),'Usually lower than while you are working, because more of it sits in safer investments.'));
++'<div class="wz-sub"><h3>Already saving for retirement? <em>(optional)</em></h3><p class="wz-help">Money in EPF, PPF or NPS is usually locked until retirement, so we count it here, not with your other savings.</p>'
++q('EPF, PPF and NPS balance today',inp(G(ix,'rb'),g.rb,{pre:'₹',suf:'lakh',ph:'0'}))
++q('Added every month (you and your employer)',inp(G(ix,'rc'),g.rc,{pre:'₹',suf:'a month',ph:'0'}),'Your payslip shows your EPF contribution and your employer’s.')
++q('Pension you expect, in today’s money',inp(G(ix,'pn'),g.pn,{pre:'₹',suf:'a month',ph:'0'}),'From a government job, NPS annuity or rent you will earn. It reduces what your investments must pay.')
++'</div><details class="wz-adv"><summary>Fine-tune the assumptions</summary>'+q('Prices rise by',inp(G(ix,'i'),g.i,{suf:'% a year'}),'Our starting point: 6%, close to India’s long-run average.')
++q('EPF, PPF and NPS earn',inp(G(ix,'rr'),g.rr,{suf:'% a year'}))
++q('Expected return on new savings for this goal',inp(G(ix,'r'),g.r==null?'':g.r,{suf:'% a year',ph:num(S.r,10)}),'Leave empty to use your overall '+num(S.r,10)+'%.')
++q('Your money earns, after you stop working',inp(G(ix,'p'),g.p,{suf:'% a year'}),'Usually lower than while you are working, because more of it sits in safer investments.')+'</details>';
 return head+b+'<div class="wz-live" id="wz-live" aria-live="polite"></div>';}
 function stepMoney(){return '<p class="wz-kick">Almost there · What you have</p><h2>Now, what you already have.</h2><p class="wz-lead">Money you have already invested keeps growing and pays for your earliest goals first. That lowers what you need to save from now on.</p>'
-+q('Savings already invested for these goals',inp('data-s="s"',S.s,{pre:'₹',suf:'lakh'}),'Mutual funds, shares, PF, FDs. Leave out your emergency fund.')
-+q('SIP you already do each month <em>(optional)</em>',inp('data-s="c"',S.c||'',{pre:'₹'}),'We will tell you if it is enough.')
-+q('What do you expect your investments to earn?',inp('data-s="r"',S.r,{suf:'% a year'}),'Be honest, not hopeful. Many planners use 10% to 12% for long-term equity funds, and less for money you need within a few years.')
++q('Savings already invested for these goals',inp('data-s="s"',S.s,{pre:'₹',suf:'lakh'}),'Mutual funds, shares, FDs. Leave out your emergency fund, and EPF, PPF or NPS (they go with financial freedom).')
++q('How much can you comfortably invest each month?',inp('data-s="cap"',S.cap,{pre:'₹',suf:'a month',ph:'e.g. 40000'}),'After rent, EMIs, bills and household costs. Many people aim for 20% to 30% of take-home pay. We will check your plan against it.')
++q('SIP you already do each month <em>(optional)</em>',inp('data-s="c"',S.c||'',{pre:'₹'}))
++q('What do you expect your investments to earn?',inp('data-s="r"',S.r,{suf:'% a year'}),'Be honest, not hopeful. Many planners use 10% to 12% for long-term equity funds. You can set a different rate for any goal under “Fine-tune”.')
 +q('Can you raise your SIP every year?',inp('data-s="u"',S.u,{suf:'% a year'}),'A step-up SIP rises with your salary, so you can start smaller. Enter 0 to see a fixed SIP only.');}
-function stepPlan(){var o=plan(),R=o.R,nm=S.name?esc(S.name)+'’s':'Your',h,c=Math.max(0,num(S.c,0)),tl='';
+function extra(G){var x=G.x,s='';if(G.g.t=='fi'){s+=' ('+inr(x.E)+' a month for '+x.L+' years'+(x.ret>0.5?'; EPF/PPF/NPS will cover '+big(Math.min(x.ret,x.corpus)):'')+')';}
+return s;}
+function stepPlan(){var o=plan(),nm=S.name?esc(S.name)+'’s':'Your',h,c=Math.max(0,num(S.c,0)),cap=num(S.cap,0),tl='';
 o.goals.forEach(function(G){var x=T[G.g.t],yr=G.y2>G.y?G.y+'–'+String(G.y2).slice(2):G.y,a=age()+G.n;
 tl+='<li><span class="wz-yr">'+yr+'</span><div class="wz-tc"><b>'+x.e+' '+esc(G.nm)+'</b><span class="wz-meta">'+(G.n==0?'This year':'In '+G.n+' year'+(G.n==1?'':'s'))+' · you will be '+a+'</span>'
-+'<span>Needed then: <strong>'+big(G.fv)+'</strong>'+(G.E?' (₹'+Math.round(G.E).toLocaleString('en-IN')+' a month for '+G.L+' years)':'')+'</span>'
-+(G.gap<=0.5?'<span class="wz-ok">Paid for by your savings</span>':G.f<0.5?'<span class="wz-bad">'+big(G.gap)+' needed now, not covered</span>':'<span>SIP: <strong>'+inr(G.f)+'</strong> fixed'+(R.s>0?' or <strong>'+inr(G.st)+'</strong> step-up':'')+'</span>')
++'<span>Needed then: <strong>'+big(G.fv)+'</strong>'+(G.y2>G.y?' over '+G.x.cnt+' years':'')+extra(G)+'</span>'
++(G.x.emi?'<span class="wz-meta">Plus a home loan of '+big(G.x.loan)+': about '+inr(G.x.emi)+' a month EMI, paid from your income.</span>':'')
++(G.gap<=0.5?'<span class="wz-ok">Paid for by your savings</span>':G.f<0.5?'<span class="wz-bad">'+big(G.gap)+' needed now, not covered</span>':'<span>SIP: <strong>'+inr(G.f)+'</strong> fixed'+(o.s>0?' or <strong>'+inr(G.st)+'</strong> step-up':'')+'</span>')
 +'</div><button type="button" class="wz-edit" data-goto="'+(3+G.ix)+'">Edit</button></li>';});
 if(!o.goals.length)h='<h2>Add a goal to see your plan.</h2>';
-else if(o.F<0.5&&o.late<0.5)h='<h2>Your savings already pay for this future.</h2><p class="wz-lead">At '+(R.r*100).toFixed(0)+'% a year, what you have invested covers all '+o.goals.length+' goals. Keep it invested.</p>';
-else h='<h2>Your future costs <mark>'+big(o.need)+'</mark>.<br>Here’s how you pay for it.</h2><div class="wz-opts"><div><small>Fixed SIP</small><b>'+inr(o.F)+'</b><em>a month, every month</em></div>'+(R.s>0?'<div class="best"><small>Step-up SIP</small><b>'+inr(o.ST)+'</b><em>a month to start, then '+(R.s*100).toFixed(0)+'% more each year</em></div>':'')+'</div>'
+else if(o.F<0.5&&o.late<0.5)h='<h2>Your savings already pay for this future.</h2><p class="wz-lead">At '+(o.r*100).toFixed(0)+'% a year, what you have invested covers all '+o.goals.length+' goals. Keep it invested.</p>';
+else h='<h2>Your future costs <mark>'+big(o.need)+'</mark>.<br>Here’s how you pay for it.</h2><div class="wz-opts"><div><small>Fixed SIP</small><b>'+inr(o.F)+'</b><em>a month, every month</em></div>'+(o.s>0?'<div class="best"><small>Step-up SIP</small><b>'+inr(o.ST)+'</b><em>a month to start, then '+(o.s*100).toFixed(0)+'% more each year</em></div>':'')+'</div>'
 +'<p class="wz-lead">Start this month. Every year you wait makes each goal more expensive and leaves fewer months to save.'+(o.cov>0.5?' Your savings already cover '+big(o.cov)+'.':'')+'</p>'
-+(o.late>0.5?'<p class="wz-bad">'+big(o.late)+' is needed this year and is not covered by your savings.</p>':'')
-+(c>0?(c>=(R.s>0?o.ST:o.F)-0.5?'<p class="wz-ok">Your current SIP of '+inr(c)+' is enough'+(R.s>0?' if you step it up every year':'')+'. Well done.</p>':'<p class="wz-bad">You invest '+inr(c)+' a month now: '+inr((R.s>0?o.ST:o.F)-c)+' a month short'+(R.s>0?' of the step-up plan':'')+'.</p>'):'');
-var ys=[];o.P.forEach(function(p){if(p.f&&ys.indexOf(p.y)<0)ys.push(p.y);});ys.sort(function(a,b){return a-b;});
-var sh='',from=Y0;ys.forEach(function(y){var a=0,b=0,nmz=[];o.P.forEach(function(p){if(p.f&&p.y>from){a+=p.f;b+=p.st;if(nmz.indexOf(p.G.nm)<0)nmz.push(p.G.nm);}});
-sh+='<tr><th scope="row">'+(from==Y0?'Now':from)+'–'+y+'</th><td>'+inr(a)+'</td>'+(R.s>0?'<td>'+inr(b*Math.pow(1+R.s,from-Y0))+(y-1>from?' → '+inr(b*Math.pow(1+R.s,y-1-Y0)):'')+'</td>':'')+'<td>'+nmz.map(esc).join(', ')+'</td></tr>';from=y;});
-var tb='';o.goals.forEach(function(G){tb+='<tr><th scope="row">'+esc(G.nm)+'</th><td>'+(G.y2>G.y?G.y+'–'+G.y2:G.y)+'</td><td>'+G.n+'</td><td>'+big(G.bcf||0)+'</td><td>'+big(G.fv)+'</td><td>'+big(G.gap)+'</td><td>'+(G.f?inr(G.f):'–')+'</td>'+(R.s>0?'<td>'+(G.st?inr(G.st):'–')+'</td>':'')+'</tr>';});
-return '<p class="wz-kick">'+nm+' plan</p>'+h+(tl?'<h3>Your journey, goal by goal</h3><ol class="wz-tl">'+tl+'</ol>':'')
++(o.late>0.5?'<p class="wz-bad">'+big(o.late)+' is needed this year and is not covered by your savings.</p>':'');
+var fit='';if(o.goals.length&&o.start>0.5&&cap>0){var pc=Math.min(100,cap/o.start*100),ok=cap>=o.start-0.5,id=ideas(o);
+fit='<div class="wz-fit'+(ok?' ok':'')+'"><h3>'+(ok?'Good news: this plan fits your budget.':'Your plan needs '+inr(o.start)+' a month. You can invest '+inr(cap)+'.')+'</h3><div class="wz-meter"><span style="width:'+pc.toFixed(0)+'%"></span></div>'
++(ok?'<p>You can invest '+inr(cap)+' a month and the plan needs '+inr(o.start)+(o.s>0?' to start':'')+'. Put the extra '+inr(cap-o.start)+' to work too, or plan one more dream.</p>'
+:'<p>That leaves a gap of <b>'+inr(o.start-cap)+'</b> a month. You don’t have to give up a dream. Try one of these and watch the number change:</p><ul class="wz-ideas">'+id.map(function(d,k){return '<li><span>'+d.t+'</span><b>saves '+inr(d.save)+' a month</b><button type="button" class="wz-btn sm" data-idea="'+k+'">Apply</button></li>';}).join('')+'</ul>')+'</div>';W._ideas=id;}
+var cur=c>0?(c>=o.start-0.5?'<p class="wz-ok">Your current SIP of '+inr(c)+' is enough'+(o.s>0?' if you step it up every year':'')+'. Well done.</p>':'<p class="wz-bad">You invest '+inr(c)+' a month now: '+inr(o.start-c)+' a month short'+(o.s>0?' of the step-up plan':'')+'.</p>'):'';
+var sh=sched(o),tb=calcRows(o);
+return '<p class="wz-kick">'+nm+' plan</p>'+h+cur+fit+(tl?'<h3>Your journey, goal by goal</h3><ol class="wz-tl">'+tl+'</ol>':'')
 +'<button type="button" class="wz-add" data-addgoal>+ Add another goal</button>'
-+(ys.length>1?'<details class="wz-more"><summary>How your SIP changes as goals are reached</summary><div class="tablewrap"><table class="ctable"><thead><tr><th>Years</th><th>Fixed SIP</th>'+(R.s>0?'<th>Step-up SIP</th>':'')+'<th>Paying for</th></tr></thead><tbody>'+sh+'</tbody></table></div></details>':'')
-+(tb?'<details class="wz-more"><summary>See the full calculation</summary><div class="tablewrap"><table class="ctable gtab"><thead><tr><th>Goal</th><th>Year</th><th>Years left</th><th>Savings carried forward</th><th>Needed on the day</th><th>Gap after savings</th><th>Fixed SIP</th>'+(R.s>0?'<th>Step-up SIP (start)</th>':'')+'</tr></thead><tbody>'+tb+'</tbody></table></div><p class="wz-help">Assumes '+(R.r*100).toFixed(1)+'% a year on your investments. Savings pay for the earliest goals first; what is left carries forward.</p></details>':'')
-+'<div class="wz-sharebox"><h3>Share it with the people it’s for</h3><p>Your spouse, your parents, your children. The link opens this plan with your numbers, so they can see it and try their own.</p><div class="wz-shares"><button type="button" class="wz-btn wa" data-share="wa">Share on WhatsApp</button><button type="button" class="wz-btn" data-share="native" hidden>Share…</button><button type="button" class="wz-btn ghost" data-share="copy">Copy link</button></div></div>'
++(sh?'<details class="wz-more"><summary>How your SIP changes as goals are reached</summary><div class="tablewrap"><table class="ctable"><thead><tr><th>Years</th><th>Fixed SIP</th>'+(o.s>0?'<th>Step-up SIP</th>':'')+'<th>Paying for</th></tr></thead><tbody>'+sh+'</tbody></table></div></details>':'')
++(tb?'<details class="wz-more"><summary>See the full calculation</summary><div class="tablewrap"><table class="ctable gtab"><thead><tr><th>Goal</th><th>Year</th><th>Years left</th><th>Savings carried forward</th><th>Needed on the day</th><th>Gap after savings</th><th>Fixed SIP</th>'+(o.s>0?'<th>Step-up SIP (start)</th>':'')+'</tr></thead><tbody>'+tb+'</tbody></table></div><p class="wz-help">Assumes '+(o.r*100).toFixed(1)+'% a year on your savings unless you set a rate for a goal. Savings pay for the earliest goals first; what is left carries forward.</p></details>':'')
++'<div class="wz-sharebox"><h3>Keep it, and share it with the people it’s for</h3><p>Your spouse, your parents, your children. Download a PDF of your plan, or send a link that opens it with your numbers so they can try their own.</p><div class="wz-shares"><button type="button" class="wz-btn" data-share="pdf">Download PDF</button><button type="button" class="wz-btn wa" data-share="wa">Share on WhatsApp</button><button type="button" class="wz-btn ghost" data-share="native" hidden>Share…</button><button type="button" class="wz-btn ghost" data-share="copy">Copy link</button></div></div>'
 +'<p class="wz-restart"><button type="button" class="wz-link" data-restart>Start a new plan</button></p>';}
+function sched(o){var ys=[];o.P.forEach(function(p){if(p.f&&ys.indexOf(p.y)<0)ys.push(p.y);});ys.sort(function(a,b){return a-b;});if(ys.length<2)return '';
+var seg=[],from=Y0;ys.forEach(function(y){var a=0,b=0,nmz=[];o.P.forEach(function(p){if(p.f&&p.y>from){a+=p.f;b+=p.st;if(nmz.indexOf(p.G.nm)<0)nmz.push(p.G.nm);}});
+var key=nmz.join('|'),L=seg[seg.length-1],sa=b*Math.pow(1+o.s,from-Y0),se=b*Math.pow(1+o.s,y-1-Y0);
+if(L&&L.key==key){L.y=y;L.fe=a;L.se=se;}else seg.push({key:key,from:from,y:y,fs:a,fe:a,ss:sa,se:se,nm:nmz});from=y;});
+var ar=function(a,b){return Math.abs(a-b)<1?inr(a):inr(a)+' → '+inr(b);};
+return seg.map(function(z){return '<tr><th scope="row">'+(z.from==Y0?'Now':z.from)+'–'+z.y+'</th><td>'+ar(z.fs,z.fe)+'</td>'+(o.s>0?'<td>'+ar(z.ss,z.se)+'</td>':'')+'<td>'+z.nm.map(esc).join(', ')+'</td></tr>';}).join('');}
+function calcRows(o){var tb='';o.goals.forEach(function(G){tb+='<tr><th scope="row">'+esc(G.nm)+'</th><td>'+(G.y2>G.y?G.y+'–'+G.y2:G.y)+'</td><td>'+G.n+'</td><td>'+big(G.bcf||0)+'</td><td>'+big(G.fv)+'</td><td>'+big(G.gap)+'</td><td>'+(G.f?inr(G.f):'–')+'</td>'+(o.s>0?'<td>'+(G.st?inr(G.st):'–')+'</td>':'')+'</tr>';});return tb;}
+function today(g){var a=num(g.a,0);if(g.t=='fi'||g.t=='par')return inr(a)+' a month';if(g.t=='sch')return lk(a)+' a year';return lk(a)+(g.t=='home'&&num(g.pp,100)<100?' ('+num(g.pp,100)+'% paid by you)':'');}
+/* ---- branded PDF (print) ---- */
+function pdf(){var o=plan(),d=new Date(),ds=d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}),who=S.name?esc(S.name)+'’s':'Our',rows='',cap=num(S.cap,0);
+o.goals.forEach(function(G){rows+='<tr><td><b>'+T[G.g.t].e+' '+esc(G.nm)+'</b></td><td>'+(G.y2>G.y?G.y+'–'+G.y2:G.y)+'</td><td>'+(age()+G.n)+'</td><td>'+today(G.g)+'</td><td><b>'+big(G.fv)+'</b>'+extra(G)+'</td><td>'+(G.f?inr(G.f):G.gap<=0.5?'Covered':'–')+'</td>'+(o.s>0?'<td>'+(G.st?inr(G.st):'–')+'</td>':'')+'</tr>'
++(G.x.emi?'<tr class="pr-note"><td colspan="'+(o.s>0?7:6)+'">Home loan of '+big(G.x.loan)+' on top: about '+inr(G.x.emi)+' a month EMI for '+num(G.g.lt,20)+' years at '+num(G.g.lr,8.5)+'%, paid from income.</td></tr>':'');});
+var sh=sched(o),el=document.getElementById('wz-print');if(!el){el=document.createElement('div');el.id='wz-print';document.body.appendChild(el);}
+el.innerHTML='<div class="pr-head"><img src="/assets/logo.svg" alt="" width="46" height="35"><div><b>Borrowed Hindsight</b><span>Goal SIP planner</span></div><em>'+ds+'</em></div>'
++'<h1>'+who+' family plan</h1><p class="pr-sub">'+o.goals.length+' goals · prepared for age '+age()+' in '+Y0+'</p>'
++'<div class="pr-kpis"><div><small>Total needed on the day</small><b>'+big(o.need)+'</b></div><div><small>Fixed SIP</small><b>'+inr(o.F)+'</b><span>a month</span></div>'+(o.s>0?'<div class="hl"><small>Step-up SIP</small><b>'+inr(o.ST)+'</b><span>to start, +'+(o.s*100).toFixed(0)+'% a year</span></div>':'')+'<div><small>Covered by savings</small><b>'+big(o.cov)+'</b></div></div>'
++(cap>0?'<p class="pr-fit">'+(cap>=o.start-0.5?'This plan fits the '+inr(cap)+' a month you can invest.':'This plan needs '+inr(o.start)+' a month; you can invest '+inr(cap)+'. Gap: '+inr(o.start-cap)+' a month.')+'</p>':'')
++'<h2>Goal by goal</h2><table><thead><tr><th>Goal</th><th>Year</th><th>Your age</th><th>Cost today</th><th>Needed then</th><th>Fixed SIP</th>'+(o.s>0?'<th>Step-up SIP</th>':'')+'</tr></thead><tbody>'+rows+'</tbody></table>'
++(sh?'<h2>How your SIP changes as goals are reached</h2><table><thead><tr><th>Years</th><th>Fixed SIP</th>'+(o.s>0?'<th>Step-up SIP</th>':'')+'<th>Paying for</th></tr></thead><tbody>'+sh+'</tbody></table>':'')
++'<h2>Assumptions</h2><ul><li>Investments earn '+num(S.r,10)+'% a year unless a different rate is set for a goal.</li><li>Savings already invested: '+lk(S.s)+', used for the earliest goals first.</li>'+(o.s>0?'<li>Step-up SIP rises '+(o.s*100).toFixed(0)+'% every year.</li>':'')+'<li>Each cost grows by its own yearly price rise until the year it is needed.</li></ul>'
++'<div class="pr-foot"><p><b>Make or update your own plan, free:</b> borrowedhindsight.org/tools/goal-sip-planner</p><p>General education, not investment advice. Returns are not guaranteed and results are estimates based on the rates entered. Speak to a SEBI-registered investment adviser before you invest.</p></div>';
+var t=document.title;document.title=(S.name?S.name+'’s':'Our')+' family plan - Borrowed Hindsight';document.body.classList.add('wz-pr');
+var done=function(){document.body.classList.remove('wz-pr');document.title=t;window.removeEventListener('afterprint',done);};window.addEventListener('afterprint',done);
+var img=el.querySelector('img');var go2=function(){window.print();setTimeout(done,1500);};if(img&&!img.complete){img.onload=go2;img.onerror=go2;}else go2();}
 /* ---- render and navigation ---- */
 function render(){var st=steps();if(S.at>=st.length)S.at=st.length-1;if(S.at<0)S.at=0;var s=st[S.at],body;
 body=s=='you'?stepYou():s=='kids'?stepKids():s=='pick'?stepPick():s=='money'?stepMoney():s=='plan'?stepPlan():stepGoal(s);
 var pct=Math.round(S.at/(st.length-1)*100);
-W.innerHTML='<div class="wz-bar"><span style="width:'+pct+'%"></span></div><div class="wz-step">'+body+'</div>'
+W.innerHTML='<div class="wz-bar" role="progressbar" aria-label="Progress" aria-valuenow="'+pct+'" aria-valuemin="0" aria-valuemax="100"><span style="width:'+pct+'%"></span></div><div class="wz-step">'+body+'</div>'
 +(s=='plan'?'<div class="wz-nav"><button type="button" class="wz-btn ghost" data-nav="-1">← Back</button></div>':'<div class="wz-nav">'+(S.at>0?'<button type="button" class="wz-btn ghost" data-nav="-1">← Back</button>':'<span></span>')+'<button type="button" class="wz-btn" data-nav="1">'+(st[S.at+1]=='plan'?'See my plan →':'Next →')+'</button></div>');
 if(s=='plan'){var nb=W.querySelector('[data-share=native]');if(nb&&navigator.share)nb.hidden=false;}
 live();save();}
-function live(){var st=steps()[S.at];if(typeof st!='number')return;var g=S.g[st],o=solo(g),R=rates(),el=document.getElementById('wz-live'),w=document.getElementById('wz-when');
+function live(){var st=steps()[S.at];if(typeof st!='number')return;var g=S.g[st],o=solo(g),s=Math.max(0,num(S.u,0))/100,el=document.getElementById('wz-live'),w=document.getElementById('wz-when');
 if(w){if(g.t=='fi'){var n=Math.round(num(g.k,50))-age();w.innerHTML='At <b>'+Math.round(num(g.k,50))+'</b> · in '+(Y0+n)+', '+n+' years from now';}else{var yn=Math.round(num(g.y,Y0+5)-Y0);w.innerHTML='In <b>'+Math.round(num(g.y,Y0+5))+'</b> · '+yn+' year'+(yn==1?'':'s')+' from now, you will be '+(age()+yn);}}
-if(!el)return;if(o.x.err){el.innerHTML='<p class="wz-bad">'+o.x.err+'</p>';return;}
-var when=o.x.y2>o.x.y?'from '+o.x.y+' to '+o.x.y2:'in '+o.x.y;
-el.innerHTML='<p class="wz-lk">Your answer</p><p>'+(g.t=='fi'?'To be free at '+Math.round(num(g.k,50))+' you will need about <b>'+big(o.fv)+'</b> invested by '+o.x.y+'. By then your monthly spending will be about '+inr(o.x.E)+'.':'This will cost about <b>'+big(o.fv)+'</b> '+when+(g.t=='edu'&&o.x.y2>o.x.y?' in all':'')+'.')+'</p>'
-+(o.f>0.5?'<p>Start saving <b>'+inr(o.f)+'</b> a month from now'+(R.s>0?', or <b>'+inr(o.st)+'</b> a month rising '+(R.s*100).toFixed(0)+'% every year':'')+'.</p><p class="wz-help">Before counting savings you already have; we add those at the end.</p>':o.x.n<1?'<p class="wz-help">This is due this year, so a SIP is too late for it. It must come from savings.</p>':'');}
+if(!el)return;var x=o.x;if(x.err){el.innerHTML='<p class="wz-bad">'+x.err+'</p>';return;}
+var when=x.y2>x.y?'from '+x.y+' to '+x.y2:'in '+x.y,m;
+if(g.t=='fi'){m='<p>To be free at '+Math.round(num(g.k,50))+' you will need about <b>'+big(x.corpus)+'</b> invested by '+x.y+'. By then your household will spend about '+inr(x.Eall)+' a month'+(x.Eall-x.E>0.5?', of which your pension pays '+inr(x.Eall-x.E):'')+'.</p>'
++(x.ret>0.5?'<p>Your EPF, PPF and NPS should grow to about '+big(x.ret)+'. '+(x.ret>=x.corpus?'That covers all of it.':'You need <b>'+big(o.fv)+'</b> more.')+'</p>':'');}
+else if(g.t=='sch')m='<p>The '+x.cnt+' school year'+(x.cnt==1?'':'s')+' still ahead will cost about <b>'+big(o.fv)+'</b> in all, '+when+'. The last year alone will cost '+big(x.P[x.P.length-1].fv)+'.</p>';
+else if(g.t=='par')m='<p>That support will cost about <b>'+big(o.fv)+'</b> '+when+', starting at '+inr(x.P[0].fv/12)+' a month.</p>';
+else m='<p>This will cost about <b>'+big(o.fv)+'</b> '+when+(x.cnt>1?' in all':'')+'.</p>'+(x.emi?'<p>The rest, '+big(x.loan)+', would be a home loan: about <b>'+inr(x.emi)+'</b> a month EMI for '+num(g.lt,20)+' years at '+num(g.lr,8.5)+'%. That comes from your income, not this SIP.</p>':'');
+el.innerHTML='<p class="wz-lk">Your answer</p>'+m+(o.f>0.5?'<p>Start saving <b>'+inr(o.f)+'</b> a month from now'+(s>0?', or <b>'+inr(o.st)+'</b> a month rising '+(s*100).toFixed(0)+'% every year':'')+'.</p><p class="wz-help">Before counting savings you already have; we add those at the end.</p>':o.fv>0.5&&x.n<1?'<p class="wz-help">This is due this year, so a SIP is too late for it. It must come from savings.</p>':'');}
 function go(n){S.at=n;render();var t=W.getBoundingClientRect().top;if(t<0||t>window.innerHeight*0.6)W.scrollIntoView({behavior:'smooth',block:'start'});var h2=W.querySelector('h2');if(h2){h2.setAttribute('tabindex','-1');h2.focus({preventScroll:true});}}
-W.addEventListener('input',function(e){var t=e.target,k=t.getAttribute('data-k'),v=t.value;
+function next(){var st=steps(),cur=st[S.at];if(cur=='you'&&!(num(S.age,0)>=16&&num(S.age,0)<=85)){var a=W.querySelector('[data-s=age]');if(a){a.focus();a.closest('.wz-in').classList.add('bad');}return;}
+if(cur=='kids'||cur=='pick')sync();if(cur=='pick'&&!S.g.length){document.getElementById('wz-err').hidden=false;return;}go(S.at+1);}
+W.addEventListener('input',function(e){var t=e.target,k=t.getAttribute('data-k'),v=t.value,wi=t.closest('.wz-in');if(wi)wi.classList.remove('bad');
 if(t.hasAttribute('data-s'))S[t.getAttribute('data-s')]=v;
 else if(t.hasAttribute('data-kid'))S.kids[+t.getAttribute('data-kid')][k]=v;
-else if(t.hasAttribute('data-g')){var g=S.g[+t.getAttribute('data-g')];if(k=='yn')g.y=Y0+(+v);else g[k]=v;}
+else if(t.hasAttribute('data-g')){var g=S.g[+t.getAttribute('data-g')];if(k=='yn')g.y=Y0+(+v);else if(k=='r'&&v==='')delete g.r;else g[k]=v;}
 live();save();});
-W.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var st=steps(),cur=st[S.at];
-if(b.hasAttribute('data-nav')){var d=+b.getAttribute('data-nav');if(d>0){if(cur=='you'&&!(num(S.age,0)>=16&&num(S.age,0)<=85)){alert('Please enter your age.');return;}
-if(cur=='kids'||cur=='pick')sync();if(cur=='pick'&&!S.g.length){document.getElementById('wz-err').hidden=false;return;}}go(S.at+d);}
+W.addEventListener('keydown',function(e){if(e.key=='Enter'&&e.target.tagName=='INPUT'&&steps()[S.at]!='plan'){e.preventDefault();next();}});
+W.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+if(b.hasAttribute('data-nav')){if(+b.getAttribute('data-nav')>0)next();else go(S.at-1);}
 else if(b.hasAttribute('data-addkid')){S.kids.push({n:'',b:Y0});render();var r=W.querySelectorAll('.wz-kid input[data-k=n]');if(r.length)r[r.length-1].focus();}
-else if(b.hasAttribute('data-delkid')){S.kids.splice(+b.getAttribute('data-delkid'),1);S.g=S.g.filter(function(g){return !T[g.t].ch;});render();}
+else if(b.hasAttribute('data-delkid')){var di=+b.getAttribute('data-delkid');S.kids.splice(di,1);S.g=S.g.filter(function(g){return !T[g.t].ch||g.c!=di;});S.g.forEach(function(g){if(T[g.t].ch&&g.c>di)g.c--;});render();}
 else if(b.hasAttribute('data-tile')){var k=b.getAttribute('data-tile');S.sel[k]=!S.sel[k];b.classList.toggle('on',!!S.sel[k]);b.setAttribute('aria-pressed',S.sel[k]?'true':'false');var er=document.getElementById('wz-err');if(er)er.hidden=true;save();}
 else if(b.hasAttribute('data-goto'))go(+b.getAttribute('data-goto'));
-else if(b.hasAttribute('data-addgoal')){S.sel.oth=true;S.g.push({t:'oth',a:10,y:Y0+5,i:6,n:''});go(3+S.g.length-1);}
+else if(b.hasAttribute('data-idea')){var d=(W._ideas||[])[+b.getAttribute('data-idea')];if(d){d.f(S);render();var f=W.querySelector('.wz-fit');if(f)f.scrollIntoView({behavior:'smooth',block:'center'});}}
+else if(b.hasAttribute('data-addgoal')){S.sel.oth=true;S.g.push(newGoal('oth'));go(3+S.g.length-1);}
 else if(b.hasAttribute('data-restart')){if(confirm('Clear this plan and start again?')){S=fresh();history.replaceState(null,'',location.pathname);go(0);}}
 else if(b.hasAttribute('data-share'))share(b.getAttribute('data-share'),b);});
 function link(){var u=location.origin+location.pathname+'#p='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(S)))));history.replaceState(null,'',u);return u;}
-function msg(){var o=plan(),R=o.R;return (S.name?S.name+'’s':'Our')+' family plan: '+o.goals.length+' goals, '+big(o.need)+' needed in all. Monthly SIP: '+inr(o.F)+(R.s>0?' fixed, or '+inr(o.ST)+' rising '+(R.s*100).toFixed(0)+'% a year':'')+'. See it and try your own numbers:';}
-function share(how,b){var u=link();if(how=='wa')window.open('https://wa.me/?text='+encodeURIComponent(msg()+' '+u),'_blank','noopener');
+function msg(){var o=plan();return (S.name?S.name+'’s':'Our')+' family plan: '+o.goals.length+' goals, '+big(o.need)+' needed in all. Monthly SIP: '+inr(o.F)+(o.s>0?' fixed, or '+inr(o.ST)+' rising '+(o.s*100).toFixed(0)+'% a year':'')+'. See it and try your own numbers:';}
+function share(how,b){if(how=='pdf'){pdf();return;}var u=link();if(how=='wa')window.open('https://wa.me/?text='+encodeURIComponent(msg()+' '+u),'_blank','noopener');
 else if(how=='native')navigator.share({title:'Our family goal plan',text:msg(),url:u}).catch(function(){});
 else{var ok=function(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link';},2000);};if(navigator.clipboard)navigator.clipboard.writeText(u).then(ok,function(){prompt('Copy this link:',u);});else prompt('Copy this link:',u);}}
-document.querySelectorAll('[data-start]').forEach(function(b){b.addEventListener('click',function(){W.scrollIntoView({behavior:'smooth',block:'start'});var i=W.querySelector('input');if(i)i.focus({preventScroll:true});});});
+document.querySelectorAll('[data-start]').forEach(function(b){b.addEventListener('click',function(){W.scrollIntoView({behavior:'smooth',block:'start'});var i=W.querySelector('input,button.wz-tile');if(i)i.focus({preventScroll:true});});});
 if(S.at>0){var c=document.querySelector('[data-start]');if(c)c.textContent='Continue your plan →';}
 render();})();'''
 
@@ -764,6 +848,7 @@ def main():
 <p class="lead">Founders, late starters, comebacks and record-breakers: the low point, the climb, the money behind it, and one line of hindsight you can borrow. Every story is researched, sourced and checked twice.</p></div></section>
 <a class="feature" href="/stories/{feat["slug"]}/"><div class="pic">{img_tag(feat, "(max-width:900px) 100vw, 690px", eager=True)}</div>
 <div>{kicker(fc)}<h2>{E(feat["title"])}</h2><p>{E(feat["summary"])}</p><blockquote><span class="hl">{E(feat["lesson"])}</span></blockquote><span class="more">Read the story ({mins(feat)} min)</span></div></a>
+<a class="plan-banner" href="{GOAL_PATH}"><div><span class="pb-kick">Free goal planner</span><b>Plan your future <mark>from here.</mark></b><span class="pb-sub">Your home, your children's education and wedding, the day work becomes optional. See what each will really cost, and what to save from this month.</span></div><span class="pb-emo" aria-hidden="true">🏠 🎓 💍 🌴</span><span class="pb-btn">Start planning →</span></a>
 {money_home}{most_html}<section class="block"><div class="shead"><h2>Latest stories</h2><a class="all" href="/stories/">All {len(stories)} stories</a></div>{grid(latest)}</section></div>
 <section class="wall"><div class="wrap"><h2>Lines worth borrowing</h2><p class="sub">Every story ends with one line of hindsight. Here are the latest. Tap one to read the story behind it.</p><div class="quotes">{wall_html}</div></div></section>
 <div class="wrap"><section class="block"><div class="shead"><h2>Browse by category</h2></div>{chips_html(by_cat)}</section>
@@ -976,7 +1061,9 @@ o.innerHTML='<b>CAGR: about '+(r*100).toFixed(1)+'% a year.</b><span>The value '
 <li><b>A SIP for each gap.</b> Whatever your savings cannot cover is filled by a monthly SIP that runs from now until that goal's year. When a goal is reached, its SIP stops, so your total SIP falls over time.</li>
 <li><b>Two ways to pay.</b> A <b>fixed SIP</b> stays the same every month until the goal. A <b>step-up SIP</b> starts lower and rises by the percentage you choose every year, which suits a growing salary. Both reach the same amount.</li>
 <li><b>Fees over several years.</b> For a course paid over, say, four years, the fees are split evenly across those years and each year's share grows with inflation until it is due.</li>
-<li><b>Retirement.</b> Your monthly expenses today are grown by inflation until the age you stop working. The planner then works out the fund that pays those expenses, still rising with inflation, until the age you plan for.</li>
+<li><b>Retirement.</b> Your monthly expenses today are grown by inflation until the age you stop working. The planner then works out the fund that pays those expenses, still rising with inflation, until the age you plan for. Your EPF, PPF and NPS, and any pension, are taken off what you still need.</li>
+<li><b>Yearly costs.</b> School fees and support for parents are paid every year, so each year's amount grows with inflation and gets its own place in your plan.</li>
+<li><b>Does it fit?</b> Tell the planner how much you can invest each month. If your plan needs more, it suggests changes, such as moving a goal two years later, and shows how much each one saves.</li>
 </ol>
 <h2>Example: a pilot course and a ₹1 crore price tag</h2>
 <p>A commercial pilot course costs about ₹1 crore today. For a child born in 2024 who starts training after Class 12, at 18, the money is needed in {2024 + 18}, {ex_n} years from now. If course fees rise 10% a year, the same course will cost about <b>{lakh_cr(ex_fv)}</b> by then.</p>
