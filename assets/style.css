@@ -326,9 +326,3 @@ footer .fine{font-size:13px;color:#9A93B8;margin-top:40px;padding-top:20px;borde
 @media(prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
 @media print{.top,footer,.aside,.share,.reel,.signup,.related,.progress{display:none}}
 .figcap{font:400 14px/1.4 var(--sans);color:var(--ink2);margin:-0px 0 8px}
-.money .mpoints{margin:14px 0 0;padding-left:1.4em}
-.money .mpoints li{margin:0 0 14px}
-.money .mpoints h3,.money h3{margin:0 0 4px;font:700 17px/1.35 var(--sans);color:var(--ink)}
-.money h3{margin-top:18px}
-.money .mborrow{margin:6px 0 0;padding-left:1.2em}
-.money .mborrow li{margin:0 0 8px}
