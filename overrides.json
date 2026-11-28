@@ -116,10 +116,20 @@
     "answer": "Lijjat Papad's annual turnover is reported at more than ₹1,600 crore. Seven women in Girgaum, Mumbai, started it on 15 March 1959 with ₹80 borrowed money, and about 45,000 women now co-own it.",
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "As an accountant, the number I keep coming back to is the ₹80. Adjusted for India's consumer price inflation, it is worth roughly ₹7,400 in today's money. That is less than many people spend on a phone. It was never the capital that built Lijjat.",
-        "What built it was compounding. Sales in the first year were just over ₹6,000. Reports now put turnover at about ₹1,600 crore. That is roughly 27 lakh times larger, which works out to sales growing about 26% a year, every year, for more than six decades. Even after removing inflation, real growth was about 18% a year. Very few Indian businesses of any kind have sustained that for so long.",
-        "One caution when reading these figures: ₹1,600 crore is turnover, not profit, and it is shared across about 45,000 members. That is roughly ₹3.6 lakh of sales per member each year, before the cost of flour, spices and packing. Lijjat's real achievement is not one big number. It is thousands of steady, modest earnings that the women own outright."
+      "intro": "To understand Lijjat's success, look at three numbers: the money it started with, how fast it grew, and what each member actually earns.",
+      "points": [
+        [
+          "The ₹80 start: capital was never the advantage",
+          "Adjusted for India's consumer price inflation, the ₹80 the women borrowed in 1959 is worth roughly ₹7,400 today, less than many people spend on a phone. As an accountant, this is the number I keep coming back to. Lijjat was not built on money."
+        ],
+        [
+          "Compounding: the real engine of growth",
+          "Sales in the first year were just over ₹6,000. Reports now put turnover at about ₹1,600 crore, roughly 27 lakh times larger. That works out to sales growing about 26% a year, every year, for more than six decades, or about 18% a year after removing inflation. Very few Indian businesses of any kind have sustained that for so long."
+        ],
+        [
+          "Turnover is not profit: read the figure correctly",
+          "₹1,600 crore is shared across about 45,000 members. That is roughly ₹3.6 lakh of sales per member each year, before the cost of flour, spices and packing. Lijjat's real achievement is not one big number. It is thousands of steady, modest earnings that the women own outright."
+        ]
       ],
       "table": [
         [
@@ -143,6 +153,12 @@
           "about ₹3.6 lakh a year"
         ]
       ],
+      "borrow": [
+        "Start with what you have: a small amount spent on something people buy every week can be enough to begin.",
+        "Value consistency over speed: steady growth for decades beats one good year. Even 15% a year turns ₹1 lakh into about ₹66 lakh over 30 years.",
+        "Check the right number: when you read a company's turnover, ask what is left after costs and how many people share it."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own savings are growing.",
       "note": "How we calculated this: inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, 1960 to 2025; 1960 is the earliest year available, so it stands in for 1959). Growth rates are compound annual rates from first-year sales (1959-60) to the ₹1,600 crore turnover reported in 2023. Figures are rounded. General education, not financial advice."
     }
   },
