@@ -556,8 +556,8 @@ def list_pages(base, items, title, desc, heading, head_html, crumb_items, below=
         ld = [crumbs([(n_, u) for n_, u in crumb_items]),
               {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': heading, 'url': SITE + path, 'description': desc, 'publisher': ORG,
                'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE}/stories/{s["slug"]}/', 'name': s['title']} for i, s in enumerate(chunk)]}}]
-        # page 2+ of a list: crawlable for links, kept out of the index (thin list pages)
-        write(path.lstrip('/') + 'index.html', page(title + (f' (page {n})' if n > 1 else ''), desc, body, path, ld=ld, noindex=hide or n > 1, ads=n == 1 and not hide))
+        # page 2+ of a list: indexable again (27 Nov 2026) so Google keeps reaching older stories through it; still no ads
+        write(path.lstrip('/') + 'index.html', page(title + (f' (page {n})' if n > 1 else ''), desc, body, path, ld=ld, noindex=hide, ads=n == 1 and not hide))
 
 
 def main():
