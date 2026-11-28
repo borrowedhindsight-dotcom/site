@@ -167,9 +167,16 @@
     "answer": "Ray Kroc was 52 when he met Dick and Mac McDonald in San Bernardino in 1954, while selling milkshake mixers. He opened his first McDonald's in 1955 and bought the brothers out for $2.7 million in 1961.",
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "In 1961 Ray Kroc paid the McDonald brothers $2.7 million for their rights, about $28 million in today's dollars. Before that deal, the brothers took just 0.5% of their franchisees' sales. That is a small share of a fast-growing business, and Kroc's own cut was only 1.4%.",
-        "The money was really made in property. Harry Sonneborn's plan had the company own or lease the land and rent it to franchisees, so rent arrived every month whatever happened to burger prices. When McDonald's listed in 1965 at $22.50 a share, about $224 today, investors were buying a property business as much as a restaurant chain."
+      "intro": "To understand how McDonald's made its money, look at two numbers: what Ray Kroc paid for the brothers' rights, and where the steady income really came from.",
+      "points": [
+        [
+          "The 1961 buyout: a small cut of a big business",
+          "In 1961 Ray Kroc paid the McDonald brothers $2.7 million for their rights, about $28 million in today's dollars. Before that deal, the brothers took just 0.5% of their franchisees' sales. That is a small share of a fast-growing business, and Kroc's own cut was only 1.4%."
+        ],
+        [
+          "Property: the real money machine",
+          "The money was really made in property. Harry Sonneborn's plan had the company own or lease the land and rent it to franchisees, so rent arrived every month whatever happened to burger prices. When McDonald's listed in 1965 at $22.50 a share, about $224 today, investors were buying a property business as much as a restaurant chain."
+        ]
       ],
       "table": [
         [
@@ -189,6 +196,11 @@
           "about 10.5 times"
         ]
       ],
+      "borrow": [
+        "Look for the income that arrives every month, whatever happens to sales. Steady cash makes a business easier to survive and to grow.",
+        "A thin percentage of a fast-growing business can be worth less than owning the ground it stands on."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     }
   },
@@ -201,9 +213,16 @@
     "answer": "Marvel filed for Chapter 11 bankruptcy in December 1996 after the comics and trading-card boom collapsed. It merged with Toy Biz in 1998, financed its own films, made Iron Man in 2008, and Disney bought it for about $4 billion in 2009.",
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "In 1998 Marvel reportedly offered Sony almost all its film characters for $25 million, about $48 million in today's dollars. Eleven years later Disney paid about $4 billion for the company, 160 times that offer, or nearly $5.8 billion today.",
-        "What changed in between was not the characters but who kept the profit. Selling film rights for a fixed fee turns a character into a one-off payment. In 2005 Marvel instead borrowed $525 million against its remaining rights to make its own films. Iron Man earned about $585 million, roughly $850 million today, and that income went to Marvel."
+      "intro": "Marvel's comeback comes down to two numbers: what it once asked for its characters, and what Disney paid for the whole company eleven years later.",
+      "points": [
+        [
+          "The 1998 offer: selling the future for a fixed fee",
+          "In 1998 Marvel reportedly offered Sony almost all its film characters for $25 million, about $48 million in today's dollars. Eleven years later Disney paid about $4 billion for the company, 160 times that offer, or nearly $5.8 billion today."
+        ],
+        [
+          "Keeping the profit: why Iron Man changed everything",
+          "What changed in between was not the characters but who kept the profit. Selling film rights for a fixed fee turns a character into a one-off payment. In 2005 Marvel instead borrowed $525 million against its remaining rights to make its own films. Iron Man earned about $585 million, roughly $850 million today, and that income went to Marvel."
+        ]
       ],
       "table": [
         [
@@ -223,6 +242,11 @@
           "about 160 times"
         ]
       ],
+      "borrow": [
+        "Before you sell something once, ask whether you could earn from it again and again by keeping it.",
+        "Borrowing to build your own asset is risky, but it can be the only way to keep the upside."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     }
   },
@@ -252,9 +276,16 @@
   "how-infosys-started-with-10000-rupees-sudha-murty-1981": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "The famous ₹10,000 sounds tiny, but 1981 prices were very different. Adjusted for inflation, it is worth about ₹2.1 lakh today. That is real savings for a young family, and Sudha Murty still kept ₹250 back for emergencies. That habit tells you more about how Infosys was run than the headline number does.",
-        "The growth is the real lesson. In 1999, the year it listed on Nasdaq, Infosys crossed US$100 million in revenue. It now reports about US$20 billion, roughly 200 times more. That is about 23% growth a year for 26 years, at a company already large when the run began."
+      "intro": "To read the Infosys story correctly, look at two things: what ₹10,000 meant in 1981, and how fast the company grew once it was already large.",
+      "points": [
+        [
+          "The ₹10,000 start: real savings, carefully spent",
+          "The famous ₹10,000 sounds tiny, but 1981 prices were very different. Adjusted for inflation, it is worth about ₹2.1 lakh today. That is real savings for a young family, and Sudha Murty still kept ₹250 back for emergencies. That habit tells you more about how Infosys was run than the headline number does."
+        ],
+        [
+          "Growth: the real lesson",
+          "The growth is the real lesson. In 1999, the year it listed on Nasdaq, Infosys crossed US$100 million in revenue. It now reports about US$20 billion, roughly 200 times more. That is about 23% growth a year for 26 years, at a company already large when the run began."
+        ]
       ],
       "table": [
         [
@@ -274,6 +305,11 @@
           "about 23%"
         ]
       ],
+      "borrow": [
+        "Keep a small reserve back, even when you are investing almost everything. It buys time when things go wrong.",
+        "Steady growth over decades matters more than a dramatic start."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
     },
     "answer": "₹10,000. She has said she had ₹10,250 in savings in 1981, kept ₹250 for herself and gave the rest to N. R. Narayana Murthy, as reported by Business Standard, Deccan Herald and Business Today.",
@@ -282,9 +318,16 @@
   "sunil-bharti-mittal-20000-rupees-ludhiana-to-airtel": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Sunil Mittal's ₹20,000 from 1976 is worth about ₹6.3 lakh in today's money. That is a serious sum for an 18-year-old, but it is roughly what a small trader might put into a shop today, not venture capital.",
-        "As an accountant, what stands out is that it was borrowed, from his father. Borrowed money has to come back, which forces a business to sell something early. A bicycle-parts workshop does exactly that: small, steady orders that pay the loan, long before anything as ambitious as a phone network."
+      "intro": "Sunil Mittal's start comes down to two facts: how much ₹20,000 really was in 1976, and the fact that it was borrowed.",
+      "points": [
+        [
+          "The ₹20,000: a shopkeeper's sum, not venture capital",
+          "Sunil Mittal's ₹20,000 from 1976 is worth about ₹6.3 lakh in today's money. That is a serious sum for an 18-year-old, but it is roughly what a small trader might put into a shop today, not venture capital."
+        ],
+        [
+          "Borrowed money: why it forced early sales",
+          "As an accountant, what stands out is that it was borrowed, from his father. Borrowed money has to come back, which forces a business to sell something early. A bicycle-parts workshop does exactly that: small, steady orders that pay the loan, long before anything as ambitious as a phone network."
+        ]
       ],
       "table": [
         [
@@ -296,6 +339,11 @@
           "about 31 times"
         ]
       ],
+      "borrow": [
+        "If you borrow to start, choose a first business that can earn quickly and pay the loan back.",
+        "Small, steady orders can fund the big idea later."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
     },
     "answer": "In April 1976, at 18, he borrowed ₹20,000 and started a small business in Ludhiana making bicycle crankshafts for local bicycle manufacturers.",
@@ -304,9 +352,16 @@
   "ronald-wayne-apple-800": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Ronald Wayne's $800 from 1976 is worth about $4,400 in today's dollars. Including the later $1,500, he received $2,300, about $12,700 today. Set against estimates of more than $400 billion for a 10% stake now, it looks like the worst trade in history.",
-        "The accountant's view is different. In a general partnership, each partner can be personally liable for the business's debts. Jobs had just borrowed $15,000 for parts, about $83,000 today, and Wayne had a house and savings that creditors could reach. He was not selling a share of Apple's future. He was buying protection from a debt he could not control."
+      "intro": "Ronald Wayne's famous sale looks different once you check two things: what $800 was worth, and what he was really protecting himself from.",
+      "points": [
+        [
+          "The $800 sale: the 'worst trade' on paper",
+          "Ronald Wayne's $800 from 1976 is worth about $4,400 in today's dollars. Including the later $1,500, he received $2,300, about $12,700 today. Set against estimates of more than $400 billion for a 10% stake now, it looks like the worst trade in history."
+        ],
+        [
+          "Liability: what he was really buying",
+          "The accountant's view is different. In a general partnership, each partner can be personally liable for the business's debts. Jobs had just borrowed $15,000 for parts, about $83,000 today, and Wayne had a house and savings that creditors could reach. He was not selling a share of Apple's future. He was buying protection from a debt he could not control."
+        ]
       ],
       "table": [
         [
@@ -326,6 +381,11 @@
           "about $1.59 million"
         ]
       ],
+      "borrow": [
+        "Before you join a partnership, ask who is personally responsible for its debts.",
+        "Judge a decision by what was known at the time, not by what happened forty years later."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "He gave up his 10% stake for $800 when an amendment dated 12 April 1976 removed him from the partnership. He later received a further $1,500 to give up any future claims, a total of $2,300.",
@@ -334,9 +394,16 @@
   "airbnb-rejected-by-seven-investors-2008-150000-cereal-boxes": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "In 2008 the founders asked for $150,000 for 10% of the company, which valued Airbnb at $1.5 million. In today's dollars that is about $220,000 for a tenth of the business. Seven investors said no.",
-        "At its first close as a public company in 2020, Airbnb was worth about $86.5 billion, roughly 58,000 times that 2008 valuation. As an accountant I would add one caution: early shares get diluted by every later funding round, so a 10% stake would have shrunk well before 2020. It would still have been worth billions."
+      "intro": "Airbnb's rejection story rests on two numbers: the 2008 asking price, and the company's value when it went public.",
+      "points": [
+        [
+          "The 2008 offer: a tenth of the company for $150,000",
+          "In 2008 the founders asked for $150,000 for 10% of the company, which valued Airbnb at $1.5 million. In today's dollars that is about $220,000 for a tenth of the business. Seven investors said no."
+        ],
+        [
+          "The 2020 value: and why 10% would have shrunk",
+          "At its first close as a public company in 2020, Airbnb was worth about $86.5 billion, roughly 58,000 times that 2008 valuation. As an accountant I would add one caution: early shares get diluted by every later funding round, so a 10% stake would have shrunk well before 2020. It would still have been worth billions."
+        ]
       ],
       "table": [
         [
@@ -356,6 +423,11 @@
           "about $30,000 (about $44,000 today)"
         ]
       ],
+      "borrow": [
+        "An early 'no' from investors says little about the idea; seven investors in a row were wrong.",
+        "Early stakes get diluted by later funding rounds, so count on owning less over time."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "Seven investors were introduced to Airbnb's founders in June 2008. Five replied with a no and two never replied. Brian Chesky later published the emails under the title \"7 Rejections\".",
@@ -364,9 +436,16 @@
   "jensen-huang-cleaned-toilets-dennys-dishwasher-nvidia-5-trillion": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "After Nvidia launched CUDA in 2006, its costs rose while revenue stood still, and its market value fell from about $12 billion to roughly $2 to $3 billion. Investors were treating the extra cost as waste.",
-        "On 29 October 2025 Nvidia closed at about $5.03 trillion, roughly 2,000 times its low point. In accounting terms, CUDA was spending that looked like an expense for years but behaved like an investment. The balance sheet could not show its value until the market for AI chips arrived."
+      "intro": "Nvidia's rise comes down to one decision and what the market thought of it: CUDA's cost, and what it was later worth.",
+      "points": [
+        [
+          "The CUDA years: a cost that looked like waste",
+          "After Nvidia launched CUDA in 2006, its costs rose while revenue stood still, and its market value fell from about $12 billion to roughly $2 to $3 billion. Investors were treating the extra cost as waste."
+        ],
+        [
+          "The payoff: an investment the accounts could not show",
+          "On 29 October 2025 Nvidia closed at about $5.03 trillion, roughly 2,000 times its low point. In accounting terms, CUDA was spending that looked like an expense for years but behaved like an investment. The balance sheet could not show its value until the market for AI chips arrived."
+        ]
       ],
       "table": [
         [
@@ -386,6 +465,11 @@
           "roughly 2,000 times"
         ]
       ],
+      "borrow": [
+        "Some spending only looks like an expense until the market catches up with it.",
+        "If you believe in a long-term bet, be ready for years when the numbers say you are wrong."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
     },
     "answer": "Yes. As a boy at a Kentucky boarding school he was given the job of cleaning the bathrooms, and as a teenager at Denny's his work included washing dishes and cleaning toilets, as reported by Fortune and CNBC.",
@@ -394,9 +478,16 @@
   "blockbuster-netflix-50-million-offer-2000": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Netflix's asking price in 2000 was $50 million, about $91 million in today's dollars. Blockbuster had about $6 billion of annual revenue, so the price was less than 1% of one year's sales.",
-        "But price is not the only number an accountant looks at. Netflix expected to lose about $57 million that year, more than its own asking price. Buying it meant taking on those losses as well. The deal looked expensive on the profit and loss account and cheap only in hindsight."
+      "intro": "Blockbuster's famous 'no' looks different once you check two numbers: the asking price, and the losses that came with it.",
+      "points": [
+        [
+          "The price: under 1% of a year's sales",
+          "Netflix's asking price in 2000 was $50 million, about $91 million in today's dollars. Blockbuster had about $6 billion of annual revenue, so the price was less than 1% of one year's sales."
+        ],
+        [
+          "The losses: why it looked expensive at the time",
+          "But price is not the only number an accountant looks at. Netflix expected to lose about $57 million that year, more than its own asking price. Buying it meant taking on those losses as well. The deal looked expensive on the profit and loss account and cheap only in hindsight."
+        ]
       ],
       "table": [
         [
@@ -416,6 +507,11 @@
           "nearly $1 billion"
         ]
       ],
+      "borrow": [
+        "When you buy a business, you buy its losses too. Look past the price tag.",
+        "A deal that looks cheap in hindsight may have looked costly with the facts of the day."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "Yes, according to Netflix's founders. In 2000 Reed Hastings and Marc Randolph offered to sell Netflix to Blockbuster for $50 million and were turned down. Former Blockbuster CEO John Antioco has said the offer was off-the-cuff and that no serious talks took place.",
@@ -424,9 +520,16 @@
   "kailash-katkar-quick-heal-calculator-repair-to-antivirus": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Kailash Katkar put ₹15,000 into his repair business in 1991, about ₹1.3 lakh in today's money. The first Quick Heal sold in 1995 for ₹700, about ₹4,300 today. Software was expensive then, even for a small firm.",
-        "Two decades later, in 2016, the company raised about ₹451 crore in its share issue at ₹321 a share. The shares opened about 5% below that price. A modest first day does not change the underlying story: a repair shop that started with ₹15,000 became a listed company."
+      "intro": "Quick Heal's journey is easiest to see in two numbers: what it started with, and what it raised when it listed.",
+      "points": [
+        [
+          "The ₹15,000 start: a repair shop's budget",
+          "Kailash Katkar put ₹15,000 into his repair business in 1991, about ₹1.3 lakh in today's money. The first Quick Heal sold in 1995 for ₹700, about ₹4,300 today. Software was expensive then, even for a small firm."
+        ],
+        [
+          "The 2016 listing: from repair shop to listed company",
+          "Two decades later, in 2016, the company raised about ₹451 crore in its share issue at ₹321 a share. The shares opened about 5% below that price. A modest first day does not change the underlying story: a repair shop that started with ₹15,000 became a listed company."
+        ]
       ],
       "table": [
         [
@@ -442,6 +545,11 @@
           "about ₹451 crore at ₹321 a share"
         ]
       ],
+      "borrow": [
+        "A small service business can fund the product you really want to build.",
+        "Do not judge a company by its first day on the stock market."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
     },
     "answer": "Brothers Kailash and Sanjay Katkar from Pune. Kailash ran a computer repair business, and Sanjay, a computer science student, wrote the antivirus tools that became Quick Heal.",
@@ -450,9 +558,16 @@
   "flipkart-story-two-friends-small-flat-online-bookstore": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Flipkart's first outside money was $1 million from Accel in 2009, about $1.5 million in today's dollars. In 2018 Walmart's deal valued the company at around $20.8 billion, roughly 20,800 times that first cheque.",
-        "The headline $16 billion is often misread as the price of the whole company. It actually bought a stake of about 77%, including $2 billion of new money that went into Flipkart itself rather than to the sellers."
+      "intro": "Flipkart's story is easiest to read in two numbers: its first outside cheque, and what Walmart's deal really bought.",
+      "points": [
+        [
+          "The first cheque: $1 million in 2009",
+          "Flipkart's first outside money was $1 million from Accel in 2009, about $1.5 million in today's dollars. In 2018 Walmart's deal valued the company at around $20.8 billion, roughly 20,800 times that first cheque."
+        ],
+        [
+          "The $16 billion: what the headline really means",
+          "The headline $16 billion is often misread as the price of the whole company. It actually bought a stake of about 77%, including $2 billion of new money that went into Flipkart itself rather than to the sellers."
+        ]
       ],
       "table": [
         [
@@ -472,6 +587,11 @@
           "about $20.8 billion"
         ]
       ],
+      "borrow": [
+        "When you read a big deal, ask what share was bought and how much money went into the company itself.",
+        "Early investors who back a team in a small flat can see returns that sound impossible later."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "Sachin Bansal and Binny Bansal, former Amazon employees who met at IIT Delhi, launched Flipkart in 2007 as an online bookstore from a two-bedroom flat in Koramangala, Bengaluru.",
@@ -480,9 +600,16 @@
   "amul-story-247-litres-of-milk-two-villages-india-biggest-dairy-brand": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "In 2025-26 the Amul brand's turnover crossed ₹1 lakh crore. Spread across about 36 lakh farmer-owners, that is roughly ₹2.8 lakh of sales for each farmer family, though it is turnover, not profit.",
-        "The federation's own turnover rose from ₹65,911 crore to ₹73,450 crore, about 11% in a year. Even the film Manthan (1976) was paid for by about five lakh farmers giving ₹2 each. That ₹2 is worth about ₹63 today, and the total of about ₹10 lakh would be about ₹3.1 crore."
+      "intro": "Amul's scale is easiest to see in two figures: its turnover today, and the tiny contributions that once paid for a film.",
+      "points": [
+        [
+          "The turnover: shared across lakhs of farmer-owners",
+          "In 2025-26 the Amul brand's turnover crossed ₹1 lakh crore. Spread across about 36 lakh farmer-owners, that is roughly ₹2.8 lakh of sales for each farmer family, though it is turnover, not profit."
+        ],
+        [
+          "₹2 each: what many small amounts can do",
+          "The federation's own turnover rose from ₹65,911 crore to ₹73,450 crore, about 11% in a year. Even the film Manthan (1976) was paid for by about five lakh farmers giving ₹2 each. That ₹2 is worth about ₹63 today, and the total of about ₹10 lakh would be about ₹3.1 crore."
+        ]
       ],
       "table": [
         [
@@ -502,6 +629,11 @@
           "about ₹63 each"
         ]
       ],
+      "borrow": [
+        "Many small, regular contributions can build something no single person could afford.",
+        "Turnover is not profit. Always ask how many people share the number."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
     },
     "answer": "Amul started in 1946 when dairy farmers in Kheda (Kaira) district, Gujarat, formed the Kaira District Co-operative Milk Producers' Union after a milk strike against a monopoly buyer. It began with two village dairy societies and 247 litres of milk.",
@@ -510,9 +642,16 @@
   "alakh-pandey-physicswallah-free-youtube-lessons-to-unicorn": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "PhysicsWallah's first outside round, in June 2022, valued it at $1.1 billion. By September 2024 it was valued at $2.8 billion, about 2.5 times higher in just over two years.",
-        "Its share issue then raised about ₹3,480 crore at ₹109 a share. For an accountant, the interesting part is the order: years of free YouTube lessons built the audience first, and paid courses came later. The audience was the asset, even though it never appeared on a balance sheet."
+      "intro": "PhysicsWallah's rise shows in two numbers: its valuations two years apart, and the order in which it built the business.",
+      "points": [
+        [
+          "The valuations: 2.5 times in two years",
+          "PhysicsWallah's first outside round, in June 2022, valued it at $1.1 billion. By September 2024 it was valued at $2.8 billion, about 2.5 times higher in just over two years."
+        ],
+        [
+          "The audience first: an asset with no line on the balance sheet",
+          "Its share issue then raised about ₹3,480 crore at ₹109 a share. For an accountant, the interesting part is the order: years of free YouTube lessons built the audience first, and paid courses came later. The audience was the asset, even though it never appeared on a balance sheet."
+        ]
       ],
       "table": [
         [
@@ -528,6 +667,11 @@
           "about ₹3,480 crore at ₹109 a share"
         ]
       ],
+      "borrow": [
+        "Giving real value away for free can build the audience that later pays.",
+        "Some of a business's most valuable assets never show up in its accounts."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
     },
     "answer": "He started PhysicsWallah as a YouTube channel in 2016, posting free physics lessons for JEE, NEET and Class 11 and 12 students. The app and paid courses followed in May 2020.",
@@ -536,9 +680,16 @@
   "karsanbhai-patel-nirma-detergent-3-rupees-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "In 1969 Nirma sold at ₹3 a kilo when the cheapest rival cost ₹13. In today's money that is about ₹160 against about ₹690. Nirma was about 77% cheaper.",
-        "A price that low only works with very low costs. Patel made the powder himself, had no shop and no advertising at first, and sold door to door by bicycle while keeping his day job. As an accountant, I see a business that kept its overheads near zero until sales could carry them."
+      "intro": "Nirma's success comes down to two numbers: its price against the cheapest rival, and the costs that made that price possible.",
+      "points": [
+        [
+          "The price: 77% cheaper than the cheapest rival",
+          "In 1969 Nirma sold at ₹3 a kilo when the cheapest rival cost ₹13. In today's money that is about ₹160 against about ₹690. Nirma was about 77% cheaper."
+        ],
+        [
+          "The costs: overheads kept near zero",
+          "A price that low only works with very low costs. Patel made the powder himself, had no shop and no advertising at first, and sold door to door by bicycle while keeping his day job. As an accountant, I see a business that kept its overheads near zero until sales could carry them."
+        ]
       ],
       "table": [
         [
@@ -558,6 +709,11 @@
           "about $1.4 billion"
         ]
       ],
+      "borrow": [
+        "You can only sell cheaply for long if your costs are lower still.",
+        "Keep your day job and your overheads low until sales can carry the business."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
     },
     "answer": "Karsanbhai Patel (also spelled Karshanbhai Patel), a chemistry graduate who worked as a lab technician in Gujarat, started Nirma in 1969 by making detergent powder in his backyard near Ahmedabad.",
@@ -566,9 +722,16 @@
   "brian-acton-rejected-by-facebook-whatsapp-19-billion": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Facebook's 2014 deal was worth up to $19 billion for WhatsApp, which had more than 450 million monthly users. That is about $42 for each user.",
-        "Only $4 billion, about 21%, was cash. About $12 billion was Facebook shares, and $3 billion was restricted stock for founders and staff that they had to stay to earn. As an accountant, I would say the headline number tells you the value. The mix of cash and shares tells you how much risk the sellers took on."
+      "intro": "The WhatsApp deal is easiest to read in two parts: the headline value per user, and how much of it was cash.",
+      "points": [
+        [
+          "The price: about $42 a user",
+          "Facebook's 2014 deal was worth up to $19 billion for WhatsApp, which had more than 450 million monthly users. That is about $42 for each user."
+        ],
+        [
+          "The mix: cash, shares and strings attached",
+          "Only $4 billion, about 21%, was cash. About $12 billion was Facebook shares, and $3 billion was restricted stock for founders and staff that they had to stay to earn. As an accountant, I would say the headline number tells you the value. The mix of cash and shares tells you how much risk the sellers took on."
+        ]
       ],
       "table": [
         [
@@ -588,6 +751,11 @@
           "$50 million"
         ]
       ],
+      "borrow": [
+        "When you sell something, the mix of cash and shares matters as much as the headline price.",
+        "A rejection can redirect you to something far bigger."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
     },
     "answer": "Yes. Brian Acton tweeted on 3 August 2009 that Facebook had turned him down. Earlier, on 23 May 2009, he had tweeted that Twitter had also rejected him.",
@@ -596,9 +764,16 @@
   "stewart-butterfield-glitch-game-slack-origin-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Glitch cost about $17 million to develop, about $24 million in today's dollars, and it failed. The chat tool the team built for themselves while making it became Slack.",
-        "In December 2020 Salesforce agreed to pay $27.7 billion, about 1,600 times what Glitch cost. That was also about 69 times Slack's yearly revenue of around $400 million. Accountants would call Glitch a sunk cost, but here the cost bought a tool nobody had planned to sell."
+      "intro": "Slack's origin shows in two numbers: what the failed game cost, and what Salesforce paid for the tool built along the way.",
+      "points": [
+        [
+          "Glitch: an expensive failure",
+          "Glitch cost about $17 million to develop, about $24 million in today's dollars, and it failed. The chat tool the team built for themselves while making it became Slack."
+        ],
+        [
+          "Slack: the sunk cost that paid back 1,600 times",
+          "In December 2020 Salesforce agreed to pay $27.7 billion, about 1,600 times what Glitch cost. That was also about 69 times Slack's yearly revenue of around $400 million. Accountants would call Glitch a sunk cost, but here the cost bought a tool nobody had planned to sell."
+        ]
       ],
       "table": [
         [
@@ -618,6 +793,11 @@
           "about 1,600 times"
         ]
       ],
+      "borrow": [
+        "Look at the tools you build for yourself. Others may need them too.",
+        "A failed project can still leave behind something valuable."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "Slack began as an internal chat tool that Stewart Butterfield's team at Tiny Speck built while making the online game Glitch. After Glitch closed in December 2012, they turned the tool into a product, which launched publicly on 12 February 2014.",
@@ -626,9 +806,16 @@
   "phil-knight-50-dollars-shoes-car-trunk-nike-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Phil Knight's $50 from his father is worth only about $500 in today's dollars. His first year of sales, about $8,000, would be about $81,000 today. It was a side business run from a car boot, not a company.",
-        "The Swoosh logo cost $35 in 1971, about $270 today, possibly the best-value design fee ever paid. By 2016 Nike's yearly sales topped $30 billion. The early years show a familiar pattern: sales grew, but the business kept running short of cash, because growing a stock business ties money up in shoes before customers pay."
+      "intro": "Nike's early years show in three small numbers: the $50 loan, the first year's sales and the $35 logo.",
+      "points": [
+        [
+          "The start: a side business from a car boot",
+          "Phil Knight's $50 from his father is worth only about $500 in today's dollars. His first year of sales, about $8,000, would be about $81,000 today. It was a side business run from a car boot, not a company."
+        ],
+        [
+          "Growth: why a growing business still ran short of cash",
+          "The Swoosh logo cost $35 in 1971, about $270 today, possibly the best-value design fee ever paid. By 2016 Nike's yearly sales topped $30 billion. The early years show a familiar pattern: sales grew, but the business kept running short of cash, because growing a stock business ties money up in shoes before customers pay."
+        ]
       ],
       "table": [
         [
@@ -648,6 +835,11 @@
           "over $30 billion"
         ]
       ],
+      "borrow": [
+        "Growing a stock business ties up cash before customers pay, so plan for it.",
+        "A small, early spend can become your most valuable asset."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "In 1962 he borrowed $50 from his father to order running shoes from Onitsuka in Japan. He sold them from the trunk of his car under the name Blue Ribbon Sports, which later became Nike.",
@@ -656,9 +848,16 @@
   "instagram-13-employees-1-billion-facebook-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Facebook's offer of about $1 billion for a 13-person company works out to about $77 million per employee. Because much of it was paid in Facebook shares, which fell after Facebook's stock market listing, it was worth about $715 million at completion, still $55 million per person.",
-        "Instagram had no revenue at all. Facebook was paying for users and growth, not for profits. The founders' $500,000 seed round in 2010, about $720,000 today, bought a stake in something worth over a thousand times more within two years."
+      "intro": "Instagram's sale is easiest to read in two numbers: the price per employee, and what the deal was actually worth when it closed.",
+      "points": [
+        [
+          "The price: $77 million per employee on paper",
+          "Facebook's offer of about $1 billion for a 13-person company works out to about $77 million per employee. Because much of it was paid in Facebook shares, which fell after Facebook's stock market listing, it was worth about $715 million at completion, still $55 million per person."
+        ],
+        [
+          "No revenue: paying for users and growth",
+          "Instagram had no revenue at all. Facebook was paying for users and growth, not for profits. The founders' $500,000 seed round in 2010, about $720,000 today, bought a stake in something worth over a thousand times more within two years."
+        ]
       ],
       "table": [
         [
@@ -678,6 +877,11 @@
           "about $720,000"
         ]
       ],
+      "borrow": [
+        "If you are paid in shares, the final value depends on the buyer's share price.",
+        "Growth and users can be worth more to a buyer than today's profits."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "Instagram had 13 employees when Facebook agreed to buy it in April 2012, as reported by Business Standard and TechCrunch. It also had no revenue at the time.",
@@ -686,9 +890,16 @@
   "colonel-sanders-started-over-at-65-kfc-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "In 1964 Sanders sold most of the business for $2 million, about $20 million in today's dollars, plus $40,000 a year for life, about $400,000 a year today.",
-        "Britannica estimates he was earning about $300,000 a year from it by then. So the price was under seven years of his income, plus a salary. For a man in his seventies, swapping uncertain future earnings for cash and a guaranteed income was a reasonable choice."
+      "intro": "Colonel Sanders' sale comes down to two numbers: the price he accepted, and what the business was earning him.",
+      "points": [
+        [
+          "The 1964 sale: $2 million plus a salary for life",
+          "In 1964 Sanders sold most of the business for $2 million, about $20 million in today's dollars, plus $40,000 a year for life, about $400,000 a year today."
+        ],
+        [
+          "The trade-off: certainty over a bigger gamble",
+          "Britannica estimates he was earning about $300,000 a year from it by then. So the price was under seven years of his income, plus a salary. For a man in his seventies, swapping uncertain future earnings for cash and a guaranteed income was a reasonable choice."
+        ]
       ],
       "table": [
         [
@@ -708,6 +919,11 @@
           "under 7 years"
         ]
       ],
+      "borrow": [
+        "Swapping uncertain future income for a sure payment can be the right call, depending on your age and needs.",
+        "It is never too late to start, or to sell well."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "He licensed his recipe to his first franchisee, Pete Harman, in 1952, when he was 61 or 62. He turned franchising into his full-time work in the mid-1950s at about 65, after a highway bypass forced him to sell his Corbin, Kentucky cafe.",
@@ -716,9 +932,16 @@
   "tata-indica-ford-talks-to-buying-jaguar-land-rover-2008": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Tata Motors paid Ford a net US$2.3 billion in cash for Jaguar Land Rover in 2008, about $3.4 billion in today's dollars.",
-        "The word 'net' matters. Ford also put about US$600 million into Jaguar Land Rover's pension plans, so Ford received less than the headline figure. The deal was on a cash-free, debt-free basis, meaning Tata did not take on the brands' existing borrowings."
+      "intro": "The Jaguar Land Rover deal turns on two small words in the price: 'net' and 'debt-free'.",
+      "points": [
+        [
+          "The price: US$2.3 billion net",
+          "Tata Motors paid Ford a net US$2.3 billion in cash for Jaguar Land Rover in 2008, about $3.4 billion in today's dollars."
+        ],
+        [
+          "The fine print: pensions and debt",
+          "The word 'net' matters. Ford also put about US$600 million into Jaguar Land Rover's pension plans, so Ford received less than the headline figure. The deal was on a cash-free, debt-free basis, meaning Tata did not take on the brands' existing borrowings."
+        ]
       ],
       "table": [
         [
@@ -734,6 +957,11 @@
           "cash-free, debt-free"
         ]
       ],
+      "borrow": [
+        "Read the fine print of any deal: 'net', 'cash-free' and 'debt-free' change what was really paid.",
+        "The deal headline is rarely the whole story."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "Yes. Tata Motors completed the purchase on 2 June 2008 for a net US$2.3 billion in cash, according to its own filing with the US Securities and Exchange Commission. PTI reports the same price.",
@@ -742,9 +970,16 @@
   "stephen-king-carrie-first-novel-in-the-trash-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Doubleday's advance for Carrie was $2,500. The paperback rights then sold for $400,000, 160 times as much.",
-        "For a teacher earning a modest salary, that difference was life-changing. King said he realised he would not have to teach any more. An advance is a prepayment against future royalties; the paperback sale showed what the book was actually worth to the market."
+      "intro": "Carrie's success shows in two numbers: the advance, and what the paperback rights sold for.",
+      "points": [
+        [
+          "The advance: $2,500",
+          "Doubleday's advance for Carrie was $2,500. The paperback rights then sold for $400,000, 160 times as much."
+        ],
+        [
+          "The paperback rights: 160 times more",
+          "For a teacher earning a modest salary, that difference was life-changing. King said he realised he would not have to teach any more. An advance is a prepayment against future royalties; the paperback sale showed what the book was actually worth to the market."
+        ]
       ],
       "table": [
         [
@@ -760,6 +995,11 @@
           "160 times"
         ]
       ],
+      "borrow": [
+        "An advance is only the first payment. What the market pays later shows the real value.",
+        "Keep the work you are tempted to throw away; it might be the one."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Figures come from the sources listed below and are rounded. General education, not financial advice."
     },
     "answer": "Yes. He threw the first few pages in the wastebasket because he thought they were not working. His wife Tabitha pulled them out, read them and urged him to keep going.",
@@ -768,9 +1008,16 @@
   "kiran-mazumdar-shaw-biocon-garage-10000-rupees-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Kiran Mazumdar-Shaw started Biocon in 1978 with ₹10,000, about ₹2.8 lakh in today's money. Prices have risen about 28 times since then.",
-        "When Biocon listed in 2004, its market value at the first day's close was about $1.11 billion. Starting in a rented garage kept fixed costs tiny in the years before the business could support more."
+      "intro": "Biocon's start comes down to two numbers: what ₹10,000 was worth in 1978, and the company's value when it listed.",
+      "points": [
+        [
+          "The ₹10,000 start: about ₹2.8 lakh today",
+          "Kiran Mazumdar-Shaw started Biocon in 1978 with ₹10,000, about ₹2.8 lakh in today's money. Prices have risen about 28 times since then."
+        ],
+        [
+          "The listing: a billion dollars from a garage",
+          "When Biocon listed in 2004, its market value at the first day's close was about $1.11 billion. Starting in a rented garage kept fixed costs tiny in the years before the business could support more."
+        ]
       ],
       "table": [
         [
@@ -786,6 +1033,11 @@
           "about $1.11 billion"
         ]
       ],
+      "borrow": [
+        "Keep fixed costs tiny until the business can support more.",
+        "When doors are closed to you, building your own can be the better path."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Inflation uses India's consumer price index from the World Bank (series FP.CPI.TOTL, to 2025). Figures are rounded. General education, not financial advice."
     },
     "answer": "She set up Biocon in 1978 in the garage of her rented home in Bangalore with ₹10,000. It began as a joint venture with an Irish enzyme company, Biocon Biochemicals.",
@@ -794,9 +1046,16 @@
   "sara-blakely-spanx-5000-savings-kept-day-job": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Sara Blakely's $5,000 of savings in 2000 is worth about $9,100 in today's dollars. In 2021 Blackstone bought a majority stake at a valuation of $1.2 billion, about 240,000 times that starting sum.",
-        "What an accountant notices is that she funded Spanx herself for 21 years. With no outside investors, she did not have to give away ownership along the way, so the growth in value stayed largely with her."
+      "intro": "Spanx's story comes down to two numbers: the savings she started with, and the valuation 21 years later.",
+      "points": [
+        [
+          "The start: $5,000 of savings",
+          "Sara Blakely's $5,000 of savings in 2000 is worth about $9,100 in today's dollars. In 2021 Blackstone bought a majority stake at a valuation of $1.2 billion, about 240,000 times that starting sum."
+        ],
+        [
+          "Ownership: why the growth stayed with her",
+          "What an accountant notices is that she funded Spanx herself for 21 years. With no outside investors, she did not have to give away ownership along the way, so the growth in value stayed largely with her."
+        ]
       ],
       "table": [
         [
@@ -816,6 +1075,11 @@
           "21"
         ]
       ],
+      "borrow": [
+        "Funding a business yourself is slower, but you keep more of what you build.",
+        "Keeping your day job while you start can reduce the risk."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "About $5,000 of her own savings, earned while selling fax machines. She never took money from outside investors.",
@@ -824,9 +1088,16 @@
   "steve-sasson-kodak-first-digital-camera-shelved-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Kodak's first commercial digital camera system in 1991 cost about $20,000, about $46,000 in today's dollars. At that price it was a professional tool, so it could not threaten Kodak's film business yet.",
-        "During its 2012 bankruptcy, Kodak sold about 1,100 digital-imaging patents for roughly $525 million, about $720 million today. The company had invented valuable technology and still lost the market, because film profits made it hard to sell something that would replace them."
+      "intro": "Kodak's digital story shows in two numbers: what its first digital camera system cost, and what its patents fetched in bankruptcy.",
+      "points": [
+        [
+          "The 1991 camera: too expensive to threaten film",
+          "Kodak's first commercial digital camera system in 1991 cost about $20,000, about $46,000 in today's dollars. At that price it was a professional tool, so it could not threaten Kodak's film business yet."
+        ],
+        [
+          "The patents: valuable technology, lost market",
+          "During its 2012 bankruptcy, Kodak sold about 1,100 digital-imaging patents for roughly $525 million, about $720 million today. The company had invented valuable technology and still lost the market, because film profits made it hard to sell something that would replace them."
+        ]
       ],
       "table": [
         [
@@ -842,6 +1113,11 @@
           "about $720 million"
         ]
       ],
+      "borrow": [
+        "Inventing something is not enough; you have to be willing to let it replace what earns you money today.",
+        "A profitable old business can make it hard to see the new one."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "Kodak engineer Steven Sasson built the first self-contained digital camera in December 1975. His supervisor, Gareth Lloyd, is named with him on the patent, US 4,131,919.",
@@ -850,9 +1126,16 @@
   "james-dyson-5127-prototypes": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "James Dyson has said he eventually owed over a million dollars while developing his vacuum. In 1993 Lloyds Bank lent him about $1 million for tooling, about $2.2 million in today's dollars.",
-        "Tooling is the expensive part of making a physical product: the moulds must be paid for before a single machine is sold. Before that, a small Japanese company had sold his design under licence as the G-Force, at close to $2,000 each."
+      "intro": "Dyson's journey comes down to two costs: the debt he ran up, and the tooling loan that let him make his own machine.",
+      "points": [
+        [
+          "The debt: over a million dollars owed",
+          "James Dyson has said he eventually owed over a million dollars while developing his vacuum. In 1993 Lloyds Bank lent him about $1 million for tooling, about $2.2 million in today's dollars."
+        ],
+        [
+          "Tooling: the cost before the first sale",
+          "Tooling is the expensive part of making a physical product: the moulds must be paid for before a single machine is sold. Before that, a small Japanese company had sold his design under licence as the G-Force, at close to $2,000 each."
+        ]
       ],
       "table": [
         [
@@ -868,6 +1151,11 @@
           "5,127"
         ]
       ],
+      "borrow": [
+        "For a physical product, budget for tooling before you count on sales.",
+        "Licensing your design can earn money while you build up to making it yourself."
+      ],
+      "close": "Use the growth-rate calculator below to see how fast any amount has grown, including your own savings.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "He made 5,127 prototypes before his bagless cyclone vacuum worked well enough. Reports put the development period at about four to five years, starting in the late 1970s.",
@@ -876,9 +1164,16 @@
   "falguni-nayar-nykaa-started-at-49-story": {
     "money": {
       "h": "The money behind it",
-      "paras": [
-        "Nykaa's 2021 share issue raised about ₹5,350 crore, roughly $720 million, about $830 million in today's dollars. The shares nearly doubled on the first day.",
-        "Because Falguni Nayar and her family still owned about half the company, the listing took her net worth to about $7 billion. Keeping a large stake through years of growth is what turned a business started at 49 into one of India's biggest fortunes."
+      "intro": "Nykaa's listing is easiest to read in two numbers: what the share issue raised, and how much of the company the founder still owned.",
+      "points": [
+        [
+          "The listing: about ₹5,350 crore raised",
+          "Nykaa's 2021 share issue raised about ₹5,350 crore, roughly $720 million, about $830 million in today's dollars. The shares nearly doubled on the first day."
+        ],
+        [
+          "Ownership: why keeping a large stake mattered",
+          "Because Falguni Nayar and her family still owned about half the company, the listing took her net worth to about $7 billion. Keeping a large stake through years of growth is what turned a business started at 49 into one of India's biggest fortunes."
+        ]
       ],
       "table": [
         [
@@ -898,6 +1193,11 @@
           "about $7 billion"
         ]
       ],
+      "borrow": [
+        "Keeping a large stake through the growth years is what turns success into personal wealth.",
+        "Starting at 49 is not starting late."
+      ],
+      "close": "Use the calculators below to see what any old rupee amount is worth today, or how fast your own money is growing.",
       "note": "Dollar inflation uses the US consumer price index from the World Bank (series FP.CPI.TOTL, to 2024, the latest year available). Figures are rounded. General education, not financial advice."
     },
     "answer": "She was 49, a few months short of turning 50, when she founded Nykaa in 2012 after leaving Kotak Mahindra Capital.",
