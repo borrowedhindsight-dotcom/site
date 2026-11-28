@@ -470,8 +470,14 @@ def story_page(s, prev_s, next_s, related):
         rows = ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in money.get('table', []))
         money_html = (f'<section class="money" id="money"><h2>{E(money.get("h", "The money behind it"))}</h2>'
                       f'<p class="mby">By <a href="{AUTHOR_PATH}" rel="author">{E(BYLINE)}</a>, accounting professional</p>'
-                      + ''.join(f'<p>{para(x)}</p>' for x in money.get('paras', []))
+                      # Manisha's how-to style (optional): intro line, numbered points [heading, text], "what you can borrow", close.
+                      + (f'<p>{para(money["intro"])}</p>' if money.get('intro') else '')
+                      + (('<ol class="mpoints">' + ''.join(f'<li><h3>{E(h)}</h3><p>{para(t)}</p></li>' for h, t in money['points']) + '</ol>')
+                         if money.get('points') else ''.join(f'<p>{para(x)}</p>' for x in money.get('paras', [])))
                       + (f'<table><tbody>{rows}</tbody></table>' if rows else '')
+                      + (('<h3>What you can borrow from this</h3><ul class="mborrow">' + ''.join(f'<li>{para(x)}</li>' for x in money['borrow']) + '</ul>')
+                         if money.get('borrow') else '')
+                      + (f'<p>{para(money["close"])}</p>' if money.get('close') else '')
                       + (f'<p class="mnote">{E(money["note"])}</p>' if money.get('note') else '')
                       + f'<p class="mtry">Try it yourself: <a href="{CALC_PATH}">inflation calculator</a> · <a href="{CAGR_PATH}">growth-rate (CAGR) calculator</a></p></section>')
     photo = s.get('photo')
