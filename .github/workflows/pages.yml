@@ -10,18 +10,25 @@ permissions:
   pages: write
   id-token: write
 concurrency: pages
+# Two jobs (GitHub's standard Pages setup): the site is built and uploaded in "build"; "deploy" starts only after
+# that job has finished, so the uploaded files are always ready. The old single job often failed with
+# 'No artifacts named "github-pages" were found' when deploy ran straight after the upload (Nov 2026).
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip install -q pillow
+      - run: python3 build.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with: { path: _site }
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - run: pip install -q pillow
-      - run: python3 build.py
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with: { path: _site }
       - id: deployment
         uses: actions/deploy-pages@v4
